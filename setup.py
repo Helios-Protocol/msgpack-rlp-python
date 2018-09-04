@@ -83,6 +83,7 @@ if sys.byteorder == 'big':
 else:
     macros = [('__LITTLE_ENDIAN__', '1')]
 
+
 ext_modules = []
 if not hasattr(sys, 'pypy_version_info'):
     ext_modules.append(Extension('msgpack._packer',

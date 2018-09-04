@@ -1,6 +1,8 @@
 class UnpackException(Exception):
     """Deprecated.  Use Exception instead to catch all exception during unpacking."""
 
+class DebugError(Exception):
+    pass
 
 class BufferFull(UnpackException):
     pass
@@ -39,3 +41,4 @@ class PackOverflowError(PackValueError, OverflowError):
 
     Deprecated.  Use ValueError instead.
     """
+

@@ -21,11 +21,11 @@ import os
 if os.environ.get('MSGPACK_PUREPYTHON'):
     from msgpack.fallback import Packer, unpackb, Unpacker
 else:
-    try:
-        from msgpack._packer import Packer
-        from msgpack._unpacker import unpackb, Unpacker
-    except ImportError:
-        from msgpack.fallback import Packer, unpackb, Unpacker
+    #try:
+    from msgpack._packer import Packer
+    from msgpack._unpacker import unpackb, Unpacker
+    #except ImportError:
+    #    from msgpack.fallback import Packer, unpackb, Unpacker
 
 
 def pack(o, stream, **kwargs):

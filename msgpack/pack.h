@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+
 #ifdef _MSC_VER
 #define inline __inline
 #endif
@@ -62,14 +63,50 @@ static inline int msgpack_pack_write(msgpack_packer* pk, const char *data, size_
     return 0;
 }
 
+//
+// overwrites some bytes at a given position
+//
+static inline int msgpack_pack_insert_at_position(msgpack_packer* pk, const char *data, size_t l, size_t position)
+{
+    char* buf = pk->buf;
+    size_t bs = pk->buf_size;
+    size_t len = pk->length;
+
+    //First we have to extend it by length
+    if (len + l > bs) {
+        bs = (len + l) * 2;
+        buf = (char*)PyMem_Realloc(buf, bs);
+        if (!buf) {
+            PyErr_NoMemory();
+            return -1;
+        }
+    }
+
+    memcpy(buf + position + l, buf + position, len-position);
+
+    //now there is a gap of length l at position, ready to be written to
+
+    memcpy(buf + position, data, l);
+
+    len += l;
+
+    pk->buf = buf;
+    pk->buf_size = bs;
+    pk->length = len;
+    return 0;
+}
+
 #define msgpack_pack_append_buffer(user, buf, len) \
         return msgpack_pack_write(user, (const char*)buf, len)
+
+#define msgpack_pack_insert_buffer(user, buf, len, position) \
+        return msgpack_pack_insert_at_position(user, (const char*)buf, len, position)
 
 #include "pack_template.h"
 
 // return -2 when o is too long
 static inline int
-msgpack_pack_unicode(msgpack_packer *pk, PyObject *o, long long limit)
+msgpack_pack_unicode(msgpack_packer *pk, PyObject *o, unsigned long long limit)
 {
 #if PY_MAJOR_VERSION >= 3
     assert(PyUnicode_Check(o));
@@ -83,10 +120,16 @@ msgpack_pack_unicode(msgpack_packer *pk, PyObject *o, long long limit)
         return -2;
     }
 
-    int ret = msgpack_pack_raw(pk, len);
-    if (ret) return ret;
+    if (len == 1 && buf[0] < 0x80){
+        return msgpack_pack_raw_body(pk, buf, len);
+    }
+    else{
+        int ret = msgpack_pack_raw(pk, len);
 
-    return msgpack_pack_raw_body(pk, buf, len);
+        if (ret) return ret;
+
+        return msgpack_pack_raw_body(pk, buf, len);
+    }
 #else
     PyObject *bytes;
     Py_ssize_t len;

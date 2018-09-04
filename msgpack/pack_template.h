@@ -16,6 +16,8 @@
  *    limitations under the License.
  */
 
+#include <math.h>
+
 #if defined(__LITTLE_ENDIAN__)
 #define TAKE8_8(d)  ((uint8_t*)&d)[0]
 #define TAKE8_16(d) ((uint8_t*)&d)[0]
@@ -620,20 +622,112 @@ static inline int msgpack_pack_false(msgpack_packer* x)
  * Array
  */
 
-static inline int msgpack_pack_array(msgpack_packer* x, unsigned int n)
+
+static inline int msgpack_clear_spot_for_start_byte(msgpack_packer* x)
 {
-    if(n < 16) {
-        unsigned char d = 0x90 | n;
-        msgpack_pack_append_buffer(x, &d, 1);
-    } else if(n < 65536) {
+    unsigned char d = 0x00;
+    msgpack_pack_append_buffer(x, &d, 1);
+
+}
+static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t position)
+{
+    if(l < 56) {
+        unsigned char d = 0xc0 | (uint8_t)l;
+        msgpack_pack_insert_buffer(x, &d, 1, position);
+    } else if ( l < 256) {
+        unsigned char buf[2] = {0xf8, (uint8_t)l};
+        msgpack_pack_insert_buffer(x, buf, 2, position);
+    } else if (l < 65536) {
         unsigned char buf[3];
-        buf[0] = 0xdc; _msgpack_store16(&buf[1], (uint16_t)n);
-        msgpack_pack_append_buffer(x, buf, 3);
-    } else {
+        buf[0] = 0xf9; _msgpack_store16(&buf[1], (uint16_t)l);
+        msgpack_pack_insert_buffer(x, buf, 3, position);
+    } else if (l < 16777216){
+        //24 bit, 1 null bit to remove from 32 bit
+        unsigned char buf[4];
+        unsigned char length_in_bytes = (uint32_t)l;
+        buf[0] = 0xfa;
+        unsigned char padded_buf[4];
+        memcpy(&padded_buf[0], &length_in_bytes, 5);
+
+        buf[1] = padded_buf[2];
+        buf[2] = padded_buf[1];
+        buf[3] = padded_buf[0];
+        //buf[4] = padded_buf[0];
+
+        msgpack_pack_insert_buffer(x, buf, 4, position);
+    } else if (l < 4294967296){
+        //32 bit
         unsigned char buf[5];
-        buf[0] = 0xdd; _msgpack_store32(&buf[1], (uint32_t)n);
-        msgpack_pack_append_buffer(x, buf, 5);
+        buf[0] = 0xfa; _msgpack_store32(&buf[1], (uint32_t)l);
+        msgpack_pack_insert_buffer(x, buf, 5, position);
+
+    } else if (l < 1099511627776){
+        //40 bit, 3 null bit to remove from 64 bit
+        unsigned char buf[6];
+        unsigned char length_in_bytes = (uint64_t)l;
+        buf[0] = 0xfb;
+        unsigned char padded_buf[8];
+        memcpy(&padded_buf[0], &length_in_bytes, 9);
+
+        buf[1] = padded_buf[4];
+        buf[2] = padded_buf[3];
+        buf[3] = padded_buf[2];
+        buf[4] = padded_buf[1];
+        buf[5] = padded_buf[0];
+
+        msgpack_pack_insert_buffer(x, buf, 6, position);
+    } else if (l < 281474976710656){
+        //48 bit, 2 null bit to remove from 64 bit
+        unsigned char buf[7];
+        unsigned char length_in_bytes = (uint64_t)l;
+        buf[0] = 0xfb;
+        unsigned char padded_buf[8];
+        memcpy(&padded_buf[0], &length_in_bytes, 9);
+
+        buf[1] = padded_buf[5];
+        buf[2] = padded_buf[4];
+        buf[3] = padded_buf[3];
+        buf[4] = padded_buf[2];
+        buf[5] = padded_buf[1];
+        buf[6] = padded_buf[0];
+
+        msgpack_pack_insert_buffer(x, buf, 7, position);
+    } else if (l < 72057594037927936){
+        //56 bit, 1 null bit to remove from 64 bit
+        unsigned char buf[8];
+        unsigned char length_in_bytes = (uint64_t)l;
+        buf[0] = 0xfb;
+        unsigned char padded_buf[8];
+        memcpy(&padded_buf[0], &length_in_bytes, 9);
+
+        buf[1] = padded_buf[6];
+        buf[2] = padded_buf[5];
+        buf[3] = padded_buf[4];
+        buf[4] = padded_buf[3];
+        buf[5] = padded_buf[2];
+        buf[6] = padded_buf[1];
+        buf[7] = padded_buf[0];
+
+        msgpack_pack_insert_buffer(x, buf, 8, position);
+    } else {
+        unsigned char buf[9];
+        buf[0] = 0xfb; _msgpack_store64(&buf[1], (uint64_t)l);
+        msgpack_pack_insert_buffer(x, buf, 9, position);
     }
+
+
+
+
+
+//    else if(n < 65536) {
+//        unsigned char buf[3];
+//        buf[0] = 0xdc; _msgpack_store16(&buf[1], (uint16_t)n);
+//        msgpack_pack_append_buffer(x, buf, 3);
+//    } else {
+//        unsigned char buf[5];
+//        buf[0] = 0xdd; _msgpack_store32(&buf[1], (uint32_t)n);
+//        msgpack_pack_append_buffer(x, buf, 5);
+//    }
 }
 
 
@@ -662,22 +756,174 @@ static inline int msgpack_pack_map(msgpack_packer* x, unsigned int n)
  * Raw
  */
 
+/*
+ *#int len_len = ceil((floor(log2(l)) + 1)/8);
+ *#int first_digit = len_len + 55 + 128;
+ *Note, this only accounts for objects whos length can be held in a 64 bit number. That will handle an object to 9,223,372,036,854,775,807 bytes long......
+ */
 static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
 {
-    if (l < 32) {
-        unsigned char d = 0xa0 | (uint8_t)l;
+
+
+    if (l < 56) {
+        unsigned char d = 0x80 | (uint8_t)l;
         msgpack_pack_append_buffer(x, &TAKE8_8(d), 1);
-    } else if (x->use_bin_type && l < 256) {  // str8 is new format introduced with bin.
-        unsigned char buf[2] = {0xd9, (uint8_t)l};
+    } else if ( l < 256) {
+        unsigned char buf[2] = {0xb8, (uint8_t)l};
         msgpack_pack_append_buffer(x, buf, 2);
     } else if (l < 65536) {
         unsigned char buf[3];
-        buf[0] = 0xda; _msgpack_store16(&buf[1], (uint16_t)l);
+        buf[0] = 0xb9; _msgpack_store16(&buf[1], (uint16_t)l);
         msgpack_pack_append_buffer(x, buf, 3);
-    } else {
+    } else if (l < 16777216){
+        //24 bit, 1 null bit to remove from 32 bit
+        unsigned char buf[4];
+        unsigned char length_in_bytes = (uint32_t)l;
+        buf[0] = 0xba;
+        unsigned char padded_buf[4];
+        memcpy(&padded_buf[0], &length_in_bytes, 5);
+
+        buf[1] = padded_buf[2];
+        buf[2] = padded_buf[1];
+        buf[3] = padded_buf[0];
+        //buf[4] = padded_buf[0];
+
+        msgpack_pack_append_buffer(x, buf, 4);
+    } else if (l < 4294967296){
+        //32 bit
         unsigned char buf[5];
-        buf[0] = 0xdb; _msgpack_store32(&buf[1], (uint32_t)l);
+        buf[0] = 0xba; _msgpack_store32(&buf[1], (uint32_t)l);
         msgpack_pack_append_buffer(x, buf, 5);
+
+    } else if (l < 1099511627776){
+        //40 bit, 3 null bit to remove from 64 bit
+        unsigned char buf[6];
+        unsigned char length_in_bytes = (uint64_t)l;
+        buf[0] = 0xbb;
+        unsigned char padded_buf[8];
+        memcpy(&padded_buf[0], &length_in_bytes, 9);
+
+        buf[1] = padded_buf[4];
+        buf[2] = padded_buf[3];
+        buf[3] = padded_buf[2];
+        buf[4] = padded_buf[1];
+        buf[5] = padded_buf[0];
+
+        msgpack_pack_append_buffer(x, buf, 6);
+    } else if (l < 281474976710656){
+        //48 bit, 2 null bit to remove from 64 bit
+        unsigned char buf[7];
+        unsigned char length_in_bytes = (uint64_t)l;
+        buf[0] = 0xbb;
+        unsigned char padded_buf[8];
+        memcpy(&padded_buf[0], &length_in_bytes, 9);
+
+        buf[1] = padded_buf[5];
+        buf[2] = padded_buf[4];
+        buf[3] = padded_buf[3];
+        buf[4] = padded_buf[2];
+        buf[5] = padded_buf[1];
+        buf[6] = padded_buf[0];
+
+        msgpack_pack_append_buffer(x, buf, 7);
+    } else if (l < 72057594037927936){
+        //56 bit, 1 null bit to remove from 64 bit
+        unsigned char buf[8];
+        unsigned char length_in_bytes = (uint64_t)l;
+        buf[0] = 0xbb;
+        unsigned char padded_buf[8];
+        memcpy(&padded_buf[0], &length_in_bytes, 9);
+
+        buf[1] = padded_buf[6];
+        buf[2] = padded_buf[5];
+        buf[3] = padded_buf[4];
+        buf[4] = padded_buf[3];
+        buf[5] = padded_buf[2];
+        buf[6] = padded_buf[1];
+        buf[7] = padded_buf[0];
+
+        msgpack_pack_append_buffer(x, buf, 8);
+    } else {
+        unsigned char buf[9];
+        buf[0] = 0xbb; _msgpack_store64(&buf[1], (uint64_t)l);
+        msgpack_pack_append_buffer(x, buf, 9);
+    }
+
+
+//       if (l < 56) {
+//        unsigned char d = 0x80 | (uint8_t)l;
+//        msgpack_pack_append_buffer(x, &TAKE8_8(d), 1);
+//    }else if ( l < 256) {
+//        unsigned char buf[2] = {0xb8, (uint8_t)l};
+//        msgpack_pack_append_buffer(x, buf, 2);
+//    } else if (l < 65536) {
+//        unsigned char buf[3];
+//        buf[0] = 0xb9; _msgpack_store16(&buf[1], (uint16_t)l);
+//        msgpack_pack_append_buffer(x, buf, 3);
+//    } else if (l < 16777216){
+//        //24 bit
+//        unsigned char buf[4];
+//        unsigned char test = (uint32_t)l;
+//        buf[0] = 0xba; memcpy(&buf[1], &test, 3);
+//        msgpack_pack_append_buffer(x, buf, 4);
+//    } else if (l < 4294967296){
+//        //32 bit
+//        unsigned char buf[5];
+//        buf[0] = 0xba; _msgpack_store32(&buf[1], (uint32_t)l);
+//        msgpack_pack_append_buffer(x, buf, 5);
+//    } else {
+//        unsigned char buf[9];
+//        buf[0] = 0xbb; _msgpack_store64(&buf[1], (uint64_t)l);
+//        msgpack_pack_append_buffer(x, buf, 9);
+//    }
+
+
+//    if (l < 56) {
+//        unsigned char d = 0x80 | (uint8_t)l;
+//        msgpack_pack_append_buffer(x, &TAKE8_8(d), 1);
+//    }else if ( l < 256) {
+//        unsigned char buf[2] = {0xb8, (uint8_t)l};
+//        msgpack_pack_append_buffer(x, buf, 2);
+//    } else if (l < 65536) {
+//        unsigned char buf[3];
+//        buf[0] = 0xb9; _msgpack_store16(&buf[1], (uint16_t)l);
+//        msgpack_pack_append_buffer(x, buf, 3);
+//    } else if (l < 16777216){
+//        unsigned char buf[4];
+//        buf[0] = 0xba;
+//        unsigned char extra_buf[3];
+//        _msgpack_store32(&extra_buf[0], (uint32_t)l);
+//        memcpy(extra_buf[1], &buf, )
+//        msgpack_pack_append_buffer(x, buf, 5);
+//    } else if (l < 4294967296){
+//        unsigned char buf[4];
+//        buf[0] = 0xba; _msgpack_store32(&buf[1], (uint32_t)l);
+//        msgpack_pack_append_buffer(x, buf, 5);
+//    } else {
+//        unsigned char buf[9];
+//        buf[0] = 0xbb; _msgpack_store64(&buf[1], (uint64_t)l);
+//        msgpack_pack_append_buffer(x, buf, 9);
+//    }
+
+
+    if (l < 56) {
+        unsigned char d = 0x80 | (uint8_t)l;
+        msgpack_pack_append_buffer(x, &TAKE8_8(d), 1);
+    }else if ( l < 256) {
+        unsigned char buf[2] = {0xb8, (uint8_t)l};
+        msgpack_pack_append_buffer(x, buf, 2);
+    } else if (l < 65536) {
+        unsigned char buf[3];
+        buf[0] = 0xb9; _msgpack_store16(&buf[1], (uint16_t)l);
+        msgpack_pack_append_buffer(x, buf, 3);
+    } else if (l < 4294967296){
+        unsigned char buf[5];
+        buf[0] = 0xba; _msgpack_store32(&buf[1], (uint32_t)l);
+        msgpack_pack_append_buffer(x, buf, 5);
+    } else {
+        unsigned char buf[9];
+        buf[0] = 0xbb; _msgpack_store64(&buf[1], (uint64_t)l);
+        msgpack_pack_append_buffer(x, buf, 9);
     }
 }
 
