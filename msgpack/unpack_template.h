@@ -181,67 +181,115 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
                 push_fixed_value(_uint8, *(uint8_t*)p);
             //SWITCH_RANGE(0xe0, 0xff)  // Negative Fixnum
             //    push_fixed_value(_int8, *(int8_t*)p);
-            //SWITCH_RANGE(0x80, 0xb7)  // String 0 to 55 bytes long
-            //    push_variable_value(_raw, data, p, *p-0x80);
-            SWITCH_RANGE(0xc0, 0xdf)  // Variable
+            SWITCH_RANGE(0x80, 0xb7)  // String 0 to 55 bytes long
+                //current_byte =
+                again_fixed_trail_if_zero(ACS_RAW_VALUE, (unsigned int)*p-128, _raw_zero);
+                //push_variable_value(_raw, data, p, (unsigned int)*p-128);
+            SWITCH_RANGE(0xb8, 0xbf)  // Long string
+                //again_fixed_trail(CS_RAW_NEW, (unsigned int)*p-183);
                 switch(*p) {
-                case 0xc0:  // nil
-                    push_simple_value(_nil);
-                //case 0xc1:  // never used
-                case 0xc2:  // false
-                    push_simple_value(_false);
-                case 0xc3:  // true
-                    push_simple_value(_true);
-                case 0xc4:  // bin 8
-                    again_fixed_trail(NEXT_CS(p), 1);
-                case 0xc5:  // bin 16
-                    again_fixed_trail(NEXT_CS(p), 2);
-                case 0xc6:  // bin 32
-                    again_fixed_trail(NEXT_CS(p), 4);
-                case 0xc7:  // ext 8
-                    again_fixed_trail(NEXT_CS(p), 1);
-                case 0xc8:  // ext 16
-                    again_fixed_trail(NEXT_CS(p), 2);
-                case 0xc9:  // ext 32
-                    again_fixed_trail(NEXT_CS(p), 4);
-                case 0xca:  // float
-                case 0xcb:  // double
-                case 0xcc:  // unsigned int  8
-                case 0xcd:  // unsigned int 16
-                case 0xce:  // unsigned int 32
-                case 0xcf:  // unsigned int 64
-                case 0xd0:  // signed int  8
-                case 0xd1:  // signed int 16
-                case 0xd2:  // signed int 32
-                case 0xd3:  // signed int 64
-                    again_fixed_trail(NEXT_CS(p), 1 << (((unsigned int)*p) & 0x03));
-                case 0xd4:  // fixext 1
-                case 0xd5:  // fixext 2
-                case 0xd6:  // fixext 4
-                case 0xd7:  // fixext 8
-                    again_fixed_trail_if_zero(ACS_EXT_VALUE, 
-                                              (1 << (((unsigned int)*p) & 0x03))+1,
-                                              _ext_zero);
-                case 0xd8:  // fixext 16
-                    again_fixed_trail_if_zero(ACS_EXT_VALUE, 16+1, _ext_zero);
-                case 0xd9:  // str 8
-                    again_fixed_trail(NEXT_CS(p), 1);
-                case 0xda:  // raw 16
-                case 0xdb:  // raw 32
-                case 0xdc:  // array 16
-                case 0xdd:  // array 32
-                case 0xde:  // map 16
-                case 0xdf:  // map 32
-                    again_fixed_trail(NEXT_CS(p), 2 << (((unsigned int)*p) & 0x01));
+                case 0xb8:  // 8 bit
+                    again_fixed_trail(CS_RAW_8, 1);
+                case 0xb9:  // 16 bit
+                    again_fixed_trail(CS_RAW_16, 2);
+                case 0xba:  // 24 bit
+                    again_fixed_trail(CS_RAW_24, 3);
+                case 0xbb:  // 32 bit
+                    again_fixed_trail(CS_RAW_32, 4);
+                case 0xbc:  // 40 bit
+                    again_fixed_trail(CS_RAW_40, 5);
+                case 0xbd:  // 48 bit
+                    again_fixed_trail(CS_RAW_48, 6);
+                case 0xbe:  // 56 bit
+                    again_fixed_trail(CS_RAW_56, 7);
+                case 0xbf:  // 64 bit
+                    again_fixed_trail(CS_RAW_64, 8);
                 default:
                     goto _failed;
                 }
-            SWITCH_RANGE(0xa0, 0xbf)  // FixRaw
-                again_fixed_trail_if_zero(ACS_RAW_VALUE, ((unsigned int)*p & 0x1f), _raw_zero);
-            SWITCH_RANGE(0x90, 0x9f)  // FixArray
-                start_container(_array, ((unsigned int)*p) & 0x0f, CT_ARRAY_ITEM);
-            SWITCH_RANGE(0x80, 0x8f)  // FixMap
-                start_container(_map, ((unsigned int)*p) & 0x0f, CT_MAP_KEY);
+
+            //noqa
+            SWITCH_RANGE(0xc0, 0xf7)  // short list
+                //again_fixed_trail(CS_RAW_NEW, (unsigned int)*p-183);
+                switch(*p) {
+                case 0xb8:  // 8 bit
+                    again_fixed_trail(CS_RAW_8, 1);
+                case 0xb9:  // 16 bit
+                    again_fixed_trail(CS_RAW_16, 2);
+                case 0xba:  // 24 bit
+                    again_fixed_trail(CS_RAW_24, 3);
+                case 0xbb:  // 32 bit
+                    again_fixed_trail(CS_RAW_32, 4);
+                case 0xbc:  // 40 bit
+                    again_fixed_trail(CS_RAW_40, 5);
+                case 0xbd:  // 48 bit
+                    again_fixed_trail(CS_RAW_48, 6);
+                case 0xbe:  // 56 bit
+                    again_fixed_trail(CS_RAW_56, 7);
+                case 0xbf:  // 64 bit
+                    again_fixed_trail(CS_RAW_64, 8);
+                default:
+                    goto _failed;
+                }
+                //endnoqa
+//                switch(*p) {
+//                case 0xc0:  // nil
+//                    push_simple_value(_nil);
+//                //case 0xc1:  // never used
+//                case 0xc2:  // false
+//                    push_simple_value(_false);
+//                case 0xc3:  // true
+//                    push_simple_value(_true);
+//                case 0xc4:  // bin 8
+//                    again_fixed_trail(NEXT_CS(p), 1);
+//                case 0xc5:  // bin 16
+//                    again_fixed_trail(NEXT_CS(p), 2);
+//                case 0xc6:  // bin 32
+//                    again_fixed_trail(NEXT_CS(p), 4);
+//                case 0xc7:  // ext 8
+//                    again_fixed_trail(NEXT_CS(p), 1);
+//                case 0xc8:  // ext 16
+//                    again_fixed_trail(NEXT_CS(p), 2);
+//                case 0xc9:  // ext 32
+//                    again_fixed_trail(NEXT_CS(p), 4);
+//                case 0xca:  // float
+//                case 0xcb:  // double
+//                case 0xcc:  // unsigned int  8
+//                case 0xcd:  // unsigned int 16
+//                case 0xce:  // unsigned int 32
+//                case 0xcf:  // unsigned int 64
+//                case 0xd0:  // signed int  8
+//                case 0xd1:  // signed int 16
+//                case 0xd2:  // signed int 32
+//                case 0xd3:  // signed int 64
+//                    again_fixed_trail(NEXT_CS(p), 1 << (((unsigned int)*p) & 0x03));
+//                case 0xd4:  // fixext 1
+//                case 0xd5:  // fixext 2
+//                case 0xd6:  // fixext 4
+//                case 0xd7:  // fixext 8
+//                    again_fixed_trail_if_zero(ACS_EXT_VALUE,
+//                                              (1 << (((unsigned int)*p) & 0x03))+1,
+//                                              _ext_zero);
+//                case 0xd8:  // fixext 16
+//                    again_fixed_trail_if_zero(ACS_EXT_VALUE, 16+1, _ext_zero);
+//                case 0xd9:  // str 8
+//                    again_fixed_trail(NEXT_CS(p), 1);
+//                case 0xda:  // raw 16
+//                case 0xdb:  // raw 32
+//                case 0xdc:  // array 16
+//                case 0xdd:  // array 32
+//                case 0xde:  // map 16
+//                case 0xdf:  // map 32
+//                    again_fixed_trail(NEXT_CS(p), 2 << (((unsigned int)*p) & 0x01));
+//                default:
+//                    goto _failed;
+//                }
+//            SWITCH_RANGE(0xa0, 0xbf)  // FixRaw
+//                again_fixed_trail_if_zero(ACS_RAW_VALUE, ((unsigned int)*p & 0x1f), _raw_zero);
+//            SWITCH_RANGE(0x90, 0x9f)  // FixArray
+//                start_container(_array, ((unsigned int)*p) & 0x0f, CT_ARRAY_ITEM);
+//            SWITCH_RANGE(0x80, 0x8f)  // FixMap
+//                start_container(_map, ((unsigned int)*p) & 0x0f, CT_MAP_KEY);
 
             SWITCH_RANGE_DEFAULT
                 goto _failed;
@@ -256,16 +304,16 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
             if((size_t)(pe - p) < trail) { goto _out; }
             n = p;  p += trail - 1;
             switch(cs) {
-            case CS_EXT_8:
-                again_fixed_trail_if_zero(ACS_EXT_VALUE, *(uint8_t*)n+1, _ext_zero);
-            case CS_EXT_16:
-                again_fixed_trail_if_zero(ACS_EXT_VALUE,
-                                          _msgpack_load16(uint16_t,n)+1,
-                                          _ext_zero);
-            case CS_EXT_32:
-                again_fixed_trail_if_zero(ACS_EXT_VALUE,
-                                          _msgpack_load32(uint32_t,n)+1,
-                                          _ext_zero);
+//            case CS_EXT_8:
+//                again_fixed_trail_if_zero(ACS_EXT_VALUE, *(uint8_t*)n+1, _ext_zero);
+//            case CS_EXT_16:
+//                again_fixed_trail_if_zero(ACS_EXT_VALUE,
+//                                          _msgpack_load16(uint16_t,n)+1,
+//                                          _ext_zero);
+//            case CS_EXT_32:
+//                again_fixed_trail_if_zero(ACS_EXT_VALUE,
+//                                          _msgpack_load32(uint32_t,n)+1,
+//                                          _ext_zero);
             case CS_FLOAT: {
                     union { uint32_t i; float f; } mem;
                     mem.i = _msgpack_load32(uint32_t,n);
@@ -296,12 +344,13 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
             case CS_INT_64:
                 push_fixed_value(_int64, _msgpack_load64(int64_t,n));
 
-            case CS_BIN_8:
-                again_fixed_trail_if_zero(ACS_BIN_VALUE, *(uint8_t*)n, _bin_zero);
-            case CS_BIN_16:
-                again_fixed_trail_if_zero(ACS_BIN_VALUE, _msgpack_load16(uint16_t,n), _bin_zero);
-            case CS_BIN_32:
-                again_fixed_trail_if_zero(ACS_BIN_VALUE, _msgpack_load32(uint32_t,n), _bin_zero);
+
+//            case CS_BIN_8:
+//                again_fixed_trail_if_zero(ACS_BIN_VALUE, *(uint8_t*)n, _bin_zero);
+//            case CS_BIN_16:
+//                again_fixed_trail_if_zero(ACS_BIN_VALUE, _msgpack_load16(uint16_t,n), _bin_zero);
+//            case CS_BIN_32:
+//                again_fixed_trail_if_zero(ACS_BIN_VALUE, _msgpack_load32(uint32_t,n), _bin_zero);
             case ACS_BIN_VALUE:
             _bin_zero:
                 push_variable_value(_bin, data, n, trail);
@@ -310,8 +359,18 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
                 again_fixed_trail_if_zero(ACS_RAW_VALUE, *(uint8_t*)n, _raw_zero);
             case CS_RAW_16:
                 again_fixed_trail_if_zero(ACS_RAW_VALUE, _msgpack_load16(uint16_t,n), _raw_zero);
+            case CS_RAW_24:
+                again_fixed_trail_if_zero(ACS_RAW_VALUE, _msgpack_load24(uint32_t,n), _raw_zero);
             case CS_RAW_32:
                 again_fixed_trail_if_zero(ACS_RAW_VALUE, _msgpack_load32(uint32_t,n), _raw_zero);
+            case CS_RAW_40:
+                again_fixed_trail_if_zero(ACS_RAW_VALUE, _msgpack_load40(uint64_t,n), _raw_zero);
+            case CS_RAW_48:
+                again_fixed_trail_if_zero(ACS_RAW_VALUE, _msgpack_load48(uint64_t,n), _raw_zero);
+            case CS_RAW_56:
+                again_fixed_trail_if_zero(ACS_RAW_VALUE, _msgpack_load56(uint64_t,n), _raw_zero);
+            case CS_RAW_64:
+                again_fixed_trail_if_zero(ACS_RAW_VALUE, _msgpack_load64(uint64_t,n), _raw_zero);
             case ACS_RAW_VALUE:
             _raw_zero:
                 push_variable_value(_raw, data, n, trail);

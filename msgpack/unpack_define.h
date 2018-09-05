@@ -38,17 +38,23 @@ extern "C" {
 typedef enum {
     CS_HEADER            = 0x00,  // nil
 
-    //CS_                = 0x01,
-    //CS_                = 0x02,  // false
-    //CS_                = 0x03,  // true
+    CS_RAW_8             = 0x01,
+    CS_RAW_16            = 0x02,
+    CS_RAW_24            = 0x03,
+    CS_RAW_32            = 0x04,
+    CS_RAW_40            = 0x05,
+    CS_RAW_48            = 0x06,
+    CS_RAW_56            = 0x07,
+    CS_RAW_64            = 0x08,
 
-    CS_BIN_8             = 0x04,
-    CS_BIN_16            = 0x05,
-    CS_BIN_32            = 0x06,
-
-    CS_EXT_8             = 0x07,
-    CS_EXT_16            = 0x08,
-    CS_EXT_32            = 0x09,
+//
+//    CS_BIN_8             = 0x09,
+//    CS_BIN_16            = 0x05,
+//    CS_BIN_32            = 0x06,
+//
+//    CS_EXT_8             = 0x07,
+//    CS_EXT_16            = 0x08,
+//    CS_EXT_32            = 0x09,
 
     CS_FLOAT             = 0x0a,
     CS_DOUBLE            = 0x0b,
@@ -67,9 +73,8 @@ typedef enum {
     //CS_FIXEXT8           = 0x17,
     //CS_FIXEXT16          = 0x18,
 
-    CS_RAW_8             = 0x19,
-    CS_RAW_16            = 0x1a,
-    CS_RAW_32            = 0x1b,
+
+
     CS_ARRAY_16          = 0x1c,
     CS_ARRAY_32          = 0x1d,
     CS_MAP_16            = 0x1e,
