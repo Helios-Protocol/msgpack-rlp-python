@@ -3,4 +3,4 @@ from Cython.Build import cythonize
 
 #python setup.py build_ext --inplace
 
-setup(ext_modules=cythonize("_unpacker.pyx"))
+setup(ext_modules=cythonize("msgpack/_unpacker.pyx"))

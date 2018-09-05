@@ -183,6 +183,7 @@ cdef class Packer(object):
                     ret = msgpack_pack_raw_body(&self.pk, rawval, L)
                 else:
                     print('encoding byte string normally')
+                    print('length = {}'.format(L))
                     ret = msgpack_pack_raw(&self.pk, L)
                     if ret == 0:
                         ret = msgpack_pack_raw_body(&self.pk, rawval, L)

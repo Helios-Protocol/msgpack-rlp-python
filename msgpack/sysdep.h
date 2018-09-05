@@ -130,11 +130,40 @@ typedef unsigned int _msgpack_atomic_counter_t;
         (((uint16_t)((uint8_t*)(from))[0]) << 8) | \
         (((uint16_t)((uint8_t*)(from))[1])     ) ))
 
+#define _msgpack_load24(cast, from) ((cast)( \
+        (((uint32_t)((uint8_t*)(from))[0]) << 16) | \
+        (((uint32_t)((uint8_t*)(from))[1]) <<  8) | \
+        (((uint32_t)((uint8_t*)(from))[2])      ) ))
+
 #define _msgpack_load32(cast, from) ((cast)( \
         (((uint32_t)((uint8_t*)(from))[0]) << 24) | \
         (((uint32_t)((uint8_t*)(from))[1]) << 16) | \
         (((uint32_t)((uint8_t*)(from))[2]) <<  8) | \
         (((uint32_t)((uint8_t*)(from))[3])      ) ))
+
+#define _msgpack_load40(cast, from) ((cast)( \
+        (((uint64_t)((uint8_t*)(from))[0]) << 32) | \
+        (((uint64_t)((uint8_t*)(from))[1]) << 24) | \
+        (((uint64_t)((uint8_t*)(from))[2]) << 16) | \
+        (((uint64_t)((uint8_t*)(from))[3]) << 8)  | \
+        (((uint64_t)((uint8_t*)(from))[4])     )  ))
+
+#define _msgpack_load48(cast, from) ((cast)( \
+        (((uint64_t)((uint8_t*)(from))[0]) << 40) | \
+        (((uint64_t)((uint8_t*)(from))[1]) << 32) | \
+        (((uint64_t)((uint8_t*)(from))[2]) << 24) | \
+        (((uint64_t)((uint8_t*)(from))[3]) << 16) | \
+        (((uint64_t)((uint8_t*)(from))[4]) << 8)  | \
+        (((uint64_t)((uint8_t*)(from))[5])     )  ))
+
+#define _msgpack_load56(cast, from) ((cast)( \
+        (((uint64_t)((uint8_t*)(from))[0]) << 48) | \
+        (((uint64_t)((uint8_t*)(from))[1]) << 40) | \
+        (((uint64_t)((uint8_t*)(from))[2]) << 32) | \
+        (((uint64_t)((uint8_t*)(from))[3]) << 24) | \
+        (((uint64_t)((uint8_t*)(from))[4]) << 16) | \
+        (((uint64_t)((uint8_t*)(from))[5]) << 8)  | \
+        (((uint64_t)((uint8_t*)(from))[6])     )  ))
 
 #define _msgpack_load64(cast, from) ((cast)( \
         (((uint64_t)((uint8_t*)(from))[0]) << 56) | \
@@ -156,11 +185,40 @@ typedef unsigned int _msgpack_atomic_counter_t;
         (((uint16_t)((uint8_t*)from)[0]) << 8) | \
         (((uint16_t)((uint8_t*)from)[1])     ) ))
 
+#define _msgpack_load24(cast, from) ((cast)( \
+        (((uint32_t)((uint8_t*)from)[0]) << 16) | \
+        (((uint32_t)((uint8_t*)from)[1]) <<  8) | \
+        (((uint32_t)((uint8_t*)from)[2])      ) ))
+
 #define _msgpack_load32(cast, from) ((cast)( \
         (((uint32_t)((uint8_t*)from)[0]) << 24) | \
         (((uint32_t)((uint8_t*)from)[1]) << 16) | \
         (((uint32_t)((uint8_t*)from)[2]) <<  8) | \
         (((uint32_t)((uint8_t*)from)[3])      ) ))
+
+#define _msgpack_load40(cast, from) ((cast)( \
+        (((uint64_t)((uint8_t*)from)[0]) << 32) | \
+        (((uint64_t)((uint8_t*)from)[1]) << 24) | \
+        (((uint64_t)((uint8_t*)from)[2]) << 16) | \
+        (((uint64_t)((uint8_t*)from)[3]) << 8)  | \
+        (((uint64_t)((uint8_t*)from)[4])     )  ))
+
+#define _msgpack_load48(cast, from) ((cast)( \
+        (((uint64_t)((uint8_t*)from)[0]) << 40) | \
+        (((uint64_t)((uint8_t*)from)[1]) << 32) | \
+        (((uint64_t)((uint8_t*)from)[2]) << 24) | \
+        (((uint64_t)((uint8_t*)from)[3]) << 16) | \
+        (((uint64_t)((uint8_t*)from)[4]) << 8)  | \
+        (((uint64_t)((uint8_t*)from)[5])     )  ))
+
+#define _msgpack_load56(cast, from) ((cast)( \
+        (((uint64_t)((uint8_t*)from)[0]) << 48) | \
+        (((uint64_t)((uint8_t*)from)[1]) << 40) | \
+        (((uint64_t)((uint8_t*)from)[2]) << 32) | \
+        (((uint64_t)((uint8_t*)from)[3]) << 24) | \
+        (((uint64_t)((uint8_t*)from)[4]) << 16) | \
+        (((uint64_t)((uint8_t*)from)[5]) << 8)  | \
+        (((uint64_t)((uint8_t*)from)[6])     )  ))
 
 #define _msgpack_load64(cast, from) ((cast)( \
         (((uint64_t)((uint8_t*)from)[0]) << 56) | \

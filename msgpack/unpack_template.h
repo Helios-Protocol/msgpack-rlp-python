@@ -80,7 +80,9 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
 {
     assert(len >= *off);
 
+    //current buffer position pointer
     const unsigned char* p = (unsigned char*)data + *off;
+    //end of buffer position pointer
     const unsigned char* const pe = (unsigned char*)data + len;
     const void* n = p;
 
@@ -98,6 +100,7 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
 
     int ret;
 
+//seems to construct the callback for the given name, then returns true if construct is true, and the callback worked
 #define construct_cb(name) \
     construct && unpack_callback ## name
 
@@ -176,8 +179,10 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
             SWITCH_RANGE_BEGIN
             SWITCH_RANGE(0x00, 0x7f)  // Positive Fixnum
                 push_fixed_value(_uint8, *(uint8_t*)p);
-            SWITCH_RANGE(0xe0, 0xff)  // Negative Fixnum
-                push_fixed_value(_int8, *(int8_t*)p);
+            //SWITCH_RANGE(0xe0, 0xff)  // Negative Fixnum
+            //    push_fixed_value(_int8, *(int8_t*)p);
+            //SWITCH_RANGE(0x80, 0xb7)  // String 0 to 55 bytes long
+            //    push_variable_value(_raw, data, p, *p-0x80);
             SWITCH_RANGE(0xc0, 0xdf)  // Variable
                 switch(*p) {
                 case 0xc0:  // nil

@@ -13,3 +13,5 @@ msgpack/*.cpp
 /tags
 /docs/_build
 .cache
+
+.idea
