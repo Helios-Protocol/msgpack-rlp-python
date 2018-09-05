@@ -26,6 +26,7 @@ typedef struct unpack_stack {
     PyObject* obj;
     Py_ssize_t size;
     Py_ssize_t count;
+    Py_ssize_t start_pointer;
     unsigned int ct;
     PyObject* map_key;
 } unpack_stack;
@@ -125,7 +126,7 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
     cs = _cs; \
     goto _fixed_trail_again
 
-#define start_container(func, count_, ct_) \
+#define start_container(func, count_, ct_, start) \
     if(top >= MSGPACK_EMBED_STACK_SIZE) { goto _failed; } /* FIXME */ \
     if(construct_cb(func)(user, count_, &stack[top].obj) < 0) { goto _failed; } \
     if((count_) == 0) { obj = stack[top].obj; \
@@ -134,6 +135,7 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
     stack[top].ct = ct_; \
     stack[top].size  = count_; \
     stack[top].count = 0; \
+    stack[top].start_pointer = (long int)&start; \
     ++top; \
     /*printf("container %d count %d stack %d\n",stack[top].obj,count_,top);*/ \
     /*printf("stack push %d\n", top);*/ \
@@ -211,26 +213,8 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
             //noqa
             SWITCH_RANGE(0xc0, 0xf7)  // short list
                 //again_fixed_trail(CS_RAW_NEW, (unsigned int)*p-183);
-                switch(*p) {
-                case 0xb8:  // 8 bit
-                    again_fixed_trail(CS_RAW_8, 1);
-                case 0xb9:  // 16 bit
-                    again_fixed_trail(CS_RAW_16, 2);
-                case 0xba:  // 24 bit
-                    again_fixed_trail(CS_RAW_24, 3);
-                case 0xbb:  // 32 bit
-                    again_fixed_trail(CS_RAW_32, 4);
-                case 0xbc:  // 40 bit
-                    again_fixed_trail(CS_RAW_40, 5);
-                case 0xbd:  // 48 bit
-                    again_fixed_trail(CS_RAW_48, 6);
-                case 0xbe:  // 56 bit
-                    again_fixed_trail(CS_RAW_56, 7);
-                case 0xbf:  // 64 bit
-                    again_fixed_trail(CS_RAW_64, 8);
-                default:
-                    goto _failed;
-                }
+                start_container(_array, (unsigned int)*p-192, CT_ARRAY_ITEM, *p);
+
                 //endnoqa
 //                switch(*p) {
 //                case 0xc0:  // nil
@@ -379,17 +363,17 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
             _ext_zero:
                 push_variable_value(_ext, data, n, trail);
 
-            case CS_ARRAY_16:
-                start_container(_array, _msgpack_load16(uint16_t,n), CT_ARRAY_ITEM);
-            case CS_ARRAY_32:
-                /* FIXME security guard */
-                start_container(_array, _msgpack_load32(uint32_t,n), CT_ARRAY_ITEM);
-
-            case CS_MAP_16:
-                start_container(_map, _msgpack_load16(uint16_t,n), CT_MAP_KEY);
-            case CS_MAP_32:
-                /* FIXME security guard */
-                start_container(_map, _msgpack_load32(uint32_t,n), CT_MAP_KEY);
+//            case CS_ARRAY_16:
+//                start_container(_array, _msgpack_load16(uint16_t,n), CT_ARRAY_ITEM);
+//            case CS_ARRAY_32:
+//                /* FIXME security guard */
+//                start_container(_array, _msgpack_load32(uint32_t,n), CT_ARRAY_ITEM);
+//
+//            case CS_MAP_16:
+//                start_container(_map, _msgpack_load16(uint16_t,n), CT_MAP_KEY);
+//            case CS_MAP_32:
+//                /* FIXME security guard */
+//                start_container(_map, _msgpack_load32(uint32_t,n), CT_MAP_KEY);
 
             default:
                 goto _failed;
@@ -402,7 +386,8 @@ _push:
     switch(c->ct) {
     case CT_ARRAY_ITEM:
         if(construct_cb(_array_item)(user, c->count, &c->obj, obj) < 0) { goto _failed; }
-        if(++c->count == c->size) {
+        ++c->count;
+        if((long int)c->start_pointer - (long int)p == c->size) {
             obj = c->obj;
             if (construct_cb(_array_end)(user, &obj) < 0) { goto _failed; }
             --top;
