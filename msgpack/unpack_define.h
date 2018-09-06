@@ -47,6 +47,15 @@ typedef enum {
     CS_RAW_56            = 0x07,
     CS_RAW_64            = 0x08,
 
+
+    CS_ARRAY_8          = 0x11,
+    CS_ARRAY_16          = 0x12,
+    CS_ARRAY_24          = 0x13,
+    CS_ARRAY_32          = 0x14,
+    CS_ARRAY_40          = 0x15,
+    CS_ARRAY_48          = 0x16,
+    CS_ARRAY_56          = 0x17,
+    CS_ARRAY_64          = 0x18,
 //
 //    CS_BIN_8             = 0x09,
 //    CS_BIN_16            = 0x05,
@@ -56,16 +65,16 @@ typedef enum {
 //    CS_EXT_16            = 0x08,
 //    CS_EXT_32            = 0x09,
 
-    CS_FLOAT             = 0x0a,
-    CS_DOUBLE            = 0x0b,
-    CS_UINT_8            = 0x0c,
-    CS_UINT_16           = 0x0d,
-    CS_UINT_32           = 0x0e,
-    CS_UINT_64           = 0x0f,
-    CS_INT_8             = 0x10,
-    CS_INT_16            = 0x11,
-    CS_INT_32            = 0x12,
-    CS_INT_64            = 0x13,
+//    CS_FLOAT             = 0x0a,
+//    CS_DOUBLE            = 0x0b,
+//    CS_UINT_8            = 0x0c,
+//    CS_UINT_16           = 0x0d,
+//    CS_UINT_32           = 0x0e,
+//    CS_UINT_64           = 0x0f,
+//    CS_INT_8             = 0x10,
+//    CS_INT_16            = 0x11,
+//    CS_INT_32            = 0x12,
+//    CS_INT_64            = 0x13,
 
     //CS_FIXEXT1           = 0x14,
     //CS_FIXEXT2           = 0x15,
@@ -75,10 +84,10 @@ typedef enum {
 
 
 
-    CS_ARRAY_16          = 0x1c,
-    CS_ARRAY_32          = 0x1d,
-    CS_MAP_16            = 0x1e,
-    CS_MAP_32            = 0x1f,
+//    CS_ARRAY_16          = 0x1c,
+//    CS_ARRAY_32          = 0x1d,
+//    CS_MAP_16            = 0x1e,
+//    CS_MAP_32            = 0x1f,
 
     ACS_RAW_VALUE,
     ACS_BIN_VALUE,

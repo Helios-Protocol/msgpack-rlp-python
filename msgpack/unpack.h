@@ -132,6 +132,7 @@ static inline int unpack_callback_true(unpack_user* u, msgpack_unpack_object* o)
 static inline int unpack_callback_false(unpack_user* u, msgpack_unpack_object* o)
 { Py_INCREF(Py_False); *o = Py_False; return 0; }
 
+//starts the array
 static inline int unpack_callback_array(unpack_user* u, unsigned int n, msgpack_unpack_object* o)
 {
     if (n > u->max_array_len) {
@@ -146,6 +147,20 @@ static inline int unpack_callback_array(unpack_user* u, unsigned int n, msgpack_
     return 0;
 }
 
+
+//appends o to list
+static inline int unpack_callback_append_array_item(unpack_user* u, msgpack_unpack_object* c, msgpack_unpack_object o)
+{
+    if (u->use_list)
+        PyList_Append(*c, o);
+    else
+        return -1;
+        //not implemented yet
+        //PyTuple_SET_ITEM(*c, current, o);
+    return 0;
+}
+
+//sets a position in the list to o
 static inline int unpack_callback_array_item(unpack_user* u, unsigned int current, msgpack_unpack_object* c, msgpack_unpack_object o)
 {
     if (u->use_list)
@@ -155,6 +170,7 @@ static inline int unpack_callback_array_item(unpack_user* u, unsigned int curren
     return 0;
 }
 
+//ends the array
 static inline int unpack_callback_array_end(unpack_user* u, msgpack_unpack_object* c)
 {
     if (u->list_hook) {

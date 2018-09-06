@@ -35,6 +35,8 @@
 #endif
 
 
+
+
 /*
  * Integer
  */
@@ -647,11 +649,12 @@ static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t positio
         uint32_t length_in_bytes = (uint32_t)l;
         buf[0] = 0xfa;
         unsigned char padded_buf[4];
-        memcpy(&padded_buf[0], &length_in_bytes, 5);
+        //memcpy(&padded_buf[0], &length_in_bytes, 5);
+        _msgpack_store32(&padded_buf[0], (uint32_t)l);
 
-        buf[1] = padded_buf[2];
-        buf[2] = padded_buf[1];
-        buf[3] = padded_buf[0];
+        buf[1] = padded_buf[1];
+        buf[2] = padded_buf[2];
+        buf[3] = padded_buf[3];
         //buf[4] = padded_buf[0];
 
         msgpack_pack_insert_buffer(x, buf, 4, position);
@@ -667,13 +670,14 @@ static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t positio
         uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xfc;
         unsigned char padded_buf[8];
-        memcpy(&padded_buf[0], &length_in_bytes, 9);
+        //memcpy(&padded_buf[0], &length_in_bytes, 9);
+        _msgpack_store64(&padded_buf[0], (uint64_t)l);
 
-        buf[1] = padded_buf[4];
-        buf[2] = padded_buf[3];
-        buf[3] = padded_buf[2];
-        buf[4] = padded_buf[1];
-        buf[5] = padded_buf[0];
+        buf[1] = padded_buf[3];
+        buf[2] = padded_buf[4];
+        buf[3] = padded_buf[5];
+        buf[4] = padded_buf[6];
+        buf[5] = padded_buf[7];
 
         msgpack_pack_insert_buffer(x, buf, 6, position);
     } else if (l < 281474976710656){
@@ -682,14 +686,15 @@ static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t positio
         uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xfd;
         unsigned char padded_buf[8];
-        memcpy(&padded_buf[0], &length_in_bytes, 9);
+        //memcpy(&padded_buf[0], &length_in_bytes, 9);
+        _msgpack_store64(&padded_buf[0], (uint64_t)l);
 
-        buf[1] = padded_buf[5];
-        buf[2] = padded_buf[4];
-        buf[3] = padded_buf[3];
-        buf[4] = padded_buf[2];
-        buf[5] = padded_buf[1];
-        buf[6] = padded_buf[0];
+        buf[1] = padded_buf[2];
+        buf[2] = padded_buf[3];
+        buf[3] = padded_buf[4];
+        buf[4] = padded_buf[5];
+        buf[5] = padded_buf[6];
+        buf[6] = padded_buf[7];
 
         msgpack_pack_insert_buffer(x, buf, 7, position);
     } else if (l < 72057594037927936){
@@ -698,15 +703,16 @@ static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t positio
         uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xfe;
         unsigned char padded_buf[8];
-        memcpy(&padded_buf[0], &length_in_bytes, 9);
+        //memcpy(&padded_buf[0], &length_in_bytes, 9);
+        _msgpack_store64(&padded_buf[0], (uint64_t)l);
 
-        buf[1] = padded_buf[6];
-        buf[2] = padded_buf[5];
-        buf[3] = padded_buf[4];
-        buf[4] = padded_buf[3];
-        buf[5] = padded_buf[2];
-        buf[6] = padded_buf[1];
-        buf[7] = padded_buf[0];
+        buf[1] = padded_buf[1];
+        buf[2] = padded_buf[2];
+        buf[3] = padded_buf[3];
+        buf[4] = padded_buf[4];
+        buf[5] = padded_buf[5];
+        buf[6] = padded_buf[6];
+        buf[7] = padded_buf[7];
 
         msgpack_pack_insert_buffer(x, buf, 8, position);
     } else {
@@ -781,12 +787,12 @@ static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
         uint32_t length_in_bytes = (uint32_t)l;
         buf[0] = 0xba;
         unsigned char padded_buf[4];
-        memcpy(&padded_buf[0], &length_in_bytes, 4);
-        //_msgpack_store32(&padded_buf[0], (uint32_t)l);
+        //memcpy(&padded_buf[0], &length_in_bytes, 4);
+        _msgpack_store32(&padded_buf[0], (uint32_t)l);
 
-        buf[1] = padded_buf[2];
-        buf[2] = padded_buf[1];
-        buf[3] = padded_buf[0];
+        buf[1] = padded_buf[1];
+        buf[2] = padded_buf[2];
+        buf[3] = padded_buf[3];
         //buf[4] = padded_buf[0];
 
         msgpack_pack_append_buffer(x, buf, 4);
@@ -802,13 +808,14 @@ static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
         uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xbc;
         unsigned char padded_buf[8];
-        memcpy(&padded_buf[0], &length_in_bytes, 9);
+        //memcpy(&padded_buf[0], &length_in_bytes, 9);
+        _msgpack_store64(&padded_buf[0], (uint64_t)l);
 
-        buf[1] = padded_buf[4];
-        buf[2] = padded_buf[3];
-        buf[3] = padded_buf[2];
-        buf[4] = padded_buf[1];
-        buf[5] = padded_buf[0];
+        buf[1] = padded_buf[3];
+        buf[2] = padded_buf[4];
+        buf[3] = padded_buf[5];
+        buf[4] = padded_buf[6];
+        buf[5] = padded_buf[7];
 
         msgpack_pack_append_buffer(x, buf, 6);
     } else if (l < 281474976710656){
@@ -817,14 +824,15 @@ static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
         uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xbd;
         unsigned char padded_buf[8];
-        memcpy(&padded_buf[0], &length_in_bytes, 9);
+        //memcpy(&padded_buf[0], &length_in_bytes, 9);
+        _msgpack_store64(&padded_buf[0], (uint64_t)l);
 
-        buf[1] = padded_buf[5];
-        buf[2] = padded_buf[4];
-        buf[3] = padded_buf[3];
-        buf[4] = padded_buf[2];
-        buf[5] = padded_buf[1];
-        buf[6] = padded_buf[0];
+        buf[1] = padded_buf[2];
+        buf[2] = padded_buf[3];
+        buf[3] = padded_buf[4];
+        buf[4] = padded_buf[5];
+        buf[5] = padded_buf[6];
+        buf[6] = padded_buf[7];
 
         msgpack_pack_append_buffer(x, buf, 7);
     } else if (l < 72057594037927936){
@@ -833,15 +841,16 @@ static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
         uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xbe;
         unsigned char padded_buf[8];
-        memcpy(&padded_buf[0], &length_in_bytes, 9);
+        //memcpy(&padded_buf[0], &length_in_bytes, 9);
+        _msgpack_store64(&padded_buf[0], (uint64_t)l);
 
-        buf[1] = padded_buf[6];
-        buf[2] = padded_buf[5];
-        buf[3] = padded_buf[4];
-        buf[4] = padded_buf[3];
-        buf[5] = padded_buf[2];
-        buf[6] = padded_buf[1];
-        buf[7] = padded_buf[0];
+        buf[1] = padded_buf[1];
+        buf[2] = padded_buf[2];
+        buf[3] = padded_buf[3];
+        buf[4] = padded_buf[4];
+        buf[5] = padded_buf[5];
+        buf[6] = padded_buf[6];
+        buf[7] = padded_buf[7];
 
         msgpack_pack_append_buffer(x, buf, 8);
     } else {

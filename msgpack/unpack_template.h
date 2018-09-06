@@ -26,7 +26,8 @@ typedef struct unpack_stack {
     PyObject* obj;
     Py_ssize_t size;
     Py_ssize_t count;
-    Py_ssize_t start_pointer;
+    uint64_t length;
+    intptr_t start_pointer;
     unsigned int ct;
     PyObject* map_key;
 } unpack_stack;
@@ -126,16 +127,19 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
     cs = _cs; \
     goto _fixed_trail_again
 
-#define start_container(func, count_, ct_, start) \
+#define start_container(func, length_, ct_, start) \
     if(top >= MSGPACK_EMBED_STACK_SIZE) { goto _failed; } /* FIXME */ \
-    if(construct_cb(func)(user, count_, &stack[top].obj) < 0) { goto _failed; } \
-    if((count_) == 0) { obj = stack[top].obj; \
+    /*if(construct_cb(func)(user, count_, &stack[top].obj) < 0) { goto _failed; } */ \
+    /*Create a python list of 0 length. We no longer know the length and need to append */ \
+    if(construct_cb(func)(user, 0, &stack[top].obj) < 0) { goto _failed; } \
+    if((length_) == 0) { obj = stack[top].obj; \
         if (construct_cb(func##_end)(user, &obj) < 0) { goto _failed; } \
         goto _push; } \
     stack[top].ct = ct_; \
-    stack[top].size  = count_; \
-    stack[top].count = 0; \
-    stack[top].start_pointer = (long int)&start; \
+    /*stack[top].size  = count_; */ \
+    /*stack[top].count = 0; */ \
+    stack[top].length  = (uint64_t)length_; \
+    stack[top].start_pointer = (intptr_t)start; \
     ++top; \
     /*printf("container %d count %d stack %d\n",stack[top].obj,count_,top);*/ \
     /*printf("stack push %d\n", top);*/ \
@@ -180,7 +184,10 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
         case CS_HEADER:
             SWITCH_RANGE_BEGIN
             SWITCH_RANGE(0x00, 0x7f)  // Positive Fixnum
-                push_fixed_value(_uint8, *(uint8_t*)p);
+                n = p;
+                push_variable_value(_raw, data, n, 1);
+                //again_fixed_trail_if_zero(ACS_RAW_VALUE, 1, _raw_zero);
+                //push_fixed_value(_uint8, *(uint8_t*)p);
             //SWITCH_RANGE(0xe0, 0xff)  // Negative Fixnum
             //    push_fixed_value(_int8, *(int8_t*)p);
             SWITCH_RANGE(0x80, 0xb7)  // String 0 to 55 bytes long
@@ -211,10 +218,35 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
                 }
 
             //noqa
-            SWITCH_RANGE(0xc0, 0xf7)  // short list
+            SWITCH_RANGE(0xc0, 0xf7)  // Short list
                 //again_fixed_trail(CS_RAW_NEW, (unsigned int)*p-183);
-                start_container(_array, (unsigned int)*p-192, CT_ARRAY_ITEM, *p);
+                n = p;
+                start_container(_array, (unsigned int)*p-192, CT_ARRAY_ITEM, n);
 
+            SWITCH_RANGE(0xf8, 0xff)  // Long string
+                //again_fixed_trail(CS_RAW_NEW, (unsigned int)*p-183);
+                switch(*p) {
+                case 0xf8:  // 8 bit
+                    again_fixed_trail(CS_ARRAY_8, 1);
+                case 0xf9:  // 16 bit
+                    again_fixed_trail(CS_ARRAY_16, 2);
+                case 0xfa:  // 24 bit
+                    again_fixed_trail(CS_ARRAY_24, 3);
+                case 0xfb:  // 32 bit
+                    again_fixed_trail(CS_ARRAY_32, 4);
+                case 0xfc:  // 40 bit
+                    again_fixed_trail(CS_ARRAY_40, 5);
+                case 0xfd:  // 48 bit
+                    again_fixed_trail(CS_ARRAY_48, 6);
+                case 0xfe:  // 56 bit
+                    again_fixed_trail(CS_ARRAY_56, 7);
+                case 0xff:  // 64 bit
+                    again_fixed_trail(CS_ARRAY_64, 8);
+                default:
+                    goto _failed;
+                }
+
+                //push_variable_value(_raw, data, p, (unsigned int)*p-128);
                 //endnoqa
 //                switch(*p) {
 //                case 0xc0:  // nil
@@ -298,35 +330,35 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
 //                again_fixed_trail_if_zero(ACS_EXT_VALUE,
 //                                          _msgpack_load32(uint32_t,n)+1,
 //                                          _ext_zero);
-            case CS_FLOAT: {
-                    union { uint32_t i; float f; } mem;
-                    mem.i = _msgpack_load32(uint32_t,n);
-                    push_fixed_value(_float, mem.f); }
-            case CS_DOUBLE: {
-                    union { uint64_t i; double f; } mem;
-                    mem.i = _msgpack_load64(uint64_t,n);
-#if defined(__arm__) && !(__ARM_EABI__) // arm-oabi
-                    // https://github.com/msgpack/msgpack-perl/pull/1
-                    mem.i = (mem.i & 0xFFFFFFFFUL) << 32UL | (mem.i >> 32UL);
-#endif
-                    push_fixed_value(_double, mem.f); }
-            case CS_UINT_8:
-                push_fixed_value(_uint8, *(uint8_t*)n);
-            case CS_UINT_16:
-                push_fixed_value(_uint16, _msgpack_load16(uint16_t,n));
-            case CS_UINT_32:
-                push_fixed_value(_uint32, _msgpack_load32(uint32_t,n));
-            case CS_UINT_64:
-                push_fixed_value(_uint64, _msgpack_load64(uint64_t,n));
-
-            case CS_INT_8:
-                push_fixed_value(_int8, *(int8_t*)n);
-            case CS_INT_16:
-                push_fixed_value(_int16, _msgpack_load16(int16_t,n));
-            case CS_INT_32:
-                push_fixed_value(_int32, _msgpack_load32(int32_t,n));
-            case CS_INT_64:
-                push_fixed_value(_int64, _msgpack_load64(int64_t,n));
+//            case CS_FLOAT: {
+//                    union { uint32_t i; float f; } mem;
+//                    mem.i = _msgpack_load32(uint32_t,n);
+//                    push_fixed_value(_float, mem.f); }
+//            case CS_DOUBLE: {
+//                    union { uint64_t i; double f; } mem;
+//                    mem.i = _msgpack_load64(uint64_t,n);
+//#if defined(__arm__) && !(__ARM_EABI__) // arm-oabi
+//                    // https://github.com/msgpack/msgpack-perl/pull/1
+//                    mem.i = (mem.i & 0xFFFFFFFFUL) << 32UL | (mem.i >> 32UL);
+//#endif
+//                    push_fixed_value(_double, mem.f); }
+//            case CS_UINT_8:
+//                push_fixed_value(_uint8, *(uint8_t*)n);
+//            case CS_UINT_16:
+//                push_fixed_value(_uint16, _msgpack_load16(uint16_t,n));
+//            case CS_UINT_32:
+//                push_fixed_value(_uint32, _msgpack_load32(uint32_t,n));
+//            case CS_UINT_64:
+//                push_fixed_value(_uint64, _msgpack_load64(uint64_t,n));
+//
+//            case CS_INT_8:
+//                push_fixed_value(_int8, *(int8_t*)n);
+//            case CS_INT_16:
+//                push_fixed_value(_int16, _msgpack_load16(int16_t,n));
+//            case CS_INT_32:
+//                push_fixed_value(_int32, _msgpack_load32(int32_t,n));
+//            case CS_INT_64:
+//                push_fixed_value(_int64, _msgpack_load64(int64_t,n));
 
 
 //            case CS_BIN_8:
@@ -359,15 +391,27 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
             _raw_zero:
                 push_variable_value(_raw, data, n, trail);
 
-            case ACS_EXT_VALUE:
-            _ext_zero:
-                push_variable_value(_ext, data, n, trail);
+//            case ACS_EXT_VALUE:
+//            _ext_zero:
+//                push_variable_value(_ext, data, n, trail);
 
-//            case CS_ARRAY_16:
-//                start_container(_array, _msgpack_load16(uint16_t,n), CT_ARRAY_ITEM);
-//            case CS_ARRAY_32:
-//                /* FIXME security guard */
-//                start_container(_array, _msgpack_load32(uint32_t,n), CT_ARRAY_ITEM);
+
+            case CS_ARRAY_8:
+                start_container(_array, *(uint8_t*)n, CT_ARRAY_ITEM, n+trail-1);
+            case CS_ARRAY_16:
+                start_container(_array, _msgpack_load16(uint16_t,n), CT_ARRAY_ITEM, n+trail-1);
+            case CS_ARRAY_24:
+                start_container(_array, _msgpack_load24(uint32_t,n), CT_ARRAY_ITEM, n+trail-1);
+            case CS_ARRAY_32:
+                start_container(_array, _msgpack_load32(uint32_t,n), CT_ARRAY_ITEM, n+trail-1);
+            case CS_ARRAY_40:
+                start_container(_array, _msgpack_load40(uint64_t,n), CT_ARRAY_ITEM, n+trail-1);
+            case CS_ARRAY_48:
+                start_container(_array, _msgpack_load48(uint64_t,n), CT_ARRAY_ITEM, n+trail-1);
+            case CS_ARRAY_56:
+                start_container(_array, _msgpack_load56(uint64_t,n), CT_ARRAY_ITEM, n+trail-1);
+            case CS_ARRAY_64:
+                start_container(_array, _msgpack_load64(uint64_t,n), CT_ARRAY_ITEM, n+trail-1);
 //
 //            case CS_MAP_16:
 //                start_container(_map, _msgpack_load16(uint16_t,n), CT_MAP_KEY);
@@ -385,9 +429,10 @@ _push:
     c = &stack[top-1];
     switch(c->ct) {
     case CT_ARRAY_ITEM:
-        if(construct_cb(_array_item)(user, c->count, &c->obj, obj) < 0) { goto _failed; }
-        ++c->count;
-        if((long int)c->start_pointer - (long int)p == c->size) {
+        //if(construct_cb(_array_item)(user, c->count, &c->obj, obj) < 0) { goto _failed; }
+        if(construct_cb(_append_array_item)(user, &c->obj, obj) < 0) { goto _failed; }
+        //++c->count;
+        if((uint64_t) (intptr_t)p - c->start_pointer == c->length) {
             obj = c->obj;
             if (construct_cb(_array_end)(user, &obj) < 0) { goto _failed; }
             --top;

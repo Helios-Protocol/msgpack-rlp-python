@@ -179,11 +179,11 @@ cdef class Packer(object):
                 #ret = msgpack_pack_bin(&self.pk, L)
                 #we don't have a special type for binary, so lets skip this and use the same function as unicode
                 if L == 1 and ord(o) < 0x80:
-                    print('encoding single byte as is')
+                    #print('encoding single byte as is')
                     ret = msgpack_pack_raw_body(&self.pk, rawval, L)
                 else:
-                    print('encoding byte string normally')
-                    print('length = {}'.format(L))
+                    #print('encoding byte string normally')
+                    #print('length = {}'.format(L))
                     ret = msgpack_pack_raw(&self.pk, L)
                     if ret == 0:
                         ret = msgpack_pack_raw_body(&self.pk, rawval, L)

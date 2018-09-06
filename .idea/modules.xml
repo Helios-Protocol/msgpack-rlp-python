@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../helios prototype/.idea/helios prototype.iml" filepath="$PROJECT_DIR$/../helios prototype/.idea/helios prototype.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/msgpack-rlp-python.iml" filepath="$PROJECT_DIR$/.idea/msgpack-rlp-python.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../py-rlp-cython/.idea/py-rlp-cython.iml" filepath="$PROJECT_DIR$/../py-rlp-cython/.idea/py-rlp-cython.iml" />
     </modules>
   </component>
 </project>
