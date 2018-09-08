@@ -22,28 +22,37 @@
 #endif
 #endif
 
-typedef struct unpack_stack {
-    PyObject* obj;
-    Py_ssize_t size;
-    Py_ssize_t count;
-    uint64_t length;
-    intptr_t start_pointer;
-    unsigned int ct;
-    PyObject* map_key;
-} unpack_stack;
+//typedef struct sede {
+//    int type;
+//    int num_children;
+//    struct sede* children[MSGPACK_EMBED_STACK_SIZE];
+//} sede;
 
-struct unpack_context {
-    unpack_user user;
-    unsigned int cs;
-    unsigned int trail;
-    unsigned int top;
-    /*
-    unpack_stack* stack;
-    unsigned int stack_size;
-    unpack_stack embed_stack[MSGPACK_EMBED_STACK_SIZE];
-    */
-    unpack_stack stack[MSGPACK_EMBED_STACK_SIZE];
-};
+//sede->children_sedes[1]->children_sedes[2]->type
+
+//typedef struct unpack_stack {
+//    PyObject* obj;
+//    Py_ssize_t size;
+//    Py_ssize_t count;
+//    uint64_t length;
+//    intptr_t start_pointer;
+//    unsigned int ct;
+//    PyObject* map_key;
+//} unpack_stack;
+//
+//struct unpack_context {
+//    unpack_user user;
+//    unsigned int cs;
+//    unsigned int trail;
+//    unsigned int top;
+//    /*
+//    unpack_stack* stack;
+//    unsigned int stack_size;
+//    unpack_stack embed_stack[MSGPACK_EMBED_STACK_SIZE];
+//    */
+//    //sede sedes;
+//    unpack_stack stack[MSGPACK_EMBED_STACK_SIZE];
+//};
 
 
 static inline void unpack_init(unpack_context* ctx)
@@ -87,6 +96,7 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
     //end of buffer position pointer
     const unsigned char* const pe = (unsigned char*)data + len;
     const void* n = p;
+    int type;
 
     unsigned int trail = ctx->trail;
     unsigned int cs = ctx->cs;
@@ -137,10 +147,11 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
         goto _push; } \
     stack[top].ct = ct_; \
     /*stack[top].size  = count_; */ \
-    /*stack[top].count = 0; */ \
+    stack[top].count = 0; \
     stack[top].length  = (uint64_t)length_; \
     stack[top].start_pointer = (intptr_t)start; \
     ++top; \
+    ctx->top = top; \
     /*printf("container %d count %d stack %d\n",stack[top].obj,count_,top);*/ \
     /*printf("stack push %d\n", top);*/ \
     /* FIXME \
@@ -184,8 +195,14 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
         case CS_HEADER:
             SWITCH_RANGE_BEGIN
             SWITCH_RANGE(0x00, 0x7f)  // Positive Fixnum
+                type = get_current_item_type(user, ctx);
                 n = p;
-                push_variable_value(_raw, data, n, 1);
+                if (type == SEDE_BYTES){
+                    push_variable_value(_raw, data, n, 1);
+                } else if (type == SEDE_UINT) {
+                    push_fixed_value(_uint8, *(uint8_t*)n);
+                }
+
                 //again_fixed_trail_if_zero(ACS_RAW_VALUE, 1, _raw_zero);
                 //push_fixed_value(_uint8, *(uint8_t*)p);
             //SWITCH_RANGE(0xe0, 0xff)  // Negative Fixnum
@@ -367,9 +384,9 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
 //                again_fixed_trail_if_zero(ACS_BIN_VALUE, _msgpack_load16(uint16_t,n), _bin_zero);
 //            case CS_BIN_32:
 //                again_fixed_trail_if_zero(ACS_BIN_VALUE, _msgpack_load32(uint32_t,n), _bin_zero);
-            case ACS_BIN_VALUE:
-            _bin_zero:
-                push_variable_value(_bin, data, n, trail);
+//            case ACS_BIN_VALUE:
+//            _bin_zero:
+//                push_variable_value(_bin, data, n, trail);
 
             case CS_RAW_8:
                 again_fixed_trail_if_zero(ACS_RAW_VALUE, *(uint8_t*)n, _raw_zero);
@@ -388,8 +405,44 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
             case CS_RAW_64:
                 again_fixed_trail_if_zero(ACS_RAW_VALUE, _msgpack_load64(uint64_t,n), _raw_zero);
             case ACS_RAW_VALUE:
+            //in RLP, everything is encoded as a raw bytes so they all come here. Here we can reproduce the objects using sedes.
             _raw_zero:
-                push_variable_value(_raw, data, n, trail);
+                type = get_current_item_type(user, ctx);
+                if (type == SEDE_BYTES){
+                    push_variable_value(_raw, data, n, trail);
+                } else if (type == SEDE_UINT) {
+                    //trail is the number of bytes to load
+                    if (trail == 1){
+                        push_fixed_value(_uint8, *(uint8_t*)n);
+                    } else if (trail == 2){
+                        push_fixed_value(_uint16, _msgpack_load16(uint16_t,n));
+                    } else if (trail == 3){
+                        push_fixed_value(_uint32, _msgpack_load24(uint32_t,n));
+                    } else if (trail == 4){
+                        push_fixed_value(_uint32, _msgpack_load32(uint32_t,n));
+                    } else if (trail == 5){
+                        push_fixed_value(_uint64, _msgpack_load40(uint64_t,n));
+                    } else if (trail == 6){
+                        push_fixed_value(_uint64, _msgpack_load48(uint64_t,n));
+                    } else if (trail == 7){
+                        push_fixed_value(_uint64, _msgpack_load56(uint64_t,n));
+                    } else if (trail == 8){
+                        push_fixed_value(_uint64, _msgpack_load64(uint64_t,n));
+                    } else {
+                        ret = 11;
+                        //PyErr_SetString(PyExc_ValueError, "Attempted to decode an int, but it was larger than the maximum allowed size");
+                        //ret = trail;
+                        goto _end;
+                        //goto _failed;
+                    }
+                    //ret = type;
+                    //ret = 100;
+                    //goto _end;
+                } else {
+                    //PyErr_Format(PyExc_ValueError, "Unknown sede type %u", type);
+                    ret = 12;
+                    goto _end;
+                }
 
 //            case ACS_EXT_VALUE:
 //            _ext_zero:
@@ -431,30 +484,32 @@ _push:
     case CT_ARRAY_ITEM:
         //if(construct_cb(_array_item)(user, c->count, &c->obj, obj) < 0) { goto _failed; }
         if(construct_cb(_append_array_item)(user, &c->obj, obj) < 0) { goto _failed; }
-        //++c->count;
+        ++c->count;
         if((uint64_t) (intptr_t)p - c->start_pointer == c->length) {
             obj = c->obj;
             if (construct_cb(_array_end)(user, &obj) < 0) { goto _failed; }
             --top;
+            ctx->top = top;
             /*printf("stack pop %d\n", top);*/
             goto _push;
         }
         goto _header_again;
-    case CT_MAP_KEY:
-        c->map_key = obj;
-        c->ct = CT_MAP_VALUE;
-        goto _header_again;
-    case CT_MAP_VALUE:
-        if(construct_cb(_map_item)(user, c->count, &c->obj, c->map_key, obj) < 0) { goto _failed; }
-        if(++c->count == c->size) {
-            obj = c->obj;
-            if (construct_cb(_map_end)(user, &obj) < 0) { goto _failed; }
-            --top;
-            /*printf("stack pop %d\n", top);*/
-            goto _push;
-        }
-        c->ct = CT_MAP_KEY;
-        goto _header_again;
+//    case CT_MAP_KEY:
+//        c->map_key = obj;
+//        c->ct = CT_MAP_VALUE;
+//        goto _header_again;
+//    case CT_MAP_VALUE:
+//        if(construct_cb(_map_item)(user, c->count, &c->obj, c->map_key, obj) < 0) { goto _failed; }
+//        if(++c->count == c->size) {
+//            obj = c->obj;
+//            if (construct_cb(_map_end)(user, &obj) < 0) { goto _failed; }
+//            --top;
+//            ctx->top = top;
+//            /*printf("stack pop %d\n", top);*/
+//            goto _push;
+//        }
+//        c->ct = CT_MAP_KEY;
+//        goto _header_again;
 
     default:
         goto _failed;

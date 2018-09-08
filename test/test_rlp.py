@@ -31,7 +31,7 @@ for i in range(1,26):
 
 for i in range(1,26):
     print("trying string with length = {} bytes".format(i))
-    to_encode = (2**i) * b'0'
+    to_encode = (2**i) * '0'
 
     rlp_encoded = rlp.encode(to_encode)
     msg_encoded = msgpack.packb(to_encode)

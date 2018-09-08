@@ -104,24 +104,77 @@ do { \
             msgpack_pack_append_buffer(x, &TAKE8_64(d), 1); \
         } else { \
             /* unsigned 8 */ \
-            unsigned char buf[2] = {0xcc, TAKE8_64(d)}; \
+            unsigned char s = 0x80 | (uint8_t)1; \
+            unsigned char buf[2] = {s, TAKE8_64(d)}; \
             msgpack_pack_append_buffer(x, buf, 2); \
         } \
     } else { \
         if(d < (1ULL<<16)) { \
             /* unsigned 16 */ \
+            unsigned char s = 0x80 | (uint8_t)2; \
             unsigned char buf[3]; \
-            buf[0] = 0xcd; _msgpack_store16(&buf[1], (uint16_t)d); \
+            buf[0] = s; _msgpack_store16(&buf[1], (uint16_t)d); \
             msgpack_pack_append_buffer(x, buf, 3); \
+        } else if(d < (1ULL<<24)) { \
+            /* unsigned 24 */ \
+            unsigned char s = 0x80 | (uint8_t)3; \
+            unsigned char buf[4]; \
+            unsigned char padded_buf[4]; \
+            buf[0] = s; _msgpack_store32(&padded_buf[0], (uint32_t)d); \
+            buf[1] = padded_buf[1]; \
+            buf[2] = padded_buf[2]; \
+            buf[3] = padded_buf[3]; \
+            msgpack_pack_append_buffer(x, buf, 4); \
         } else if(d < (1ULL<<32)) { \
             /* unsigned 32 */ \
+            unsigned char s = 0x80 | (uint8_t)4; \
             unsigned char buf[5]; \
-            buf[0] = 0xce; _msgpack_store32(&buf[1], (uint32_t)d); \
+            buf[0] = s; _msgpack_store32(&buf[1], (uint32_t)d); \
             msgpack_pack_append_buffer(x, buf, 5); \
+        } else if(d < (1ULL<<40)) { \
+            /* unsigned 40 */ \
+            unsigned char s = 0x80 | (uint8_t)5; \
+            unsigned char buf[6]; \
+            unsigned char padded_buf[8]; \
+            buf[0] = s; _msgpack_store64(&padded_buf[0], (uint64_t)d); \
+            buf[1] = padded_buf[3]; \
+            buf[2] = padded_buf[4]; \
+            buf[3] = padded_buf[5]; \
+            buf[4] = padded_buf[6]; \
+            buf[5] = padded_buf[7]; \
+            msgpack_pack_append_buffer(x, buf, 6); \
+        } else if(d < (1ULL<<48)) { \
+            /* unsigned 48 */ \
+            unsigned char s = 0x80 | (uint8_t)6; \
+            unsigned char buf[7]; \
+            unsigned char padded_buf[8]; \
+            buf[0] = s; _msgpack_store64(&padded_buf[0], (uint64_t)d); \
+            buf[1] = padded_buf[2]; \
+            buf[2] = padded_buf[3]; \
+            buf[3] = padded_buf[4]; \
+            buf[4] = padded_buf[5]; \
+            buf[5] = padded_buf[6]; \
+            buf[6] = padded_buf[7]; \
+            msgpack_pack_append_buffer(x, buf, 7); \
+        } else if(d < (1ULL<<56)) { \
+            /* unsigned 56 */ \
+            unsigned char s = 0x80 | (uint8_t)7; \
+            unsigned char buf[8]; \
+            unsigned char padded_buf[8]; \
+            buf[0] = s; _msgpack_store64(&padded_buf[0], (uint64_t)d); \
+            buf[1] = padded_buf[1]; \
+            buf[2] = padded_buf[2]; \
+            buf[3] = padded_buf[3]; \
+            buf[4] = padded_buf[4]; \
+            buf[5] = padded_buf[5]; \
+            buf[6] = padded_buf[6]; \
+            buf[7] = padded_buf[7]; \
+            msgpack_pack_append_buffer(x, buf, 8); \
         } else { \
             /* unsigned 64 */ \
+            unsigned char s = 0x80 | (uint8_t)8; \
             unsigned char buf[9]; \
-            buf[0] = 0xcf; _msgpack_store64(&buf[1], d); \
+            buf[0] = s; _msgpack_store64(&buf[1], d); \
             msgpack_pack_append_buffer(x, buf, 9); \
         } \
     } \
@@ -646,7 +699,7 @@ static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t positio
     } else if (l < 16777216){
         //24 bit, 1 null bit to remove from 32 bit
         unsigned char buf[4];
-        uint32_t length_in_bytes = (uint32_t)l;
+        //uint32_t length_in_bytes = (uint32_t)l;
         buf[0] = 0xfa;
         unsigned char padded_buf[4];
         //memcpy(&padded_buf[0], &length_in_bytes, 5);
@@ -667,7 +720,7 @@ static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t positio
     } else if (l < 1099511627776){
         //40 bit, 3 null bit to remove from 64 bit
         unsigned char buf[6];
-        uint64_t length_in_bytes = (uint64_t)l;
+        //uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xfc;
         unsigned char padded_buf[8];
         //memcpy(&padded_buf[0], &length_in_bytes, 9);
@@ -683,7 +736,7 @@ static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t positio
     } else if (l < 281474976710656){
         //48 bit, 2 null bit to remove from 64 bit
         unsigned char buf[7];
-        uint64_t length_in_bytes = (uint64_t)l;
+        //uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xfd;
         unsigned char padded_buf[8];
         //memcpy(&padded_buf[0], &length_in_bytes, 9);
@@ -700,7 +753,7 @@ static inline int msgpack_pack_array(msgpack_packer* x, size_t l, size_t positio
     } else if (l < 72057594037927936){
         //56 bit, 1 null bit to remove from 64 bit
         unsigned char buf[8];
-        uint64_t length_in_bytes = (uint64_t)l;
+        //uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xfe;
         unsigned char padded_buf[8];
         //memcpy(&padded_buf[0], &length_in_bytes, 9);
@@ -784,7 +837,7 @@ static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
     } else if (l < 16777216){
         //24 bit, 1 null bit to remove from 32 bit
         unsigned char buf[4];
-        uint32_t length_in_bytes = (uint32_t)l;
+        //uint32_t length_in_bytes = (uint32_t)l;
         buf[0] = 0xba;
         unsigned char padded_buf[4];
         //memcpy(&padded_buf[0], &length_in_bytes, 4);
@@ -805,7 +858,7 @@ static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
     } else if (l < 1099511627776){
         //40 bit, 3 null bit to remove from 64 bit
         unsigned char buf[6];
-        uint64_t length_in_bytes = (uint64_t)l;
+        //uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xbc;
         unsigned char padded_buf[8];
         //memcpy(&padded_buf[0], &length_in_bytes, 9);
@@ -821,7 +874,7 @@ static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
     } else if (l < 281474976710656){
         //48 bit, 2 null bit to remove from 64 bit
         unsigned char buf[7];
-        uint64_t length_in_bytes = (uint64_t)l;
+        //uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xbd;
         unsigned char padded_buf[8];
         //memcpy(&padded_buf[0], &length_in_bytes, 9);
@@ -838,7 +891,7 @@ static inline int msgpack_pack_raw(msgpack_packer* x, size_t l)
     } else if (l < 72057594037927936){
         //56 bit, 1 null bit to remove from 64 bit
         unsigned char buf[8];
-        uint64_t length_in_bytes = (uint64_t)l;
+        //uint64_t length_in_bytes = (uint64_t)l;
         buf[0] = 0xbe;
         unsigned char padded_buf[8];
         //memcpy(&padded_buf[0], &length_in_bytes, 9);

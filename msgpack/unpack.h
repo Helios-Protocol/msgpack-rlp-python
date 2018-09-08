@@ -26,10 +26,35 @@ typedef struct unpack_user {
     PyObject *object_hook;
     PyObject *list_hook;
     PyObject *ext_hook;
+    PyObject *sedes;
     const char *encoding;
     const char *unicode_errors;
     Py_ssize_t max_str_len, max_bin_len, max_array_len, max_map_len, max_ext_len;
 } unpack_user;
+
+typedef struct unpack_stack {
+    PyObject* obj;
+    Py_ssize_t size;
+    Py_ssize_t count;
+    uint64_t length;
+    intptr_t start_pointer;
+    unsigned int ct;
+    PyObject* map_key;
+} unpack_stack;
+
+struct unpack_context {
+    unpack_user user;
+    unsigned int cs;
+    unsigned int trail;
+    unsigned int top;
+    /*
+    unpack_stack* stack;
+    unsigned int stack_size;
+    unpack_stack embed_stack[MSGPACK_EMBED_STACK_SIZE];
+    */
+    //sede sedes;
+    unpack_stack stack[MSGPACK_EMBED_STACK_SIZE];
+};
 
 typedef PyObject* msgpack_unpack_object;
 struct unpack_context;
@@ -132,41 +157,140 @@ static inline int unpack_callback_true(unpack_user* u, msgpack_unpack_object* o)
 static inline int unpack_callback_false(unpack_user* u, msgpack_unpack_object* o)
 { Py_INCREF(Py_False); *o = Py_False; return 0; }
 
+
+/*
+*
+*NEWWWWWWW
+*This function will get the type of the item currently being decoded
+* user will have the actual python list, unpack_user->sedes. unpack_context->stack will have the stack, unpack_context->top is the length of the stack. current item is top-1
+* types: 0 = binary (default), 1 = uint64_t, 2 = unicode string
+*/
+static inline int get_current_item_type(unpack_user *u, unpack_context *ctx)
+{
+    //else if unpack_user->sedes is an intiger or long, return it. this allows you to easily set the sede for everything the same, or for all children the same.
+    //else if unpack_user->sedes is a list, go to loop. then at each iteration do these two checks.
+
+    if (u->sedes) {
+
+        int ret;
+
+        if(PyLong_Check(u->sedes))
+        {
+            ret = (int)PyLong_AsLong(u->sedes);
+            return ret;
+        }
+        else
+        {
+
+            unsigned int _top = ctx->top;
+            unsigned int i;
+            Py_ssize_t stack_index;
+            PyObject *current_sede = u->sedes;
+            Py_ssize_t current_sede_length;
+
+            for( i = 0; i < _top; i = i + 1 )
+            {
+                if(i != 0)
+                {
+                    if(PyLong_Check(u->sedes))
+                    {
+                        ret = (int)PyLong_AsLong(current_sede);
+                        return ret;
+                    }
+                }
+                if (!PyList_Check(current_sede))
+                {
+                    PyErr_Format(PyExc_ValueError, "Sedes can only be lists or integers");
+                    return -1;
+                }
+
+                current_sede_length = PyList_GET_SIZE(current_sede);
+                if (current_sede_length == 1) {
+                    //this means it can be repeating. for example: [a] is a list of repeating a's, but they all have the type of the 0th element in sedes
+                    // example 2: [[a,b]], even if the first list has an index of n, the sede lookup for a should be 0,0. Not n, 0.
+                    current_sede = PyList_GetItem(current_sede, 0);
+                } else {
+                    stack_index =  ctx->stack[i].count;
+
+                    if(current_sede_length < (stack_index + 1))
+                    {
+                        PyErr_Format(PyExc_ValueError, "Sede list dimensions don't match data. Current_sede_length = %u, stack_index = %u, stack height = %u", current_sede_length, stack_index, i);
+                        return -1;
+                    }
+
+                    //current_sede = PyList_GET_ITEM(current_sede, stack_index);
+                    current_sede = PyList_GetItem(current_sede, stack_index);
+                }
+            }
+            //now we should be at the relevant sede.
+            if(PyLong_Check(current_sede))
+            {
+                ret = (int)PyLong_AsLong(current_sede);
+                return ret;
+            }
+            //PyErr_Format(PyExc_ValueError, " debug %u %zd", _top, stack_index);
+            PyErr_Format(PyExc_ValueError, "The sede for one of the values in the encoded data is not an integer");
+            return -1;
+
+        }
+    } else {
+        return 0;
+    }
+
+
+}
+
+
 //starts the array
 static inline int unpack_callback_array(unpack_user* u, unsigned int n, msgpack_unpack_object* o)
 {
+    Py_ssize_t tuple_size;
     if (n > u->max_array_len) {
         PyErr_Format(PyExc_ValueError, "%u exceeds max_array_len(%zd)", n, u->max_array_len);
         return -1;
     }
     PyObject *p = u->use_list ? PyList_New(n) : PyTuple_New(n);
 
-    if (!p)
+    if (!p){
         return -1;
+    }
     *o = p;
     return 0;
 }
 
 
+
+
 //appends o to list
 static inline int unpack_callback_append_array_item(unpack_user* u, msgpack_unpack_object* c, msgpack_unpack_object o)
 {
-    if (u->use_list)
+    Py_ssize_t tuple_size;
+    if (u->use_list) {
         PyList_Append(*c, o);
-    else
-        return -1;
-        //not implemented yet
-        //PyTuple_SET_ITEM(*c, current, o);
+    } else {
+        tuple_size = PyTuple_Size(*c);
+
+        if(_PyTuple_Resize(c, tuple_size+1) == 0){
+            if(PyTuple_SetItem(*c, tuple_size, o) != 0){
+                PyErr_Format(PyExc_ValueError, "failed to set tuple item");
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+    }
     return 0;
 }
 
 //sets a position in the list to o
 static inline int unpack_callback_array_item(unpack_user* u, unsigned int current, msgpack_unpack_object* c, msgpack_unpack_object o)
 {
-    if (u->use_list)
+    if (u->use_list) {
         PyList_SET_ITEM(*c, current, o);
-    else
+
+    } else {
         PyTuple_SET_ITEM(*c, current, o);
+    }
     return 0;
 }
 

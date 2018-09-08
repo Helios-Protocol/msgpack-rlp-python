@@ -49,6 +49,7 @@ cdef extern from "unpack.h":
         PyObject* object_hook
         PyObject* list_hook
         PyObject* ext_hook
+        PyObject* sedes
         char *encoding
         char *unicode_errors
         Py_ssize_t max_str_len
@@ -72,7 +73,7 @@ cdef extern from "unpack.h":
     object unpack_data(unpack_context* ctx)
     void unpack_clear(unpack_context* ctx)
 
-cdef inline init_ctx(unpack_context *ctx,
+cdef inline init_ctx(unpack_context *ctx, object sedes,
                      object object_hook, object object_pairs_hook,
                      object list_hook, object ext_hook,
                      bint use_list, bint raw,
@@ -83,12 +84,16 @@ cdef inline init_ctx(unpack_context *ctx,
     unpack_init(ctx)
     ctx.user.use_list = use_list
     ctx.user.raw = raw
+    ctx.user.sedes = <PyObject*>NULL
     ctx.user.object_hook = ctx.user.list_hook = <PyObject*>NULL
     ctx.user.max_str_len = max_str_len
     ctx.user.max_bin_len = max_bin_len
     ctx.user.max_array_len = max_array_len
     ctx.user.max_map_len = max_map_len
     ctx.user.max_ext_len = max_ext_len
+
+    if sedes is not None:
+        ctx.user.sedes = < PyObject * >sedes
 
     if object_hook is not None and object_pairs_hook is not None:
         raise TypeError("object_pairs_hook and object_hook are mutually exclusive.")
@@ -159,9 +164,10 @@ cdef inline int get_data_from_buffer(object obj,
         return 1
 
 def unpackb(object packed, object object_hook=None, object list_hook=None,
-            bint use_list=True, bint raw=True,
+            bint use_list=False, bint raw=True,
             encoding=None, unicode_errors=None,
             object_pairs_hook=None, ext_hook=ExtType,
+            sedes = None,
             Py_ssize_t max_str_len=2147483647, # 2**32-1
             Py_ssize_t max_bin_len=2147483647,
             Py_ssize_t max_array_len=2147483647,
@@ -194,7 +200,7 @@ def unpackb(object packed, object object_hook=None, object list_hook=None,
 
     get_data_from_buffer(packed, &view, &buf, &buf_len, &new_protocol)
     try:
-        init_ctx(&ctx, object_hook, object_pairs_hook, list_hook, ext_hook,
+        init_ctx(&ctx, sedes, object_hook, object_pairs_hook, list_hook, ext_hook,
                  use_list, raw, cenc, cerr,
                  max_str_len, max_bin_len, max_array_len, max_map_len, max_ext_len)
         ret = unpack_construct(&ctx, buf, buf_len, &off)
@@ -208,7 +214,12 @@ def unpackb(object packed, object object_hook=None, object list_hook=None,
             raise ExtraData(obj, PyBytes_FromStringAndSize(buf+off, buf_len-off))
         return obj
     unpack_clear(&ctx)
-    raise UnpackValueError("Unpack failed: error = %d" % (ret,))
+    if ret == 11:
+        raise UnpackValueError("Attempted to apply an int sede to an encoded value, but it was larger than the maximum allowed size for int")
+    elif ret == 12:
+        raise UnpackValueError("Unknown sede type")
+    else:
+        raise UnpackValueError("Unpack failed: error = %d" % (ret,))
 
 
 def unpack(object stream, **kwargs):
@@ -365,7 +376,7 @@ cdef class Unpacker(object):
             self.unicode_errors = unicode_errors
             cerr = unicode_errors
 
-        init_ctx(&self.ctx, object_hook, object_pairs_hook, list_hook,
+        init_ctx(&self.ctx, None, object_hook, object_pairs_hook, list_hook,
                  ext_hook, use_list, raw, cenc, cerr,
                  max_str_len, max_bin_len, max_array_len,
                  max_map_len, max_ext_len)

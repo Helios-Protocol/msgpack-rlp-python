@@ -193,6 +193,28 @@ cdef class Packer(object):
                 if ret == -2:
                     raise PackValueError("unicode string is too large")
 
+
+            elif PyLong_CheckExact(o) if strict_types else PyLong_Check(o):
+                # PyInt_Check(long) is True for Python 3.
+                # So we should test long before int.
+                try:
+                    if o > 0:
+                        #print("saving unsigned long")
+                        ullval = o
+                        ret = msgpack_pack_unsigned_long_long(&self.pk, ullval)
+                    else:
+                        raise PackValueError("Cannot encode negative numbers to big endian int.")
+                        # llval = o
+                        # ret = msgpack_pack_long_long(&self.pk, llval)
+                except OverflowError as oe:
+                    if not default_used and self._default is not None:
+                        o = self._default(o)
+                        default_used = True
+                        continue
+                    else:
+                        raise PackOverflowError("Integer value out of range for fast automatic sedes. Use python fallback instead")
+
+
             elif PyList_CheckExact(o) if strict_types else (PyTuple_Check(o) or PyList_Check(o)):
                 #this is a python list
                 L = len(o)

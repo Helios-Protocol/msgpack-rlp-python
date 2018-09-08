@@ -33,6 +33,9 @@ extern "C" {
 #define MSGPACK_EMBED_STACK_SIZE 32
 #endif
 
+#define SEDE_BYTES  0
+#define SEDE_UINT   1
+
 
 // CS is first byte & 0x1f
 typedef enum {
@@ -48,7 +51,7 @@ typedef enum {
     CS_RAW_64            = 0x08,
 
 
-    CS_ARRAY_8          = 0x11,
+    CS_ARRAY_8           = 0x11,
     CS_ARRAY_16          = 0x12,
     CS_ARRAY_24          = 0x13,
     CS_ARRAY_32          = 0x14,
@@ -88,6 +91,8 @@ typedef enum {
 //    CS_ARRAY_32          = 0x1d,
 //    CS_MAP_16            = 0x1e,
 //    CS_MAP_32            = 0x1f,
+
+
 
     ACS_RAW_VALUE,
     ACS_BIN_VALUE,
