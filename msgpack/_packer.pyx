@@ -109,7 +109,7 @@ cdef class Packer(object):
     cdef bint autoreset
 
     def __cinit__(self):
-        cdef int buf_size = 1024*1024
+        cdef int buf_size = 1024*2024
         self.pk.buf = <char*> PyMem_Malloc(buf_size)
         if self.pk.buf == NULL:
             raise MemoryError("Unable to allocate internal buffer.")
@@ -249,11 +249,13 @@ cdef class Packer(object):
             raise
         if ret:  # should not happen.
             raise RuntimeError("internal error")
+        buf = PyBytes_FromStringAndSize(self.pk.buf, self.pk.length)
         if self.autoreset:
-            buf = PyBytes_FromStringAndSize(self.pk.buf, self.pk.length)
             self.pk.length = 0
-            return buf
+        return buf
 
+    def get_length(self):
+        return self.pk.length
 
     def reset(self):
         """Clear internal buffer."""
