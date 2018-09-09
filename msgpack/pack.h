@@ -72,6 +72,8 @@ static inline int msgpack_pack_insert_at_position(msgpack_packer* pk, const char
     size_t bs = pk->buf_size;
     size_t len = pk->length;
 
+    char buf_copy[bs];
+
     //First we have to extend it by length
     if (len + l > bs) {
         bs = (len + l) * 2;
@@ -82,7 +84,12 @@ static inline int msgpack_pack_insert_at_position(msgpack_packer* pk, const char
         }
     }
 
-    memcpy(buf + position + l, buf + position, len-position);
+    //can simplify this with memmove if we want
+    //first make a duplicate
+    memcpy(&buf_copy, buf + position, len-position);
+
+    //now copy back but shifted
+    memcpy(buf + position + l, &buf_copy, len-position);
 
     //now there is a gap of length l at position, ready to be written to
 
