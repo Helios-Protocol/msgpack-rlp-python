@@ -198,7 +198,7 @@ cdef class Packer(object):
                 # PyInt_Check(long) is True for Python 3.
                 # So we should test long before int.
                 try:
-                    if o > 0:
+                    if o >= 0:
                         #print("saving unsigned long")
                         ullval = o
                         ret = msgpack_pack_unsigned_long_long(&self.pk, ullval)
