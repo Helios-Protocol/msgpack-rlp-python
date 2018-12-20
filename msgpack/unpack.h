@@ -229,7 +229,7 @@ static inline int get_current_item_type(unpack_user *u, unpack_context *ctx)
                 return ret;
             }
             //PyErr_Format(PyExc_ValueError, " debug %u %zd", _top, stack_index);
-            PyErr_Format(PyExc_ValueError, "The sede for one of the values in the encoded data is not an integer");
+            PyErr_Format(PyExc_ValueError, "There is a mismatch between the sedes and the data. Make sure the sedes are correct for this encoded data");
             return -1;
 
         }

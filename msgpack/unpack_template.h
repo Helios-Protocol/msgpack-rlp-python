@@ -412,7 +412,10 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
                     push_variable_value(_raw, data, n, trail);
                 } else if (type == SEDE_UINT) {
                     //trail is the number of bytes to load
-                    if (trail == 1){
+                    if (trail == 0){
+                        //This is a special case. RLP specs treat 0 like a byte string of length 0
+                        push_fixed_value(_uint8, 0);
+                    } else if (trail == 1){
                         push_fixed_value(_uint8, *(uint8_t*)n);
                     } else if (trail == 2){
                         push_fixed_value(_uint16, _msgpack_load16(uint16_t,n));
