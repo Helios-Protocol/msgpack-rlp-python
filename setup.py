@@ -9,8 +9,6 @@ from setuptools import setup, Extension
 
 from distutils.command.build_ext import build_ext
 
-# for building transitional package.
-TRANSITIONAL = False
 
 class NoCython(Exception):
     pass
@@ -101,16 +99,12 @@ if not hasattr(sys, 'pypy_version_info'):
 del libraries, macros
 
 
-desc = 'MessagePack (de)serializer.'
+desc = 'MessagePack (de)serializer with Ethereum RLP encoding'
 with io.open('README.rst', encoding='utf-8') as f:
     long_desc = f.read()
 del f
 
-name = 'msgpack'
-
-if TRANSITIONAL:
-    name = 'msgpack-python'
-    long_desc = "This package is deprecated.  Install msgpack instead."
+name = 'msgpack-rlp-python'
 
 setup(name=name,
       author='INADA Naoki',
@@ -124,9 +118,8 @@ setup(name=name,
       long_description_content_type="text/x-rst",
       url='https://msgpack.org/',
       project_urls = {
-          'Documentation': 'https://msgpack-python.readthedocs.io/',
-          'Source': 'https://github.com/msgpack/msgpack-python',
-          'Tracker': 'https://github.com/msgpack/msgpack-python/issues',
+          'Source': 'https://github.com/Helios-Protocol/msgpack-rlp-python',
+          'Tracker': 'https://github.com/Helios-Protocol/msgpack-rlp-python/issues',
       },
       license='Apache 2.0',
       classifiers=[
