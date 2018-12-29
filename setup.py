@@ -107,8 +107,8 @@ del f
 name = 'msgpack-rlp-python'
 
 setup(name=name,
-      author='Tommy Mckinnon',
-      author_email='admin@hyperevo.com',
+      author='INADA Naoki, Tommy Mckinnon',
+      author_email='songofacandy@gmail.com, admin@hyperevo.com',
       version=version_str,
       cmdclass={'build_ext': BuildExt, 'sdist': Sdist},
       ext_modules=ext_modules,

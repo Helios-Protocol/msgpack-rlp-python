@@ -3,6 +3,15 @@ import rlp
 import msgpack
 
 
+encoded = msgpack.packb([[]])
+print(encoded)
+decoded = msgpack.unpackb(encoded)
+
+print(decoded)
+
+
+sys.exit()
+
 #Didn't do tests beyond a length of 2**26 because it can cause system instability. The variables just get too large.
 for i in range(1,26):
     print("trying list with byte length = {} bytes".format(i))
