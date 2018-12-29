@@ -107,8 +107,8 @@ del f
 name = 'msgpack-rlp-python'
 
 setup(name=name,
-      author='INADA Naoki',
-      author_email='songofacandy@gmail.com',
+      author='Tommy Mckinnon',
+      author_email='admin@hyperevo.com',
       version=version_str,
       cmdclass={'build_ext': BuildExt, 'sdist': Sdist},
       ext_modules=ext_modules,
@@ -116,7 +116,7 @@ setup(name=name,
       description=desc,
       long_description=long_desc,
       long_description_content_type="text/x-rst",
-      url='https://msgpack.org/',
+      url='https://heliosprotocol.io/',
       project_urls = {
           'Source': 'https://github.com/Helios-Protocol/msgpack-rlp-python',
           'Tracker': 'https://github.com/Helios-Protocol/msgpack-rlp-python/issues',
