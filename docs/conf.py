@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'msgpack'
+project = u'msgpack_rlp'
 copyright = u'2013, INADA Naoki'
 
 # The version info for the project you're documenting, acts as replacement for

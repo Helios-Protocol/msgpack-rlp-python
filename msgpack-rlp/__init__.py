@@ -1,6 +1,6 @@
 # coding: utf-8
-from msgpack._version import version
-from msgpack.exceptions import *
+from msgpack_rlp._version import version
+from msgpack_rlp.exceptions import *
 
 from collections import namedtuple
 
@@ -19,11 +19,11 @@ class ExtType(namedtuple('ExtType', 'code data')):
 
 import os
 if os.environ.get('MSGPACK_PUREPYTHON'):
-    from msgpack.fallback import Packer, unpackb, Unpacker
+    from msgpack_rlp.fallback import Packer, unpackb, Unpacker
 else:
     #try:
-    from msgpack._packer import Packer
-    from msgpack._unpacker import unpackb, Unpacker
+    from msgpack_rlp._packer import Packer
+    from msgpack_rlp._unpacker import unpackb, Unpacker
     #except ImportError:
     #    from msgpack.fallback import Packer, unpackb, Unpacker
 

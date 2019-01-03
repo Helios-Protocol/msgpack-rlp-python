@@ -5,6 +5,8 @@ MessagePack with Ethereum RLP encoding for Python
 This library uses a modified version of msgpack to encode and decode binary
 data according to the Ethereum RLP specification here https://github.com/ethereum/wiki/wiki/RLP
 
+Because it is based on msgpack, with a back-end in cython, it is lightning fast.
+
 This is the first release of this library, and there are likely still bugs. Use at your own risk.
 
 Install

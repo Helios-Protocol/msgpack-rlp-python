@@ -18,9 +18,9 @@ serve-doc: all
 .PHONY: clean
 clean:
 	rm -rf build
-	rm -f msgpack/_packer.cpp
-	rm -f msgpack/_unpacker.cpp
-	rm -rf msgpack/__pycache__
+	rm -f msgpack-rlp/_packer.cpp
+	rm -f msgpack-rlp/_unpacker.cpp
+	rm -rf msgpack-rlp/__pycache__
 	rm -rf test/__pycache__
 
 .PHONY: update-docker
