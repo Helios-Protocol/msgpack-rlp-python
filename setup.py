@@ -45,18 +45,18 @@ class BuildExt(build_ext):
         except NoCython:
             print("WARNING")
             print("Cython is required for building extension from checkout.")
-            print("Install Cython >= 0.16 or install msgpack-rlp from PyPI.")
+            print("Install Cython >= 0.16 or install msgpack_rlp from PyPI.")
             print("Falling back to pure Python implementation.")
             return
         try:
             return build_ext.build_extension(self, ext)
         except Exception as e:
             print("WARNING: Failed to compile extension modules.")
-            print("msgpack-rlp uses fallback pure python implementation.")
+            print("msgpack_rlp uses fallback pure python implementation.")
             print(e)
 
 
-exec(open('msgpack-rlp/_version.py').read())
+exec(open('msgpack_rlp/_version.py').read())
 
 version_str = '.'.join(str(x) for x in version[:3])
 if len(version) > 3 and version[3] != 'final':
@@ -66,7 +66,7 @@ if len(version) > 3 and version[3] != 'final':
 if have_cython:
     class Sdist(sdist):
         def __init__(self, *args, **kwargs):
-            for src in glob('msgpack-rlp/*.pyx'):
+            for src in glob('msgpack_rlp/*.pyx'):
                 cythonize(src)
             sdist.__init__(self, *args, **kwargs)
 else:
@@ -84,14 +84,14 @@ else:
 
 ext_modules = []
 if not hasattr(sys, 'pypy_version_info'):
-    ext_modules.append(Extension('msgpack-rlp._packer',
-                                 sources=['msgpack-rlp/_packer.cpp'],
+    ext_modules.append(Extension('msgpack_rlp._packer',
+                                 sources=['msgpack_rlp/_packer.cpp'],
                                  libraries=libraries,
                                  include_dirs=['.'],
                                  define_macros=macros,
                                  ))
-    ext_modules.append(Extension('msgpack-rlp._unpacker',
-                                 sources=['msgpack-rlp/_unpacker.cpp'],
+    ext_modules.append(Extension('msgpack_rlp._unpacker',
+                                 sources=['msgpack_rlp/_unpacker.cpp'],
                                  libraries=libraries,
                                  include_dirs=['.'],
                                  define_macros=macros,
