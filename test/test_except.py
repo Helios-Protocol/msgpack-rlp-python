@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from pytest import raises
-from msgpack import packb, unpackb
+from msgpack_rlp import packb, unpackb
 
 import datetime
 

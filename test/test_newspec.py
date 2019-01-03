@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from msgpack import packb, unpackb, ExtType
+from msgpack_rlp import packb, unpackb, ExtType
 
 
 def test_str8():

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from msgpack import unpackb
+from msgpack_rlp import unpackb
 
 def check(src, should, use_list=0):
     assert unpackb(src, use_list=use_list) == should

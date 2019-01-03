@@ -5,7 +5,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import struct
 from pytest import raises, xfail
 
-from msgpack import packb, unpackb, Unpacker, Packer
+from msgpack_rlp import packb, unpackb, Unpacker, Packer
 
 from collections import OrderedDict
 from io import BytesIO

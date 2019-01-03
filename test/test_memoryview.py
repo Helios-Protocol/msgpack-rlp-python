@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from array import array
-from msgpack import packb, unpackb
+from msgpack_rlp import packb, unpackb
 import sys
 
 

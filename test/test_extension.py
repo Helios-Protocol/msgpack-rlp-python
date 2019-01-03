@@ -1,7 +1,7 @@
 from __future__ import print_function
 import array
-import msgpack
-from msgpack import ExtType
+import msgpack_rlp as msgpack
+from msgpack_rlp import ExtType
 
 
 def test_pack_ext_type():

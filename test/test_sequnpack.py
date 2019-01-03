@@ -2,9 +2,9 @@
 # coding: utf-8
 
 import io
-from msgpack import Unpacker, BufferFull
-from msgpack import pack
-from msgpack.exceptions import OutOfData
+from msgpack_rlp import Unpacker, BufferFull
+from msgpack_rlp import pack
+from msgpack_rlp.exceptions import OutOfData
 from pytest import raises
 
 

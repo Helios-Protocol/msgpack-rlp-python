@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from pytest import raises
-from msgpack import packb, unpackb
+from msgpack_rlp import packb, unpackb
 
 def _decode_complex(obj):
     if b'__complex__' in obj:

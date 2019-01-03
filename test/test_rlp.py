@@ -1,6 +1,5 @@
 import sys
-import rlp
-import msgpack
+import msgpack_rlp as msgpack
 
 
 encoded = msgpack.packb([[]])

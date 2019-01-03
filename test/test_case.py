@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from msgpack import packb, unpackb
+from msgpack_rlp import packb, unpackb
 
 
 def check(length, obj):

@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import io
-import msgpack
+import msgpack_rlp as msgpack
 
 
 binarydata = bytes(bytearray(range(256)))
