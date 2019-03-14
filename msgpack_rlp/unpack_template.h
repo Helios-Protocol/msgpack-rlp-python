@@ -491,9 +491,13 @@ _push:
         if((uint64_t) (intptr_t)p - c->start_pointer == c->length) {
             obj = c->obj;
             if (construct_cb(_array_end)(user, &obj) < 0) { goto _failed; }
+            //free(&stack[top-1]);
+            //Py_CLEAR(c->obj);
+            //Py_CLEAR(stack[top-1]->obj);
+
             --top;
             ctx->top = top;
-            /*printf("stack pop %d\n", top);*/
+            //printf("stack pop %d\n", sizeof(c));
             goto _push;
         }
         goto _header_again;

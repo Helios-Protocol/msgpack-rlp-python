@@ -133,7 +133,6 @@ cdef inline int get_data_from_buffer(object obj,
                                      Py_ssize_t *buffer_len,
                                      int *new_protocol) except 0:
     cdef object contiguous
-    cdef Py_buffer tmp
     if PyObject_CheckBuffer(obj):
         new_protocol[0] = 1
         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:

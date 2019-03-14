@@ -244,16 +244,20 @@ static inline int get_current_item_type(unpack_user *u, unpack_context *ctx)
 //starts the array
 static inline int unpack_callback_array(unpack_user* u, unsigned int n, msgpack_unpack_object* o)
 {
-    Py_ssize_t tuple_size;
+
     if (n > u->max_array_len) {
         PyErr_Format(PyExc_ValueError, "%u exceeds max_array_len(%zd)", n, u->max_array_len);
         return -1;
     }
+
     PyObject *p = u->use_list ? PyList_New(n) : PyTuple_New(n);
+    //PyObject *p = PyList_New(n);
+    //PyObject *p = PyTuple_New(n);
 
     if (!p){
         return -1;
     }
+
     *o = p;
     return 0;
 }
@@ -264,10 +268,12 @@ static inline int unpack_callback_array(unpack_user* u, unsigned int n, msgpack_
 //appends o to list
 static inline int unpack_callback_append_array_item(unpack_user* u, msgpack_unpack_object* c, msgpack_unpack_object o)
 {
-    Py_ssize_t tuple_size;
+
     if (u->use_list) {
         PyList_Append(*c, o);
+        Py_DECREF(o);
     } else {
+        Py_ssize_t tuple_size;
         tuple_size = PyTuple_Size(*c);
 
         if(_PyTuple_Resize(c, tuple_size+1) == 0){
@@ -285,9 +291,9 @@ static inline int unpack_callback_append_array_item(unpack_user* u, msgpack_unpa
 //sets a position in the list to o
 static inline int unpack_callback_array_item(unpack_user* u, unsigned int current, msgpack_unpack_object* c, msgpack_unpack_object o)
 {
+    //PyList_SET_ITEM(*c, current, o);
     if (u->use_list) {
         PyList_SET_ITEM(*c, current, o);
-
     } else {
         PyTuple_SET_ITEM(*c, current, o);
     }
@@ -304,6 +310,8 @@ static inline int unpack_callback_array_end(unpack_user* u, msgpack_unpack_objec
         Py_DECREF(*c);
         *c = new_c;
     }
+
+
     return 0;
 }
 

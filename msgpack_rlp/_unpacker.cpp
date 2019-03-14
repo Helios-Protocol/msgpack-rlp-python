@@ -760,7 +760,7 @@ typedef unsigned PY_LONG_LONG __pyx_t_11msgpack_rlp_9_unpacker_uint64_t;
 struct __pyx_obj_11msgpack_rlp_9_unpacker_Unpacker;
 struct __pyx_opt_args_11msgpack_rlp_9_unpacker_8Unpacker__unpack;
 
-/* "msgpack_rlp/_unpacker.pyx":452
+/* "msgpack_rlp/_unpacker.pyx":451
  *             self.file_like = None
  * 
  *     cdef object _unpack(self, execute_fn execute, object write_bytes, bint iter=0):             # <<<<<<<<<<<<<<
@@ -772,7 +772,7 @@ struct __pyx_opt_args_11msgpack_rlp_9_unpacker_8Unpacker__unpack {
   int iter;
 };
 
-/* "msgpack_rlp/_unpacker.pyx":233
+/* "msgpack_rlp/_unpacker.pyx":232
  * 
  * 
  * cdef class Unpacker(object):             # <<<<<<<<<<<<<<
@@ -2039,9 +2039,9 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
   char *__pyx_t_5;
   __Pyx_RefNannySetupContext("get_data_from_buffer", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":137
+  /* "msgpack_rlp/_unpacker.pyx":136
+ *                                      int *new_protocol) except 0:
  *     cdef object contiguous
- *     cdef Py_buffer tmp
  *     if PyObject_CheckBuffer(obj):             # <<<<<<<<<<<<<<
  *         new_protocol[0] = 1
  *         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:
@@ -2049,8 +2049,8 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
   __pyx_t_1 = (PyObject_CheckBuffer(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":138
- *     cdef Py_buffer tmp
+    /* "msgpack_rlp/_unpacker.pyx":137
+ *     cdef object contiguous
  *     if PyObject_CheckBuffer(obj):
  *         new_protocol[0] = 1             # <<<<<<<<<<<<<<
  *         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:
@@ -2058,27 +2058,27 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
     (__pyx_v_new_protocol[0]) = 1;
 
-    /* "msgpack_rlp/_unpacker.pyx":139
+    /* "msgpack_rlp/_unpacker.pyx":138
  *     if PyObject_CheckBuffer(obj):
  *         new_protocol[0] = 1
  *         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:             # <<<<<<<<<<<<<<
  *             raise
  *         if view.itemsize != 1:
  */
-    __pyx_t_2 = PyObject_GetBuffer(__pyx_v_obj, __pyx_v_view, PyBUF_FULL_RO); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_2 = PyObject_GetBuffer(__pyx_v_obj, __pyx_v_view, PyBUF_FULL_RO); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 138, __pyx_L1_error)
     __pyx_t_1 = ((__pyx_t_2 == -1L) != 0);
     if (__pyx_t_1) {
 
-      /* "msgpack_rlp/_unpacker.pyx":140
+      /* "msgpack_rlp/_unpacker.pyx":139
  *         new_protocol[0] = 1
  *         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:
  *             raise             # <<<<<<<<<<<<<<
  *         if view.itemsize != 1:
  *             PyBuffer_Release(view)
  */
-      __Pyx_ReraiseException(); __PYX_ERR(0, 140, __pyx_L1_error)
+      __Pyx_ReraiseException(); __PYX_ERR(0, 139, __pyx_L1_error)
 
-      /* "msgpack_rlp/_unpacker.pyx":139
+      /* "msgpack_rlp/_unpacker.pyx":138
  *     if PyObject_CheckBuffer(obj):
  *         new_protocol[0] = 1
  *         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:             # <<<<<<<<<<<<<<
@@ -2087,7 +2087,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
     }
 
-    /* "msgpack_rlp/_unpacker.pyx":141
+    /* "msgpack_rlp/_unpacker.pyx":140
  *         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:
  *             raise
  *         if view.itemsize != 1:             # <<<<<<<<<<<<<<
@@ -2097,7 +2097,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
     __pyx_t_1 = ((__pyx_v_view->itemsize != 1) != 0);
     if (__pyx_t_1) {
 
-      /* "msgpack_rlp/_unpacker.pyx":142
+      /* "msgpack_rlp/_unpacker.pyx":141
  *             raise
  *         if view.itemsize != 1:
  *             PyBuffer_Release(view)             # <<<<<<<<<<<<<<
@@ -2106,20 +2106,20 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
       PyBuffer_Release(__pyx_v_view);
 
-      /* "msgpack_rlp/_unpacker.pyx":143
+      /* "msgpack_rlp/_unpacker.pyx":142
  *         if view.itemsize != 1:
  *             PyBuffer_Release(view)
  *             raise BufferError("cannot unpack from multi-byte object")             # <<<<<<<<<<<<<<
  *         if PyBuffer_IsContiguous(view, 'A') == 0:
  *             PyBuffer_Release(view)
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_BufferError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_BufferError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 143, __pyx_L1_error)
+      __PYX_ERR(0, 142, __pyx_L1_error)
 
-      /* "msgpack_rlp/_unpacker.pyx":141
+      /* "msgpack_rlp/_unpacker.pyx":140
  *         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:
  *             raise
  *         if view.itemsize != 1:             # <<<<<<<<<<<<<<
@@ -2128,7 +2128,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
     }
 
-    /* "msgpack_rlp/_unpacker.pyx":144
+    /* "msgpack_rlp/_unpacker.pyx":143
  *             PyBuffer_Release(view)
  *             raise BufferError("cannot unpack from multi-byte object")
  *         if PyBuffer_IsContiguous(view, 'A') == 0:             # <<<<<<<<<<<<<<
@@ -2138,7 +2138,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
     __pyx_t_1 = ((PyBuffer_IsContiguous(__pyx_v_view, 'A') == 0) != 0);
     if (__pyx_t_1) {
 
-      /* "msgpack_rlp/_unpacker.pyx":145
+      /* "msgpack_rlp/_unpacker.pyx":144
  *             raise BufferError("cannot unpack from multi-byte object")
  *         if PyBuffer_IsContiguous(view, 'A') == 0:
  *             PyBuffer_Release(view)             # <<<<<<<<<<<<<<
@@ -2147,28 +2147,28 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
       PyBuffer_Release(__pyx_v_view);
 
-      /* "msgpack_rlp/_unpacker.pyx":147
+      /* "msgpack_rlp/_unpacker.pyx":146
  *             PyBuffer_Release(view)
  *             # create a contiguous copy and get buffer
  *             contiguous = PyMemoryView_GetContiguous(obj, PyBUF_READ, 'C')             # <<<<<<<<<<<<<<
  *             PyObject_GetBuffer(contiguous, view, PyBUF_SIMPLE)
  *             # view must hold the only reference to contiguous,
  */
-      __pyx_t_3 = PyMemoryView_GetContiguous(__pyx_v_obj, PyBUF_READ, 'C'); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_3 = PyMemoryView_GetContiguous(__pyx_v_obj, PyBUF_READ, 'C'); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_contiguous = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "msgpack_rlp/_unpacker.pyx":148
+      /* "msgpack_rlp/_unpacker.pyx":147
  *             # create a contiguous copy and get buffer
  *             contiguous = PyMemoryView_GetContiguous(obj, PyBUF_READ, 'C')
  *             PyObject_GetBuffer(contiguous, view, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *             # view must hold the only reference to contiguous,
  *             # so memory is freed when view is released
  */
-      __pyx_t_2 = PyObject_GetBuffer(__pyx_v_contiguous, __pyx_v_view, PyBUF_SIMPLE); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 148, __pyx_L1_error)
+      __pyx_t_2 = PyObject_GetBuffer(__pyx_v_contiguous, __pyx_v_view, PyBUF_SIMPLE); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 147, __pyx_L1_error)
 
-      /* "msgpack_rlp/_unpacker.pyx":151
+      /* "msgpack_rlp/_unpacker.pyx":150
  *             # view must hold the only reference to contiguous,
  *             # so memory is freed when view is released
  *             Py_DECREF(contiguous)             # <<<<<<<<<<<<<<
@@ -2177,7 +2177,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
       Py_DECREF(__pyx_v_contiguous);
 
-      /* "msgpack_rlp/_unpacker.pyx":144
+      /* "msgpack_rlp/_unpacker.pyx":143
  *             PyBuffer_Release(view)
  *             raise BufferError("cannot unpack from multi-byte object")
  *         if PyBuffer_IsContiguous(view, 'A') == 0:             # <<<<<<<<<<<<<<
@@ -2186,7 +2186,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
     }
 
-    /* "msgpack_rlp/_unpacker.pyx":152
+    /* "msgpack_rlp/_unpacker.pyx":151
  *             # so memory is freed when view is released
  *             Py_DECREF(contiguous)
  *         buffer_len[0] = view.len             # <<<<<<<<<<<<<<
@@ -2196,7 +2196,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
     __pyx_t_4 = __pyx_v_view->len;
     (__pyx_v_buffer_len[0]) = __pyx_t_4;
 
-    /* "msgpack_rlp/_unpacker.pyx":153
+    /* "msgpack_rlp/_unpacker.pyx":152
  *             Py_DECREF(contiguous)
  *         buffer_len[0] = view.len
  *         buf[0] = <char*> view.buf             # <<<<<<<<<<<<<<
@@ -2205,7 +2205,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
     (__pyx_v_buf[0]) = ((char *)__pyx_v_view->buf);
 
-    /* "msgpack_rlp/_unpacker.pyx":154
+    /* "msgpack_rlp/_unpacker.pyx":153
  *         buffer_len[0] = view.len
  *         buf[0] = <char*> view.buf
  *         return 1             # <<<<<<<<<<<<<<
@@ -2215,16 +2215,16 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
     __pyx_r = 1;
     goto __pyx_L0;
 
-    /* "msgpack_rlp/_unpacker.pyx":137
+    /* "msgpack_rlp/_unpacker.pyx":136
+ *                                      int *new_protocol) except 0:
  *     cdef object contiguous
- *     cdef Py_buffer tmp
  *     if PyObject_CheckBuffer(obj):             # <<<<<<<<<<<<<<
  *         new_protocol[0] = 1
  *         if PyObject_GetBuffer(obj, view, PyBUF_FULL_RO) == -1:
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":156
+  /* "msgpack_rlp/_unpacker.pyx":155
  *         return 1
  *     else:
  *         new_protocol[0] = 0             # <<<<<<<<<<<<<<
@@ -2234,31 +2234,31 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
   /*else*/ {
     (__pyx_v_new_protocol[0]) = 0;
 
-    /* "msgpack_rlp/_unpacker.pyx":157
+    /* "msgpack_rlp/_unpacker.pyx":156
  *     else:
  *         new_protocol[0] = 0
  *         if PyObject_AsReadBuffer(obj, <const void**> buf, buffer_len) == -1:             # <<<<<<<<<<<<<<
  *             raise BufferError("could not get memoryview")
  *         PyErr_WarnEx(RuntimeWarning,
  */
-    __pyx_t_2 = PyObject_AsReadBuffer(__pyx_v_obj, ((void const **)__pyx_v_buf), __pyx_v_buffer_len); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 157, __pyx_L1_error)
+    __pyx_t_2 = PyObject_AsReadBuffer(__pyx_v_obj, ((void const **)__pyx_v_buf), __pyx_v_buffer_len); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 156, __pyx_L1_error)
     __pyx_t_1 = ((__pyx_t_2 == -1L) != 0);
     if (__pyx_t_1) {
 
-      /* "msgpack_rlp/_unpacker.pyx":158
+      /* "msgpack_rlp/_unpacker.pyx":157
  *         new_protocol[0] = 0
  *         if PyObject_AsReadBuffer(obj, <const void**> buf, buffer_len) == -1:
  *             raise BufferError("could not get memoryview")             # <<<<<<<<<<<<<<
  *         PyErr_WarnEx(RuntimeWarning,
  *                      "using old buffer interface to unpack %s; "
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_BufferError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 158, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_BufferError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 158, __pyx_L1_error)
+      __PYX_ERR(0, 157, __pyx_L1_error)
 
-      /* "msgpack_rlp/_unpacker.pyx":157
+      /* "msgpack_rlp/_unpacker.pyx":156
  *     else:
  *         new_protocol[0] = 0
  *         if PyObject_AsReadBuffer(obj, <const void**> buf, buffer_len) == -1:             # <<<<<<<<<<<<<<
@@ -2267,28 +2267,28 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
  */
     }
 
-    /* "msgpack_rlp/_unpacker.pyx":162
+    /* "msgpack_rlp/_unpacker.pyx":161
  *                      "using old buffer interface to unpack %s; "
  *                      "this leads to unpacking errors if slicing is used and "
  *                      "will be removed in a future version" % type(obj),             # <<<<<<<<<<<<<<
  *                      1)
  *         return 1
  */
-    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_using_old_buffer_interface_to_un, ((PyObject *)Py_TYPE(__pyx_v_obj))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_using_old_buffer_interface_to_un, ((PyObject *)Py_TYPE(__pyx_v_obj))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_PyObject_AsWritableString(__pyx_t_3); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_AsWritableString(__pyx_t_3); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":159
+    /* "msgpack_rlp/_unpacker.pyx":158
  *         if PyObject_AsReadBuffer(obj, <const void**> buf, buffer_len) == -1:
  *             raise BufferError("could not get memoryview")
  *         PyErr_WarnEx(RuntimeWarning,             # <<<<<<<<<<<<<<
  *                      "using old buffer interface to unpack %s; "
  *                      "this leads to unpacking errors if slicing is used and "
  */
-    __pyx_t_2 = PyErr_WarnEx(__pyx_builtin_RuntimeWarning, __pyx_t_5, 1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_2 = PyErr_WarnEx(__pyx_builtin_RuntimeWarning, __pyx_t_5, 1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 158, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "msgpack_rlp/_unpacker.pyx":164
+    /* "msgpack_rlp/_unpacker.pyx":163
  *                      "will be removed in a future version" % type(obj),
  *                      1)
  *         return 1             # <<<<<<<<<<<<<<
@@ -2318,7 +2318,7 @@ static CYTHON_INLINE int __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(P
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":166
+/* "msgpack_rlp/_unpacker.pyx":165
  *         return 1
  * 
  * def unpackb(object packed, object object_hook=None, object list_hook=None,             # <<<<<<<<<<<<<<
@@ -2355,7 +2355,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_3unpackb(PyObject *__pyx_self
     values[1] = ((PyObject *)Py_None);
     values[2] = ((PyObject *)Py_None);
 
-    /* "msgpack_rlp/_unpacker.pyx":168
+    /* "msgpack_rlp/_unpacker.pyx":167
  * def unpackb(object packed, object object_hook=None, object list_hook=None,
  *             bint use_list=False, bint raw=True,
  *             encoding=None, unicode_errors=None,             # <<<<<<<<<<<<<<
@@ -2365,7 +2365,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_3unpackb(PyObject *__pyx_self
     values[5] = ((PyObject *)Py_None);
     values[6] = ((PyObject *)Py_None);
 
-    /* "msgpack_rlp/_unpacker.pyx":169
+    /* "msgpack_rlp/_unpacker.pyx":168
  *             bint use_list=False, bint raw=True,
  *             encoding=None, unicode_errors=None,
  *             object_pairs_hook=None, ext_hook=ExtType,             # <<<<<<<<<<<<<<
@@ -2375,7 +2375,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_3unpackb(PyObject *__pyx_self
     values[7] = ((PyObject *)Py_None);
     values[8] = __pyx_k__8;
 
-    /* "msgpack_rlp/_unpacker.pyx":170
+    /* "msgpack_rlp/_unpacker.pyx":169
  *             encoding=None, unicode_errors=None,
  *             object_pairs_hook=None, ext_hook=ExtType,
  *             sedes = None,             # <<<<<<<<<<<<<<
@@ -2511,7 +2511,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_3unpackb(PyObject *__pyx_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unpackb") < 0)) __PYX_ERR(0, 166, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unpackb") < 0)) __PYX_ERR(0, 165, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2552,10 +2552,10 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_3unpackb(PyObject *__pyx_self
     __pyx_v_object_hook = values[1];
     __pyx_v_list_hook = values[2];
     if (values[3]) {
-      __pyx_v_use_list = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_use_list == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
+      __pyx_v_use_list = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_use_list == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L3_error)
     } else {
 
-      /* "msgpack_rlp/_unpacker.pyx":167
+      /* "msgpack_rlp/_unpacker.pyx":166
  * 
  * def unpackb(object packed, object object_hook=None, object list_hook=None,
  *             bint use_list=False, bint raw=True,             # <<<<<<<<<<<<<<
@@ -2565,7 +2565,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_3unpackb(PyObject *__pyx_self
       __pyx_v_use_list = ((int)0);
     }
     if (values[4]) {
-      __pyx_v_raw = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_raw == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
+      __pyx_v_raw = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_raw == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L3_error)
     } else {
       __pyx_v_raw = ((int)1);
     }
@@ -2575,34 +2575,34 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_3unpackb(PyObject *__pyx_self
     __pyx_v_ext_hook = values[8];
     __pyx_v_sedes = values[9];
     if (values[10]) {
-      __pyx_v_max_str_len = __Pyx_PyIndex_AsSsize_t(values[10]); if (unlikely((__pyx_v_max_str_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 171, __pyx_L3_error)
+      __pyx_v_max_str_len = __Pyx_PyIndex_AsSsize_t(values[10]); if (unlikely((__pyx_v_max_str_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 170, __pyx_L3_error)
     } else {
       __pyx_v_max_str_len = ((Py_ssize_t)0x7FFFFFFF);
     }
     if (values[11]) {
-      __pyx_v_max_bin_len = __Pyx_PyIndex_AsSsize_t(values[11]); if (unlikely((__pyx_v_max_bin_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
+      __pyx_v_max_bin_len = __Pyx_PyIndex_AsSsize_t(values[11]); if (unlikely((__pyx_v_max_bin_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 171, __pyx_L3_error)
     } else {
       __pyx_v_max_bin_len = ((Py_ssize_t)0x7FFFFFFF);
     }
     if (values[12]) {
-      __pyx_v_max_array_len = __Pyx_PyIndex_AsSsize_t(values[12]); if (unlikely((__pyx_v_max_array_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 173, __pyx_L3_error)
+      __pyx_v_max_array_len = __Pyx_PyIndex_AsSsize_t(values[12]); if (unlikely((__pyx_v_max_array_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
     } else {
       __pyx_v_max_array_len = ((Py_ssize_t)0x7FFFFFFF);
     }
     if (values[13]) {
-      __pyx_v_max_map_len = __Pyx_PyIndex_AsSsize_t(values[13]); if (unlikely((__pyx_v_max_map_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L3_error)
+      __pyx_v_max_map_len = __Pyx_PyIndex_AsSsize_t(values[13]); if (unlikely((__pyx_v_max_map_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 173, __pyx_L3_error)
     } else {
       __pyx_v_max_map_len = ((Py_ssize_t)0x7FFFFFFF);
     }
     if (values[14]) {
-      __pyx_v_max_ext_len = __Pyx_PyIndex_AsSsize_t(values[14]); if (unlikely((__pyx_v_max_ext_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 175, __pyx_L3_error)
+      __pyx_v_max_ext_len = __Pyx_PyIndex_AsSsize_t(values[14]); if (unlikely((__pyx_v_max_ext_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L3_error)
     } else {
       __pyx_v_max_ext_len = ((Py_ssize_t)0x7FFFFFFF);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("unpackb", 0, 1, 15, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 166, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("unpackb", 0, 1, 15, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 165, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("msgpack_rlp._unpacker.unpackb", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2610,7 +2610,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_3unpackb(PyObject *__pyx_self
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(__pyx_self, __pyx_v_packed, __pyx_v_object_hook, __pyx_v_list_hook, __pyx_v_use_list, __pyx_v_raw, __pyx_v_encoding, __pyx_v_unicode_errors, __pyx_v_object_pairs_hook, __pyx_v_ext_hook, __pyx_v_sedes, __pyx_v_max_str_len, __pyx_v_max_bin_len, __pyx_v_max_array_len, __pyx_v_max_map_len, __pyx_v_max_ext_len);
 
-  /* "msgpack_rlp/_unpacker.pyx":166
+  /* "msgpack_rlp/_unpacker.pyx":165
  *         return 1
  * 
  * def unpackb(object packed, object object_hook=None, object list_hook=None,             # <<<<<<<<<<<<<<
@@ -2656,7 +2656,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
   PyObject *__pyx_t_18 = NULL;
   __Pyx_RefNannySetupContext("unpackb", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":184
+  /* "msgpack_rlp/_unpacker.pyx":183
  *     """
  *     cdef unpack_context ctx
  *     cdef Py_ssize_t off = 0             # <<<<<<<<<<<<<<
@@ -2665,7 +2665,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   __pyx_v_off = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":188
+  /* "msgpack_rlp/_unpacker.pyx":187
  * 
  *     cdef Py_buffer view
  *     cdef char* buf = NULL             # <<<<<<<<<<<<<<
@@ -2674,7 +2674,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   __pyx_v_buf = NULL;
 
-  /* "msgpack_rlp/_unpacker.pyx":190
+  /* "msgpack_rlp/_unpacker.pyx":189
  *     cdef char* buf = NULL
  *     cdef Py_ssize_t buf_len
  *     cdef const char* cenc = NULL             # <<<<<<<<<<<<<<
@@ -2683,7 +2683,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   __pyx_v_cenc = NULL;
 
-  /* "msgpack_rlp/_unpacker.pyx":191
+  /* "msgpack_rlp/_unpacker.pyx":190
  *     cdef Py_ssize_t buf_len
  *     cdef const char* cenc = NULL
  *     cdef const char* cerr = NULL             # <<<<<<<<<<<<<<
@@ -2692,7 +2692,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   __pyx_v_cerr = NULL;
 
-  /* "msgpack_rlp/_unpacker.pyx":192
+  /* "msgpack_rlp/_unpacker.pyx":191
  *     cdef const char* cenc = NULL
  *     cdef const char* cerr = NULL
  *     cdef int new_protocol = 0             # <<<<<<<<<<<<<<
@@ -2701,7 +2701,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   __pyx_v_new_protocol = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":194
+  /* "msgpack_rlp/_unpacker.pyx":193
  *     cdef int new_protocol = 0
  * 
  *     if encoding is not None:             # <<<<<<<<<<<<<<
@@ -2712,26 +2712,26 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "msgpack_rlp/_unpacker.pyx":195
+    /* "msgpack_rlp/_unpacker.pyx":194
  * 
  *     if encoding is not None:
  *         PyErr_WarnEx(PendingDeprecationWarning, "encoding is deprecated, Use raw=False instead.", 1)             # <<<<<<<<<<<<<<
  *         cenc = encoding
  * 
  */
-    __pyx_t_3 = PyErr_WarnEx(__pyx_builtin_PendingDeprecationWarning, ((char *)"encoding is deprecated, Use raw=False instead."), 1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 195, __pyx_L1_error)
+    __pyx_t_3 = PyErr_WarnEx(__pyx_builtin_PendingDeprecationWarning, ((char *)"encoding is deprecated, Use raw=False instead."), 1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 194, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":196
+    /* "msgpack_rlp/_unpacker.pyx":195
  *     if encoding is not None:
  *         PyErr_WarnEx(PendingDeprecationWarning, "encoding is deprecated, Use raw=False instead.", 1)
  *         cenc = encoding             # <<<<<<<<<<<<<<
  * 
  *     if unicode_errors is not None:
  */
-    __pyx_t_4 = __Pyx_PyObject_AsString(__pyx_v_encoding); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_AsString(__pyx_v_encoding); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L1_error)
     __pyx_v_cenc = __pyx_t_4;
 
-    /* "msgpack_rlp/_unpacker.pyx":194
+    /* "msgpack_rlp/_unpacker.pyx":193
  *     cdef int new_protocol = 0
  * 
  *     if encoding is not None:             # <<<<<<<<<<<<<<
@@ -2740,7 +2740,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":198
+  /* "msgpack_rlp/_unpacker.pyx":197
  *         cenc = encoding
  * 
  *     if unicode_errors is not None:             # <<<<<<<<<<<<<<
@@ -2751,17 +2751,17 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":199
+    /* "msgpack_rlp/_unpacker.pyx":198
  * 
  *     if unicode_errors is not None:
  *         cerr = unicode_errors             # <<<<<<<<<<<<<<
  * 
  *     get_data_from_buffer(packed, &view, &buf, &buf_len, &new_protocol)
  */
-    __pyx_t_5 = __Pyx_PyObject_AsString(__pyx_v_unicode_errors); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_AsString(__pyx_v_unicode_errors); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L1_error)
     __pyx_v_cerr = __pyx_t_5;
 
-    /* "msgpack_rlp/_unpacker.pyx":198
+    /* "msgpack_rlp/_unpacker.pyx":197
  *         cenc = encoding
  * 
  *     if unicode_errors is not None:             # <<<<<<<<<<<<<<
@@ -2770,16 +2770,16 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":201
+  /* "msgpack_rlp/_unpacker.pyx":200
  *         cerr = unicode_errors
  * 
  *     get_data_from_buffer(packed, &view, &buf, &buf_len, &new_protocol)             # <<<<<<<<<<<<<<
  *     try:
  *         init_ctx(&ctx, sedes, object_hook, object_pairs_hook, list_hook, ext_hook,
  */
-  __pyx_t_3 = __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(__pyx_v_packed, (&__pyx_v_view), (&__pyx_v_buf), (&__pyx_v_buf_len), (&__pyx_v_new_protocol)); if (unlikely(__pyx_t_3 == ((int)0))) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(__pyx_v_packed, (&__pyx_v_view), (&__pyx_v_buf), (&__pyx_v_buf_len), (&__pyx_v_new_protocol)); if (unlikely(__pyx_t_3 == ((int)0))) __PYX_ERR(0, 200, __pyx_L1_error)
 
-  /* "msgpack_rlp/_unpacker.pyx":202
+  /* "msgpack_rlp/_unpacker.pyx":201
  * 
  *     get_data_from_buffer(packed, &view, &buf, &buf_len, &new_protocol)
  *     try:             # <<<<<<<<<<<<<<
@@ -2788,29 +2788,29 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   /*try:*/ {
 
-    /* "msgpack_rlp/_unpacker.pyx":203
+    /* "msgpack_rlp/_unpacker.pyx":202
  *     get_data_from_buffer(packed, &view, &buf, &buf_len, &new_protocol)
  *     try:
  *         init_ctx(&ctx, sedes, object_hook, object_pairs_hook, list_hook, ext_hook,             # <<<<<<<<<<<<<<
  *                  use_list, raw, cenc, cerr,
  *                  max_str_len, max_bin_len, max_array_len, max_map_len, max_ext_len)
  */
-    __pyx_t_6 = __pyx_f_11msgpack_rlp_9_unpacker_init_ctx((&__pyx_v_ctx), __pyx_v_sedes, __pyx_v_object_hook, __pyx_v_object_pairs_hook, __pyx_v_list_hook, __pyx_v_ext_hook, __pyx_v_use_list, __pyx_v_raw, __pyx_v_cenc, __pyx_v_cerr, __pyx_v_max_str_len, __pyx_v_max_bin_len, __pyx_v_max_array_len, __pyx_v_max_map_len, __pyx_v_max_ext_len); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 203, __pyx_L6_error)
+    __pyx_t_6 = __pyx_f_11msgpack_rlp_9_unpacker_init_ctx((&__pyx_v_ctx), __pyx_v_sedes, __pyx_v_object_hook, __pyx_v_object_pairs_hook, __pyx_v_list_hook, __pyx_v_ext_hook, __pyx_v_use_list, __pyx_v_raw, __pyx_v_cenc, __pyx_v_cerr, __pyx_v_max_str_len, __pyx_v_max_bin_len, __pyx_v_max_array_len, __pyx_v_max_map_len, __pyx_v_max_ext_len); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 202, __pyx_L6_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "msgpack_rlp/_unpacker.pyx":206
+    /* "msgpack_rlp/_unpacker.pyx":205
  *                  use_list, raw, cenc, cerr,
  *                  max_str_len, max_bin_len, max_array_len, max_map_len, max_ext_len)
  *         ret = unpack_construct(&ctx, buf, buf_len, &off)             # <<<<<<<<<<<<<<
  *     finally:
  *         if new_protocol:
  */
-    __pyx_t_3 = unpack_construct((&__pyx_v_ctx), __pyx_v_buf, __pyx_v_buf_len, (&__pyx_v_off)); if (unlikely(__pyx_t_3 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 206, __pyx_L6_error)
+    __pyx_t_3 = unpack_construct((&__pyx_v_ctx), __pyx_v_buf, __pyx_v_buf_len, (&__pyx_v_off)); if (unlikely(__pyx_t_3 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 205, __pyx_L6_error)
     __pyx_v_ret = __pyx_t_3;
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":208
+  /* "msgpack_rlp/_unpacker.pyx":207
  *         ret = unpack_construct(&ctx, buf, buf_len, &off)
  *     finally:
  *         if new_protocol:             # <<<<<<<<<<<<<<
@@ -2822,7 +2822,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
       __pyx_t_1 = (__pyx_v_new_protocol != 0);
       if (__pyx_t_1) {
 
-        /* "msgpack_rlp/_unpacker.pyx":209
+        /* "msgpack_rlp/_unpacker.pyx":208
  *     finally:
  *         if new_protocol:
  *             PyBuffer_Release(&view);             # <<<<<<<<<<<<<<
@@ -2831,7 +2831,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
         PyBuffer_Release((&__pyx_v_view));
 
-        /* "msgpack_rlp/_unpacker.pyx":208
+        /* "msgpack_rlp/_unpacker.pyx":207
  *         ret = unpack_construct(&ctx, buf, buf_len, &off)
  *     finally:
  *         if new_protocol:             # <<<<<<<<<<<<<<
@@ -2860,7 +2860,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
         __pyx_t_1 = (__pyx_v_new_protocol != 0);
         if (__pyx_t_1) {
 
-          /* "msgpack_rlp/_unpacker.pyx":209
+          /* "msgpack_rlp/_unpacker.pyx":208
  *     finally:
  *         if new_protocol:
  *             PyBuffer_Release(&view);             # <<<<<<<<<<<<<<
@@ -2869,7 +2869,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
           PyBuffer_Release((&__pyx_v_view));
 
-          /* "msgpack_rlp/_unpacker.pyx":208
+          /* "msgpack_rlp/_unpacker.pyx":207
  *         ret = unpack_construct(&ctx, buf, buf_len, &off)
  *     finally:
  *         if new_protocol:             # <<<<<<<<<<<<<<
@@ -2895,7 +2895,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
     __pyx_L7:;
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":211
+  /* "msgpack_rlp/_unpacker.pyx":210
  *             PyBuffer_Release(&view);
  * 
  *     if ret == 1:             # <<<<<<<<<<<<<<
@@ -2905,19 +2905,19 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
   __pyx_t_1 = ((__pyx_v_ret == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":212
+    /* "msgpack_rlp/_unpacker.pyx":211
  * 
  *     if ret == 1:
  *         obj = unpack_data(&ctx)             # <<<<<<<<<<<<<<
  *         if off < buf_len:
  *             raise ExtraData(obj, PyBytes_FromStringAndSize(buf+off, buf_len-off))
  */
-    __pyx_t_6 = unpack_data((&__pyx_v_ctx)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_6 = unpack_data((&__pyx_v_ctx)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 211, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_v_obj = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "msgpack_rlp/_unpacker.pyx":213
+    /* "msgpack_rlp/_unpacker.pyx":212
  *     if ret == 1:
  *         obj = unpack_data(&ctx)
  *         if off < buf_len:             # <<<<<<<<<<<<<<
@@ -2927,16 +2927,16 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
     __pyx_t_1 = ((__pyx_v_off < __pyx_v_buf_len) != 0);
     if (__pyx_t_1) {
 
-      /* "msgpack_rlp/_unpacker.pyx":214
+      /* "msgpack_rlp/_unpacker.pyx":213
  *         obj = unpack_data(&ctx)
  *         if off < buf_len:
  *             raise ExtraData(obj, PyBytes_FromStringAndSize(buf+off, buf_len-off))             # <<<<<<<<<<<<<<
  *         return obj
  *     unpack_clear(&ctx)
  */
-      __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_ExtraData); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 214, __pyx_L1_error)
+      __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_ExtraData); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 213, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_15);
-      __pyx_t_16 = PyBytes_FromStringAndSize((__pyx_v_buf + __pyx_v_off), (__pyx_v_buf_len - __pyx_v_off)); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 214, __pyx_L1_error)
+      __pyx_t_16 = PyBytes_FromStringAndSize((__pyx_v_buf + __pyx_v_off), (__pyx_v_buf_len - __pyx_v_off)); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 213, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_16);
       __pyx_t_17 = NULL;
       __pyx_t_7 = 0;
@@ -2953,7 +2953,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_15)) {
         PyObject *__pyx_temp[3] = {__pyx_t_17, __pyx_v_obj, __pyx_t_16};
-        __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 214, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 213, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
@@ -2962,14 +2962,14 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_15)) {
         PyObject *__pyx_temp[3] = {__pyx_t_17, __pyx_v_obj, __pyx_t_16};
-        __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 214, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 213, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       } else
       #endif
       {
-        __pyx_t_18 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 214, __pyx_L1_error)
+        __pyx_t_18 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 213, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_18);
         if (__pyx_t_17) {
           __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_t_17); __pyx_t_17 = NULL;
@@ -2980,16 +2980,16 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
         __Pyx_GIVEREF(__pyx_t_16);
         PyTuple_SET_ITEM(__pyx_t_18, 1+__pyx_t_7, __pyx_t_16);
         __pyx_t_16 = 0;
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_18, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 214, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_18, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 213, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       }
       __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
       __Pyx_Raise(__pyx_t_6, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __PYX_ERR(0, 214, __pyx_L1_error)
+      __PYX_ERR(0, 213, __pyx_L1_error)
 
-      /* "msgpack_rlp/_unpacker.pyx":213
+      /* "msgpack_rlp/_unpacker.pyx":212
  *     if ret == 1:
  *         obj = unpack_data(&ctx)
  *         if off < buf_len:             # <<<<<<<<<<<<<<
@@ -2998,7 +2998,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "msgpack_rlp/_unpacker.pyx":215
+    /* "msgpack_rlp/_unpacker.pyx":214
  *         if off < buf_len:
  *             raise ExtraData(obj, PyBytes_FromStringAndSize(buf+off, buf_len-off))
  *         return obj             # <<<<<<<<<<<<<<
@@ -3010,7 +3010,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
     __pyx_r = __pyx_v_obj;
     goto __pyx_L0;
 
-    /* "msgpack_rlp/_unpacker.pyx":211
+    /* "msgpack_rlp/_unpacker.pyx":210
  *             PyBuffer_Release(&view);
  * 
  *     if ret == 1:             # <<<<<<<<<<<<<<
@@ -3019,7 +3019,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":216
+  /* "msgpack_rlp/_unpacker.pyx":215
  *             raise ExtraData(obj, PyBytes_FromStringAndSize(buf+off, buf_len-off))
  *         return obj
  *     unpack_clear(&ctx)             # <<<<<<<<<<<<<<
@@ -3028,7 +3028,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
   unpack_clear((&__pyx_v_ctx));
 
-  /* "msgpack_rlp/_unpacker.pyx":217
+  /* "msgpack_rlp/_unpacker.pyx":216
  *         return obj
  *     unpack_clear(&ctx)
  *     if ret == 11:             # <<<<<<<<<<<<<<
@@ -3038,23 +3038,23 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
   switch (__pyx_v_ret) {
     case 11:
 
-    /* "msgpack_rlp/_unpacker.pyx":218
+    /* "msgpack_rlp/_unpacker.pyx":217
  *     unpack_clear(&ctx)
  *     if ret == 11:
  *         raise UnpackValueError("Attempted to apply an int sede to an encoded value, but it was larger than the maximum allowed size for int")             # <<<<<<<<<<<<<<
  *     elif ret == 12:
  *         raise UnpackValueError("Unknown sede type")
  */
-    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_15);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_Raise(__pyx_t_15, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-    __PYX_ERR(0, 218, __pyx_L1_error)
+    __PYX_ERR(0, 217, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":217
+    /* "msgpack_rlp/_unpacker.pyx":216
  *         return obj
  *     unpack_clear(&ctx)
  *     if ret == 11:             # <<<<<<<<<<<<<<
@@ -3063,7 +3063,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
     break;
 
-    /* "msgpack_rlp/_unpacker.pyx":219
+    /* "msgpack_rlp/_unpacker.pyx":218
  *     if ret == 11:
  *         raise UnpackValueError("Attempted to apply an int sede to an encoded value, but it was larger than the maximum allowed size for int")
  *     elif ret == 12:             # <<<<<<<<<<<<<<
@@ -3072,23 +3072,23 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
  */
     case 12:
 
-    /* "msgpack_rlp/_unpacker.pyx":220
+    /* "msgpack_rlp/_unpacker.pyx":219
  *         raise UnpackValueError("Attempted to apply an int sede to an encoded value, but it was larger than the maximum allowed size for int")
  *     elif ret == 12:
  *         raise UnpackValueError("Unknown sede type")             # <<<<<<<<<<<<<<
  *     else:
  *         raise UnpackValueError("Unpack failed: error = %d" % (ret,))
  */
-    __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 219, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_15);
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
     __Pyx_Raise(__pyx_t_6, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __PYX_ERR(0, 220, __pyx_L1_error)
+    __PYX_ERR(0, 219, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":219
+    /* "msgpack_rlp/_unpacker.pyx":218
  *     if ret == 11:
  *         raise UnpackValueError("Attempted to apply an int sede to an encoded value, but it was larger than the maximum allowed size for int")
  *     elif ret == 12:             # <<<<<<<<<<<<<<
@@ -3098,23 +3098,23 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
     break;
     default:
 
-    /* "msgpack_rlp/_unpacker.pyx":222
+    /* "msgpack_rlp/_unpacker.pyx":221
  *         raise UnpackValueError("Unknown sede type")
  *     else:
  *         raise UnpackValueError("Unpack failed: error = %d" % (ret,))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_15);
-    __pyx_t_18 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_18 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_18);
-    __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_16);
     __Pyx_GIVEREF(__pyx_t_18);
     PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_18);
     __pyx_t_18 = 0;
-    __pyx_t_18 = __Pyx_PyString_Format(__pyx_kp_s_Unpack_failed_error_d, __pyx_t_16); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_18 = __Pyx_PyString_Format(__pyx_kp_s_Unpack_failed_error_d, __pyx_t_16); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_18);
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
     __pyx_t_16 = NULL;
@@ -3128,14 +3128,14 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
       }
     }
     if (!__pyx_t_16) {
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_15, __pyx_t_18); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_15, __pyx_t_18); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       __Pyx_GOTREF(__pyx_t_6);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_15)) {
         PyObject *__pyx_temp[2] = {__pyx_t_16, __pyx_t_18};
-        __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_15, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_15, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
@@ -3144,20 +3144,20 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_15)) {
         PyObject *__pyx_temp[2] = {__pyx_t_16, __pyx_t_18};
-        __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_15, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_15, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       } else
       #endif
       {
-        __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 222, __pyx_L1_error)
+        __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 221, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_GIVEREF(__pyx_t_16); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_16); __pyx_t_16 = NULL;
         __Pyx_GIVEREF(__pyx_t_18);
         PyTuple_SET_ITEM(__pyx_t_17, 0+1, __pyx_t_18);
         __pyx_t_18 = 0;
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_17, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_17, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
       }
@@ -3165,11 +3165,11 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
     __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
     __Pyx_Raise(__pyx_t_6, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __PYX_ERR(0, 222, __pyx_L1_error)
+    __PYX_ERR(0, 221, __pyx_L1_error)
     break;
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":166
+  /* "msgpack_rlp/_unpacker.pyx":165
  *         return 1
  * 
  * def unpackb(object packed, object object_hook=None, object list_hook=None,             # <<<<<<<<<<<<<<
@@ -3193,7 +3193,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_2unpackb(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":225
+/* "msgpack_rlp/_unpacker.pyx":224
  * 
  * 
  * def unpack(object stream, **kwargs):             # <<<<<<<<<<<<<<
@@ -3232,7 +3232,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_5unpack(PyObject *__pyx_self,
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "unpack") < 0)) __PYX_ERR(0, 225, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "unpack") < 0)) __PYX_ERR(0, 224, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -3243,7 +3243,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_5unpack(PyObject *__pyx_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("unpack", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 225, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("unpack", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 224, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("msgpack_rlp._unpacker.unpack", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3268,23 +3268,23 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_4unpack(CYTHON_UNUSED PyObjec
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("unpack", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":226
+  /* "msgpack_rlp/_unpacker.pyx":225
  * 
  * def unpack(object stream, **kwargs):
  *     PyErr_WarnEx(             # <<<<<<<<<<<<<<
  *         PendingDeprecationWarning,
  *         "Direct calling implementation's unpack() is deprecated, Use msgpack.unpack() or unpackb() instead.", 1)
  */
-  __pyx_t_1 = PyErr_WarnEx(__pyx_builtin_PendingDeprecationWarning, ((char *)"Direct calling implementation's unpack() is deprecated, Use msgpack.unpack() or unpackb() instead."), 1); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_1 = PyErr_WarnEx(__pyx_builtin_PendingDeprecationWarning, ((char *)"Direct calling implementation's unpack() is deprecated, Use msgpack.unpack() or unpackb() instead."), 1); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 225, __pyx_L1_error)
 
-  /* "msgpack_rlp/_unpacker.pyx":229
+  /* "msgpack_rlp/_unpacker.pyx":228
  *         PendingDeprecationWarning,
  *         "Direct calling implementation's unpack() is deprecated, Use msgpack.unpack() or unpackb() instead.", 1)
  *     data = stream.read()             # <<<<<<<<<<<<<<
  *     return unpackb(data, **kwargs)
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_stream, __pyx_n_s_read); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_stream, __pyx_n_s_read); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -3297,17 +3297,17 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_4unpack(CYTHON_UNUSED PyObjec
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_data = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":230
+  /* "msgpack_rlp/_unpacker.pyx":229
  *         "Direct calling implementation's unpack() is deprecated, Use msgpack.unpack() or unpackb() instead.", 1)
  *     data = stream.read()
  *     return unpackb(data, **kwargs)             # <<<<<<<<<<<<<<
@@ -3315,14 +3315,14 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_4unpack(CYTHON_UNUSED PyObjec
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_unpackb); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_unpackb); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_v_data);
   __Pyx_GIVEREF(__pyx_v_data);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_data);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_v_kwargs); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_v_kwargs); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3330,7 +3330,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_4unpack(CYTHON_UNUSED PyObjec
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":225
+  /* "msgpack_rlp/_unpacker.pyx":224
  * 
  * 
  * def unpack(object stream, **kwargs):             # <<<<<<<<<<<<<<
@@ -3352,7 +3352,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_4unpack(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":324
+/* "msgpack_rlp/_unpacker.pyx":323
  *     cdef uint64_t stream_offset
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -3381,7 +3381,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker___cinit__(struct __pyx_ob
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":325
+  /* "msgpack_rlp/_unpacker.pyx":324
  * 
  *     def __cinit__(self):
  *         self.buf = NULL             # <<<<<<<<<<<<<<
@@ -3390,7 +3390,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker___cinit__(struct __pyx_ob
  */
   __pyx_v_self->buf = NULL;
 
-  /* "msgpack_rlp/_unpacker.pyx":324
+  /* "msgpack_rlp/_unpacker.pyx":323
  *     cdef uint64_t stream_offset
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -3404,7 +3404,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker___cinit__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":327
+/* "msgpack_rlp/_unpacker.pyx":326
  *         self.buf = NULL
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3427,7 +3427,7 @@ static void __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_2__dealloc__(struct __py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":328
+  /* "msgpack_rlp/_unpacker.pyx":327
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.buf)             # <<<<<<<<<<<<<<
@@ -3436,7 +3436,7 @@ static void __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_2__dealloc__(struct __py
  */
   PyMem_Free(__pyx_v_self->buf);
 
-  /* "msgpack_rlp/_unpacker.pyx":329
+  /* "msgpack_rlp/_unpacker.pyx":328
  *     def __dealloc__(self):
  *         PyMem_Free(self.buf)
  *         self.buf = NULL             # <<<<<<<<<<<<<<
@@ -3445,7 +3445,7 @@ static void __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_2__dealloc__(struct __py
  */
   __pyx_v_self->buf = NULL;
 
-  /* "msgpack_rlp/_unpacker.pyx":327
+  /* "msgpack_rlp/_unpacker.pyx":326
  *         self.buf = NULL
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3457,7 +3457,7 @@ static void __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_2__dealloc__(struct __py
   __Pyx_RefNannyFinishContext();
 }
 
-/* "msgpack_rlp/_unpacker.pyx":331
+/* "msgpack_rlp/_unpacker.pyx":330
  *         self.buf = NULL
  * 
  *     def __init__(self, file_like=None, Py_ssize_t read_size=0,             # <<<<<<<<<<<<<<
@@ -3492,7 +3492,7 @@ static int __pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_5__init__(PyObject *__pyx
     PyObject* values[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     values[0] = ((PyObject *)Py_None);
 
-    /* "msgpack_rlp/_unpacker.pyx":333
+    /* "msgpack_rlp/_unpacker.pyx":332
  *     def __init__(self, file_like=None, Py_ssize_t read_size=0,
  *                  bint use_list=True, bint raw=True,
  *                  object object_hook=None, object object_pairs_hook=None, object list_hook=None,             # <<<<<<<<<<<<<<
@@ -3503,7 +3503,7 @@ static int __pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_5__init__(PyObject *__pyx
     values[5] = ((PyObject *)Py_None);
     values[6] = ((PyObject *)Py_None);
 
-    /* "msgpack_rlp/_unpacker.pyx":334
+    /* "msgpack_rlp/_unpacker.pyx":333
  *                  bint use_list=True, bint raw=True,
  *                  object object_hook=None, object object_pairs_hook=None, object list_hook=None,
  *                  encoding=None, unicode_errors=None, int max_buffer_size=0,             # <<<<<<<<<<<<<<
@@ -3651,7 +3651,7 @@ static int __pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_5__init__(PyObject *__pyx
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 331, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 330, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3693,15 +3693,15 @@ static int __pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_5__init__(PyObject *__pyx
     }
     __pyx_v_file_like = values[0];
     if (values[1]) {
-      __pyx_v_read_size = __Pyx_PyIndex_AsSsize_t(values[1]); if (unlikely((__pyx_v_read_size == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 331, __pyx_L3_error)
+      __pyx_v_read_size = __Pyx_PyIndex_AsSsize_t(values[1]); if (unlikely((__pyx_v_read_size == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 330, __pyx_L3_error)
     } else {
       __pyx_v_read_size = ((Py_ssize_t)0);
     }
     if (values[2]) {
-      __pyx_v_use_list = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_use_list == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 332, __pyx_L3_error)
+      __pyx_v_use_list = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_use_list == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 331, __pyx_L3_error)
     } else {
 
-      /* "msgpack_rlp/_unpacker.pyx":332
+      /* "msgpack_rlp/_unpacker.pyx":331
  * 
  *     def __init__(self, file_like=None, Py_ssize_t read_size=0,
  *                  bint use_list=True, bint raw=True,             # <<<<<<<<<<<<<<
@@ -3711,7 +3711,7 @@ static int __pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_5__init__(PyObject *__pyx
       __pyx_v_use_list = ((int)1);
     }
     if (values[3]) {
-      __pyx_v_raw = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_raw == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 332, __pyx_L3_error)
+      __pyx_v_raw = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_raw == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 331, __pyx_L3_error)
     } else {
       __pyx_v_raw = ((int)1);
     }
@@ -3721,40 +3721,40 @@ static int __pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_5__init__(PyObject *__pyx
     __pyx_v_encoding = values[7];
     __pyx_v_unicode_errors = values[8];
     if (values[9]) {
-      __pyx_v_max_buffer_size = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_max_buffer_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 334, __pyx_L3_error)
+      __pyx_v_max_buffer_size = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_max_buffer_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L3_error)
     } else {
       __pyx_v_max_buffer_size = ((int)0);
     }
     __pyx_v_ext_hook = values[10];
     if (values[11]) {
-      __pyx_v_max_str_len = __Pyx_PyIndex_AsSsize_t(values[11]); if (unlikely((__pyx_v_max_str_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 336, __pyx_L3_error)
+      __pyx_v_max_str_len = __Pyx_PyIndex_AsSsize_t(values[11]); if (unlikely((__pyx_v_max_str_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 335, __pyx_L3_error)
     } else {
       __pyx_v_max_str_len = ((Py_ssize_t)0x7FFFFFFF);
     }
     if (values[12]) {
-      __pyx_v_max_bin_len = __Pyx_PyIndex_AsSsize_t(values[12]); if (unlikely((__pyx_v_max_bin_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 337, __pyx_L3_error)
+      __pyx_v_max_bin_len = __Pyx_PyIndex_AsSsize_t(values[12]); if (unlikely((__pyx_v_max_bin_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 336, __pyx_L3_error)
     } else {
       __pyx_v_max_bin_len = ((Py_ssize_t)0x7FFFFFFF);
     }
     if (values[13]) {
-      __pyx_v_max_array_len = __Pyx_PyIndex_AsSsize_t(values[13]); if (unlikely((__pyx_v_max_array_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 338, __pyx_L3_error)
+      __pyx_v_max_array_len = __Pyx_PyIndex_AsSsize_t(values[13]); if (unlikely((__pyx_v_max_array_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 337, __pyx_L3_error)
     } else {
       __pyx_v_max_array_len = ((Py_ssize_t)0x7FFFFFFF);
     }
     if (values[14]) {
-      __pyx_v_max_map_len = __Pyx_PyIndex_AsSsize_t(values[14]); if (unlikely((__pyx_v_max_map_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 339, __pyx_L3_error)
+      __pyx_v_max_map_len = __Pyx_PyIndex_AsSsize_t(values[14]); if (unlikely((__pyx_v_max_map_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 338, __pyx_L3_error)
     } else {
       __pyx_v_max_map_len = ((Py_ssize_t)0x7FFFFFFF);
     }
     if (values[15]) {
-      __pyx_v_max_ext_len = __Pyx_PyIndex_AsSsize_t(values[15]); if (unlikely((__pyx_v_max_ext_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 340, __pyx_L3_error)
+      __pyx_v_max_ext_len = __Pyx_PyIndex_AsSsize_t(values[15]); if (unlikely((__pyx_v_max_ext_len == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 339, __pyx_L3_error)
     } else {
       __pyx_v_max_ext_len = ((Py_ssize_t)0x7FFFFFFF);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 16, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 331, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 16, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 330, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("msgpack_rlp._unpacker.Unpacker.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3762,7 +3762,7 @@ static int __pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_5__init__(PyObject *__pyx
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(((struct __pyx_obj_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self), __pyx_v_file_like, __pyx_v_read_size, __pyx_v_use_list, __pyx_v_raw, __pyx_v_object_hook, __pyx_v_object_pairs_hook, __pyx_v_list_hook, __pyx_v_encoding, __pyx_v_unicode_errors, __pyx_v_max_buffer_size, __pyx_v_ext_hook, __pyx_v_max_str_len, __pyx_v_max_bin_len, __pyx_v_max_array_len, __pyx_v_max_map_len, __pyx_v_max_ext_len);
 
-  /* "msgpack_rlp/_unpacker.pyx":331
+  /* "msgpack_rlp/_unpacker.pyx":330
  *         self.buf = NULL
  * 
  *     def __init__(self, file_like=None, Py_ssize_t read_size=0,             # <<<<<<<<<<<<<<
@@ -3790,7 +3790,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   char const *__pyx_t_8;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":341
+  /* "msgpack_rlp/_unpacker.pyx":340
  *                  Py_ssize_t max_map_len=2147483647,
  *                  Py_ssize_t max_ext_len=2147483647):
  *         cdef const char *cenc=NULL,             # <<<<<<<<<<<<<<
@@ -3799,7 +3799,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_cenc = NULL;
 
-  /* "msgpack_rlp/_unpacker.pyx":342
+  /* "msgpack_rlp/_unpacker.pyx":341
  *                  Py_ssize_t max_ext_len=2147483647):
  *         cdef const char *cenc=NULL,
  *         cdef const char *cerr=NULL             # <<<<<<<<<<<<<<
@@ -3808,7 +3808,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_cerr = NULL;
 
-  /* "msgpack_rlp/_unpacker.pyx":344
+  /* "msgpack_rlp/_unpacker.pyx":343
  *         cdef const char *cerr=NULL
  * 
  *         self.object_hook = object_hook             # <<<<<<<<<<<<<<
@@ -3821,7 +3821,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __Pyx_DECREF(__pyx_v_self->object_hook);
   __pyx_v_self->object_hook = __pyx_v_object_hook;
 
-  /* "msgpack_rlp/_unpacker.pyx":345
+  /* "msgpack_rlp/_unpacker.pyx":344
  * 
  *         self.object_hook = object_hook
  *         self.object_pairs_hook = object_pairs_hook             # <<<<<<<<<<<<<<
@@ -3834,7 +3834,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __Pyx_DECREF(__pyx_v_self->object_pairs_hook);
   __pyx_v_self->object_pairs_hook = __pyx_v_object_pairs_hook;
 
-  /* "msgpack_rlp/_unpacker.pyx":346
+  /* "msgpack_rlp/_unpacker.pyx":345
  *         self.object_hook = object_hook
  *         self.object_pairs_hook = object_pairs_hook
  *         self.list_hook = list_hook             # <<<<<<<<<<<<<<
@@ -3847,7 +3847,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __Pyx_DECREF(__pyx_v_self->list_hook);
   __pyx_v_self->list_hook = __pyx_v_list_hook;
 
-  /* "msgpack_rlp/_unpacker.pyx":347
+  /* "msgpack_rlp/_unpacker.pyx":346
  *         self.object_pairs_hook = object_pairs_hook
  *         self.list_hook = list_hook
  *         self.ext_hook = ext_hook             # <<<<<<<<<<<<<<
@@ -3860,7 +3860,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __Pyx_DECREF(__pyx_v_self->ext_hook);
   __pyx_v_self->ext_hook = __pyx_v_ext_hook;
 
-  /* "msgpack_rlp/_unpacker.pyx":349
+  /* "msgpack_rlp/_unpacker.pyx":348
  *         self.ext_hook = ext_hook
  * 
  *         self.file_like = file_like             # <<<<<<<<<<<<<<
@@ -3873,24 +3873,24 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __Pyx_DECREF(__pyx_v_self->file_like);
   __pyx_v_self->file_like = __pyx_v_file_like;
 
-  /* "msgpack_rlp/_unpacker.pyx":350
+  /* "msgpack_rlp/_unpacker.pyx":349
  * 
  *         self.file_like = file_like
  *         if file_like:             # <<<<<<<<<<<<<<
  *             self.file_like_read = file_like.read
  *             if not PyCallable_Check(self.file_like_read):
  */
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_file_like); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_file_like); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 349, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":351
+    /* "msgpack_rlp/_unpacker.pyx":350
  *         self.file_like = file_like
  *         if file_like:
  *             self.file_like_read = file_like.read             # <<<<<<<<<<<<<<
  *             if not PyCallable_Check(self.file_like_read):
  *                 raise TypeError("`file_like.read` must be a callable.")
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_file_like, __pyx_n_s_read); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_file_like, __pyx_n_s_read); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     __Pyx_GOTREF(__pyx_v_self->file_like_read);
@@ -3898,7 +3898,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
     __pyx_v_self->file_like_read = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "msgpack_rlp/_unpacker.pyx":352
+    /* "msgpack_rlp/_unpacker.pyx":351
  *         if file_like:
  *             self.file_like_read = file_like.read
  *             if not PyCallable_Check(self.file_like_read):             # <<<<<<<<<<<<<<
@@ -3911,20 +3911,20 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_1) {
 
-      /* "msgpack_rlp/_unpacker.pyx":353
+      /* "msgpack_rlp/_unpacker.pyx":352
  *             self.file_like_read = file_like.read
  *             if not PyCallable_Check(self.file_like_read):
  *                 raise TypeError("`file_like.read` must be a callable.")             # <<<<<<<<<<<<<<
  *         if not max_buffer_size:
  *             max_buffer_size = INT_MAX
  */
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 353, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 352, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_Raise(__pyx_t_2, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __PYX_ERR(0, 353, __pyx_L1_error)
+      __PYX_ERR(0, 352, __pyx_L1_error)
 
-      /* "msgpack_rlp/_unpacker.pyx":352
+      /* "msgpack_rlp/_unpacker.pyx":351
  *         if file_like:
  *             self.file_like_read = file_like.read
  *             if not PyCallable_Check(self.file_like_read):             # <<<<<<<<<<<<<<
@@ -3933,7 +3933,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
     }
 
-    /* "msgpack_rlp/_unpacker.pyx":350
+    /* "msgpack_rlp/_unpacker.pyx":349
  * 
  *         self.file_like = file_like
  *         if file_like:             # <<<<<<<<<<<<<<
@@ -3942,7 +3942,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":354
+  /* "msgpack_rlp/_unpacker.pyx":353
  *             if not PyCallable_Check(self.file_like_read):
  *                 raise TypeError("`file_like.read` must be a callable.")
  *         if not max_buffer_size:             # <<<<<<<<<<<<<<
@@ -3952,7 +3952,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __pyx_t_1 = ((!(__pyx_v_max_buffer_size != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":355
+    /* "msgpack_rlp/_unpacker.pyx":354
  *                 raise TypeError("`file_like.read` must be a callable.")
  *         if not max_buffer_size:
  *             max_buffer_size = INT_MAX             # <<<<<<<<<<<<<<
@@ -3961,7 +3961,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
     __pyx_v_max_buffer_size = INT_MAX;
 
-    /* "msgpack_rlp/_unpacker.pyx":354
+    /* "msgpack_rlp/_unpacker.pyx":353
  *             if not PyCallable_Check(self.file_like_read):
  *                 raise TypeError("`file_like.read` must be a callable.")
  *         if not max_buffer_size:             # <<<<<<<<<<<<<<
@@ -3970,7 +3970,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":356
+  /* "msgpack_rlp/_unpacker.pyx":355
  *         if not max_buffer_size:
  *             max_buffer_size = INT_MAX
  *         if read_size > max_buffer_size:             # <<<<<<<<<<<<<<
@@ -3980,20 +3980,20 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __pyx_t_1 = ((__pyx_v_read_size > __pyx_v_max_buffer_size) != 0);
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":357
+    /* "msgpack_rlp/_unpacker.pyx":356
  *             max_buffer_size = INT_MAX
  *         if read_size > max_buffer_size:
  *             raise ValueError("read_size should be less or equal to max_buffer_size")             # <<<<<<<<<<<<<<
  *         if not read_size:
  *             read_size = min(max_buffer_size, 1024**2)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 357, __pyx_L1_error)
+    __PYX_ERR(0, 356, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":356
+    /* "msgpack_rlp/_unpacker.pyx":355
  *         if not max_buffer_size:
  *             max_buffer_size = INT_MAX
  *         if read_size > max_buffer_size:             # <<<<<<<<<<<<<<
@@ -4002,7 +4002,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":358
+  /* "msgpack_rlp/_unpacker.pyx":357
  *         if read_size > max_buffer_size:
  *             raise ValueError("read_size should be less or equal to max_buffer_size")
  *         if not read_size:             # <<<<<<<<<<<<<<
@@ -4012,7 +4012,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __pyx_t_1 = ((!(__pyx_v_read_size != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":359
+    /* "msgpack_rlp/_unpacker.pyx":358
  *             raise ValueError("read_size should be less or equal to max_buffer_size")
  *         if not read_size:
  *             read_size = min(max_buffer_size, 1024**2)             # <<<<<<<<<<<<<<
@@ -4028,7 +4028,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
     }
     __pyx_v_read_size = __pyx_t_5;
 
-    /* "msgpack_rlp/_unpacker.pyx":358
+    /* "msgpack_rlp/_unpacker.pyx":357
  *         if read_size > max_buffer_size:
  *             raise ValueError("read_size should be less or equal to max_buffer_size")
  *         if not read_size:             # <<<<<<<<<<<<<<
@@ -4037,7 +4037,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":360
+  /* "msgpack_rlp/_unpacker.pyx":359
  *         if not read_size:
  *             read_size = min(max_buffer_size, 1024**2)
  *         self.max_buffer_size = max_buffer_size             # <<<<<<<<<<<<<<
@@ -4046,7 +4046,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_self->max_buffer_size = __pyx_v_max_buffer_size;
 
-  /* "msgpack_rlp/_unpacker.pyx":361
+  /* "msgpack_rlp/_unpacker.pyx":360
  *             read_size = min(max_buffer_size, 1024**2)
  *         self.max_buffer_size = max_buffer_size
  *         self.read_size = read_size             # <<<<<<<<<<<<<<
@@ -4055,7 +4055,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_self->read_size = __pyx_v_read_size;
 
-  /* "msgpack_rlp/_unpacker.pyx":362
+  /* "msgpack_rlp/_unpacker.pyx":361
  *         self.max_buffer_size = max_buffer_size
  *         self.read_size = read_size
  *         self.buf = <char*>PyMem_Malloc(read_size)             # <<<<<<<<<<<<<<
@@ -4064,7 +4064,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_self->buf = ((char *)PyMem_Malloc(__pyx_v_read_size));
 
-  /* "msgpack_rlp/_unpacker.pyx":363
+  /* "msgpack_rlp/_unpacker.pyx":362
  *         self.read_size = read_size
  *         self.buf = <char*>PyMem_Malloc(read_size)
  *         if self.buf == NULL:             # <<<<<<<<<<<<<<
@@ -4074,20 +4074,20 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __pyx_t_1 = ((__pyx_v_self->buf == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":364
+    /* "msgpack_rlp/_unpacker.pyx":363
  *         self.buf = <char*>PyMem_Malloc(read_size)
  *         if self.buf == NULL:
  *             raise MemoryError("Unable to allocate internal buffer.")             # <<<<<<<<<<<<<<
  *         self.buf_size = read_size
  *         self.buf_head = 0
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 363, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 364, __pyx_L1_error)
+    __PYX_ERR(0, 363, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":363
+    /* "msgpack_rlp/_unpacker.pyx":362
  *         self.read_size = read_size
  *         self.buf = <char*>PyMem_Malloc(read_size)
  *         if self.buf == NULL:             # <<<<<<<<<<<<<<
@@ -4096,7 +4096,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":365
+  /* "msgpack_rlp/_unpacker.pyx":364
  *         if self.buf == NULL:
  *             raise MemoryError("Unable to allocate internal buffer.")
  *         self.buf_size = read_size             # <<<<<<<<<<<<<<
@@ -4105,7 +4105,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_self->buf_size = __pyx_v_read_size;
 
-  /* "msgpack_rlp/_unpacker.pyx":366
+  /* "msgpack_rlp/_unpacker.pyx":365
  *             raise MemoryError("Unable to allocate internal buffer.")
  *         self.buf_size = read_size
  *         self.buf_head = 0             # <<<<<<<<<<<<<<
@@ -4114,7 +4114,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_self->buf_head = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":367
+  /* "msgpack_rlp/_unpacker.pyx":366
  *         self.buf_size = read_size
  *         self.buf_head = 0
  *         self.buf_tail = 0             # <<<<<<<<<<<<<<
@@ -4123,7 +4123,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_self->buf_tail = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":368
+  /* "msgpack_rlp/_unpacker.pyx":367
  *         self.buf_head = 0
  *         self.buf_tail = 0
  *         self.stream_offset = 0             # <<<<<<<<<<<<<<
@@ -4132,7 +4132,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   __pyx_v_self->stream_offset = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":370
+  /* "msgpack_rlp/_unpacker.pyx":369
  *         self.stream_offset = 0
  * 
  *         if encoding is not None:             # <<<<<<<<<<<<<<
@@ -4143,16 +4143,16 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __pyx_t_6 = (__pyx_t_1 != 0);
   if (__pyx_t_6) {
 
-    /* "msgpack_rlp/_unpacker.pyx":371
+    /* "msgpack_rlp/_unpacker.pyx":370
  * 
  *         if encoding is not None:
  *             PyErr_WarnEx(PendingDeprecationWarning, "encoding is deprecated, Use raw=False instead.", 1)             # <<<<<<<<<<<<<<
  *             self.encoding = encoding
  *             cenc = encoding
  */
-    __pyx_t_4 = PyErr_WarnEx(__pyx_builtin_PendingDeprecationWarning, ((char *)"encoding is deprecated, Use raw=False instead."), 1); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 371, __pyx_L1_error)
+    __pyx_t_4 = PyErr_WarnEx(__pyx_builtin_PendingDeprecationWarning, ((char *)"encoding is deprecated, Use raw=False instead."), 1); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 370, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":372
+    /* "msgpack_rlp/_unpacker.pyx":371
  *         if encoding is not None:
  *             PyErr_WarnEx(PendingDeprecationWarning, "encoding is deprecated, Use raw=False instead.", 1)
  *             self.encoding = encoding             # <<<<<<<<<<<<<<
@@ -4165,17 +4165,17 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
     __Pyx_DECREF(__pyx_v_self->encoding);
     __pyx_v_self->encoding = __pyx_v_encoding;
 
-    /* "msgpack_rlp/_unpacker.pyx":373
+    /* "msgpack_rlp/_unpacker.pyx":372
  *             PyErr_WarnEx(PendingDeprecationWarning, "encoding is deprecated, Use raw=False instead.", 1)
  *             self.encoding = encoding
  *             cenc = encoding             # <<<<<<<<<<<<<<
  * 
  *         if unicode_errors is not None:
  */
-    __pyx_t_7 = __Pyx_PyObject_AsString(__pyx_v_encoding); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 373, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_AsString(__pyx_v_encoding); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 372, __pyx_L1_error)
     __pyx_v_cenc = __pyx_t_7;
 
-    /* "msgpack_rlp/_unpacker.pyx":370
+    /* "msgpack_rlp/_unpacker.pyx":369
  *         self.stream_offset = 0
  * 
  *         if encoding is not None:             # <<<<<<<<<<<<<<
@@ -4184,7 +4184,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":375
+  /* "msgpack_rlp/_unpacker.pyx":374
  *             cenc = encoding
  * 
  *         if unicode_errors is not None:             # <<<<<<<<<<<<<<
@@ -4195,7 +4195,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   __pyx_t_1 = (__pyx_t_6 != 0);
   if (__pyx_t_1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":376
+    /* "msgpack_rlp/_unpacker.pyx":375
  * 
  *         if unicode_errors is not None:
  *             self.unicode_errors = unicode_errors             # <<<<<<<<<<<<<<
@@ -4208,17 +4208,17 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
     __Pyx_DECREF(__pyx_v_self->unicode_errors);
     __pyx_v_self->unicode_errors = __pyx_v_unicode_errors;
 
-    /* "msgpack_rlp/_unpacker.pyx":377
+    /* "msgpack_rlp/_unpacker.pyx":376
  *         if unicode_errors is not None:
  *             self.unicode_errors = unicode_errors
  *             cerr = unicode_errors             # <<<<<<<<<<<<<<
  * 
  *         init_ctx(&self.ctx, None, object_hook, object_pairs_hook, list_hook,
  */
-    __pyx_t_8 = __Pyx_PyObject_AsString(__pyx_v_unicode_errors); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 377, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_AsString(__pyx_v_unicode_errors); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 376, __pyx_L1_error)
     __pyx_v_cerr = __pyx_t_8;
 
-    /* "msgpack_rlp/_unpacker.pyx":375
+    /* "msgpack_rlp/_unpacker.pyx":374
  *             cenc = encoding
  * 
  *         if unicode_errors is not None:             # <<<<<<<<<<<<<<
@@ -4227,18 +4227,18 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":379
+  /* "msgpack_rlp/_unpacker.pyx":378
  *             cerr = unicode_errors
  * 
  *         init_ctx(&self.ctx, None, object_hook, object_pairs_hook, list_hook,             # <<<<<<<<<<<<<<
  *                  ext_hook, use_list, raw, cenc, cerr,
  *                  max_str_len, max_bin_len, max_array_len,
  */
-  __pyx_t_2 = __pyx_f_11msgpack_rlp_9_unpacker_init_ctx((&__pyx_v_self->ctx), Py_None, __pyx_v_object_hook, __pyx_v_object_pairs_hook, __pyx_v_list_hook, __pyx_v_ext_hook, __pyx_v_use_list, __pyx_v_raw, __pyx_v_cenc, __pyx_v_cerr, __pyx_v_max_str_len, __pyx_v_max_bin_len, __pyx_v_max_array_len, __pyx_v_max_map_len, __pyx_v_max_ext_len); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 379, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_11msgpack_rlp_9_unpacker_init_ctx((&__pyx_v_self->ctx), Py_None, __pyx_v_object_hook, __pyx_v_object_pairs_hook, __pyx_v_list_hook, __pyx_v_ext_hook, __pyx_v_use_list, __pyx_v_raw, __pyx_v_cenc, __pyx_v_cerr, __pyx_v_max_str_len, __pyx_v_max_bin_len, __pyx_v_max_array_len, __pyx_v_max_map_len, __pyx_v_max_ext_len); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":331
+  /* "msgpack_rlp/_unpacker.pyx":330
  *         self.buf = NULL
  * 
  *     def __init__(self, file_like=None, Py_ssize_t read_size=0,             # <<<<<<<<<<<<<<
@@ -4258,7 +4258,7 @@ static int __pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_4__init__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":384
+/* "msgpack_rlp/_unpacker.pyx":383
  *                  max_map_len, max_ext_len)
  * 
  *     def feed(self, object next_bytes):             # <<<<<<<<<<<<<<
@@ -4301,7 +4301,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
   PyObject *__pyx_t_12 = NULL;
   __Pyx_RefNannySetupContext("feed", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":387
+  /* "msgpack_rlp/_unpacker.pyx":386
  *         """Append `next_bytes` to internal buffer."""
  *         cdef Py_buffer pybuff
  *         cdef int new_protocol = 0             # <<<<<<<<<<<<<<
@@ -4310,7 +4310,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
  */
   __pyx_v_new_protocol = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":391
+  /* "msgpack_rlp/_unpacker.pyx":390
  *         cdef Py_ssize_t buf_len
  * 
  *         if self.file_like is not None:             # <<<<<<<<<<<<<<
@@ -4321,20 +4321,20 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "msgpack_rlp/_unpacker.pyx":392
+    /* "msgpack_rlp/_unpacker.pyx":391
  * 
  *         if self.file_like is not None:
  *             raise AssertionError(             # <<<<<<<<<<<<<<
  *                     "unpacker.feed() is not be able to use with `file_like`.")
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_AssertionError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 392, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_AssertionError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 391, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 392, __pyx_L1_error)
+    __PYX_ERR(0, 391, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":391
+    /* "msgpack_rlp/_unpacker.pyx":390
  *         cdef Py_ssize_t buf_len
  * 
  *         if self.file_like is not None:             # <<<<<<<<<<<<<<
@@ -4343,16 +4343,16 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":395
+  /* "msgpack_rlp/_unpacker.pyx":394
  *                     "unpacker.feed() is not be able to use with `file_like`.")
  * 
  *         get_data_from_buffer(next_bytes, &pybuff, &buf, &buf_len, &new_protocol)             # <<<<<<<<<<<<<<
  *         try:
  *             self.append_buffer(buf, buf_len)
  */
-  __pyx_t_4 = __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(__pyx_v_next_bytes, (&__pyx_v_pybuff), (&__pyx_v_buf), (&__pyx_v_buf_len), (&__pyx_v_new_protocol)); if (unlikely(__pyx_t_4 == ((int)0))) __PYX_ERR(0, 395, __pyx_L1_error)
+  __pyx_t_4 = __pyx_f_11msgpack_rlp_9_unpacker_get_data_from_buffer(__pyx_v_next_bytes, (&__pyx_v_pybuff), (&__pyx_v_buf), (&__pyx_v_buf_len), (&__pyx_v_new_protocol)); if (unlikely(__pyx_t_4 == ((int)0))) __PYX_ERR(0, 394, __pyx_L1_error)
 
-  /* "msgpack_rlp/_unpacker.pyx":396
+  /* "msgpack_rlp/_unpacker.pyx":395
  * 
  *         get_data_from_buffer(next_bytes, &pybuff, &buf, &buf_len, &new_protocol)
  *         try:             # <<<<<<<<<<<<<<
@@ -4361,19 +4361,19 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
  */
   /*try:*/ {
 
-    /* "msgpack_rlp/_unpacker.pyx":397
+    /* "msgpack_rlp/_unpacker.pyx":396
  *         get_data_from_buffer(next_bytes, &pybuff, &buf, &buf_len, &new_protocol)
  *         try:
  *             self.append_buffer(buf, buf_len)             # <<<<<<<<<<<<<<
  *         finally:
  *             if new_protocol:
  */
-    __pyx_t_3 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->append_buffer(__pyx_v_self, __pyx_v_buf, __pyx_v_buf_len); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 397, __pyx_L5_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->append_buffer(__pyx_v_self, __pyx_v_buf, __pyx_v_buf_len); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 396, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":399
+  /* "msgpack_rlp/_unpacker.pyx":398
  *             self.append_buffer(buf, buf_len)
  *         finally:
  *             if new_protocol:             # <<<<<<<<<<<<<<
@@ -4385,7 +4385,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
       __pyx_t_2 = (__pyx_v_new_protocol != 0);
       if (__pyx_t_2) {
 
-        /* "msgpack_rlp/_unpacker.pyx":400
+        /* "msgpack_rlp/_unpacker.pyx":399
  *         finally:
  *             if new_protocol:
  *                 PyBuffer_Release(&pybuff)             # <<<<<<<<<<<<<<
@@ -4394,7 +4394,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
  */
         PyBuffer_Release((&__pyx_v_pybuff));
 
-        /* "msgpack_rlp/_unpacker.pyx":399
+        /* "msgpack_rlp/_unpacker.pyx":398
  *             self.append_buffer(buf, buf_len)
  *         finally:
  *             if new_protocol:             # <<<<<<<<<<<<<<
@@ -4423,7 +4423,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
         __pyx_t_2 = (__pyx_v_new_protocol != 0);
         if (__pyx_t_2) {
 
-          /* "msgpack_rlp/_unpacker.pyx":400
+          /* "msgpack_rlp/_unpacker.pyx":399
  *         finally:
  *             if new_protocol:
  *                 PyBuffer_Release(&pybuff)             # <<<<<<<<<<<<<<
@@ -4432,7 +4432,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
  */
           PyBuffer_Release((&__pyx_v_pybuff));
 
-          /* "msgpack_rlp/_unpacker.pyx":399
+          /* "msgpack_rlp/_unpacker.pyx":398
  *             self.append_buffer(buf, buf_len)
  *         finally:
  *             if new_protocol:             # <<<<<<<<<<<<<<
@@ -4458,7 +4458,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
     __pyx_L6:;
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":384
+  /* "msgpack_rlp/_unpacker.pyx":383
  *                  max_map_len, max_ext_len)
  * 
  *     def feed(self, object next_bytes):             # <<<<<<<<<<<<<<
@@ -4479,7 +4479,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_6feed(struct __pyx_
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":402
+/* "msgpack_rlp/_unpacker.pyx":401
  *                 PyBuffer_Release(&pybuff)
  * 
  *     cdef append_buffer(self, void* _buf, Py_ssize_t _buf_len):             # <<<<<<<<<<<<<<
@@ -4504,7 +4504,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
   Py_ssize_t __pyx_t_6;
   __Pyx_RefNannySetupContext("append_buffer", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":404
+  /* "msgpack_rlp/_unpacker.pyx":403
  *     cdef append_buffer(self, void* _buf, Py_ssize_t _buf_len):
  *         cdef:
  *             char* buf = self.buf             # <<<<<<<<<<<<<<
@@ -4514,7 +4514,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
   __pyx_t_1 = __pyx_v_self->buf;
   __pyx_v_buf = __pyx_t_1;
 
-  /* "msgpack_rlp/_unpacker.pyx":406
+  /* "msgpack_rlp/_unpacker.pyx":405
  *             char* buf = self.buf
  *             char* new_buf
  *             Py_ssize_t head = self.buf_head             # <<<<<<<<<<<<<<
@@ -4524,7 +4524,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
   __pyx_t_2 = __pyx_v_self->buf_head;
   __pyx_v_head = __pyx_t_2;
 
-  /* "msgpack_rlp/_unpacker.pyx":407
+  /* "msgpack_rlp/_unpacker.pyx":406
  *             char* new_buf
  *             Py_ssize_t head = self.buf_head
  *             Py_ssize_t tail = self.buf_tail             # <<<<<<<<<<<<<<
@@ -4534,7 +4534,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
   __pyx_t_2 = __pyx_v_self->buf_tail;
   __pyx_v_tail = __pyx_t_2;
 
-  /* "msgpack_rlp/_unpacker.pyx":408
+  /* "msgpack_rlp/_unpacker.pyx":407
  *             Py_ssize_t head = self.buf_head
  *             Py_ssize_t tail = self.buf_tail
  *             Py_ssize_t buf_size = self.buf_size             # <<<<<<<<<<<<<<
@@ -4544,7 +4544,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
   __pyx_t_2 = __pyx_v_self->buf_size;
   __pyx_v_buf_size = __pyx_t_2;
 
-  /* "msgpack_rlp/_unpacker.pyx":411
+  /* "msgpack_rlp/_unpacker.pyx":410
  *             Py_ssize_t new_size
  * 
  *         if tail + _buf_len > buf_size:             # <<<<<<<<<<<<<<
@@ -4554,7 +4554,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
   __pyx_t_3 = (((__pyx_v_tail + __pyx_v__buf_len) > __pyx_v_buf_size) != 0);
   if (__pyx_t_3) {
 
-    /* "msgpack_rlp/_unpacker.pyx":412
+    /* "msgpack_rlp/_unpacker.pyx":411
  * 
  *         if tail + _buf_len > buf_size:
  *             if ((tail - head) + _buf_len) <= buf_size:             # <<<<<<<<<<<<<<
@@ -4564,7 +4564,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
     __pyx_t_3 = ((((__pyx_v_tail - __pyx_v_head) + __pyx_v__buf_len) <= __pyx_v_buf_size) != 0);
     if (__pyx_t_3) {
 
-      /* "msgpack_rlp/_unpacker.pyx":414
+      /* "msgpack_rlp/_unpacker.pyx":413
  *             if ((tail - head) + _buf_len) <= buf_size:
  *                 # move to front.
  *                 memmove(buf, buf + head, tail - head)             # <<<<<<<<<<<<<<
@@ -4573,7 +4573,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       memmove(__pyx_v_buf, (__pyx_v_buf + __pyx_v_head), (__pyx_v_tail - __pyx_v_head));
 
-      /* "msgpack_rlp/_unpacker.pyx":415
+      /* "msgpack_rlp/_unpacker.pyx":414
  *                 # move to front.
  *                 memmove(buf, buf + head, tail - head)
  *                 tail -= head             # <<<<<<<<<<<<<<
@@ -4582,7 +4582,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       __pyx_v_tail = (__pyx_v_tail - __pyx_v_head);
 
-      /* "msgpack_rlp/_unpacker.pyx":416
+      /* "msgpack_rlp/_unpacker.pyx":415
  *                 memmove(buf, buf + head, tail - head)
  *                 tail -= head
  *                 head = 0             # <<<<<<<<<<<<<<
@@ -4591,7 +4591,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       __pyx_v_head = 0;
 
-      /* "msgpack_rlp/_unpacker.pyx":412
+      /* "msgpack_rlp/_unpacker.pyx":411
  * 
  *         if tail + _buf_len > buf_size:
  *             if ((tail - head) + _buf_len) <= buf_size:             # <<<<<<<<<<<<<<
@@ -4601,7 +4601,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
       goto __pyx_L4;
     }
 
-    /* "msgpack_rlp/_unpacker.pyx":419
+    /* "msgpack_rlp/_unpacker.pyx":418
  *             else:
  *                 # expand buffer.
  *                 new_size = (tail-head) + _buf_len             # <<<<<<<<<<<<<<
@@ -4611,7 +4611,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
     /*else*/ {
       __pyx_v_new_size = ((__pyx_v_tail - __pyx_v_head) + __pyx_v__buf_len);
 
-      /* "msgpack_rlp/_unpacker.pyx":420
+      /* "msgpack_rlp/_unpacker.pyx":419
  *                 # expand buffer.
  *                 new_size = (tail-head) + _buf_len
  *                 if new_size > self.max_buffer_size:             # <<<<<<<<<<<<<<
@@ -4621,20 +4621,20 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
       __pyx_t_3 = ((__pyx_v_new_size > __pyx_v_self->max_buffer_size) != 0);
       if (__pyx_t_3) {
 
-        /* "msgpack_rlp/_unpacker.pyx":421
+        /* "msgpack_rlp/_unpacker.pyx":420
  *                 new_size = (tail-head) + _buf_len
  *                 if new_size > self.max_buffer_size:
  *                     raise BufferFull             # <<<<<<<<<<<<<<
  *                 new_size = min(new_size*2, self.max_buffer_size)
  *                 new_buf = <char*>PyMem_Malloc(new_size)
  */
-        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_BufferFull); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 421, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_BufferFull); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 420, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_Raise(__pyx_t_4, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __PYX_ERR(0, 421, __pyx_L1_error)
+        __PYX_ERR(0, 420, __pyx_L1_error)
 
-        /* "msgpack_rlp/_unpacker.pyx":420
+        /* "msgpack_rlp/_unpacker.pyx":419
  *                 # expand buffer.
  *                 new_size = (tail-head) + _buf_len
  *                 if new_size > self.max_buffer_size:             # <<<<<<<<<<<<<<
@@ -4643,7 +4643,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       }
 
-      /* "msgpack_rlp/_unpacker.pyx":422
+      /* "msgpack_rlp/_unpacker.pyx":421
  *                 if new_size > self.max_buffer_size:
  *                     raise BufferFull
  *                 new_size = min(new_size*2, self.max_buffer_size)             # <<<<<<<<<<<<<<
@@ -4659,7 +4659,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
       }
       __pyx_v_new_size = __pyx_t_6;
 
-      /* "msgpack_rlp/_unpacker.pyx":423
+      /* "msgpack_rlp/_unpacker.pyx":422
  *                     raise BufferFull
  *                 new_size = min(new_size*2, self.max_buffer_size)
  *                 new_buf = <char*>PyMem_Malloc(new_size)             # <<<<<<<<<<<<<<
@@ -4668,7 +4668,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       __pyx_v_new_buf = ((char *)PyMem_Malloc(__pyx_v_new_size));
 
-      /* "msgpack_rlp/_unpacker.pyx":424
+      /* "msgpack_rlp/_unpacker.pyx":423
  *                 new_size = min(new_size*2, self.max_buffer_size)
  *                 new_buf = <char*>PyMem_Malloc(new_size)
  *                 if new_buf == NULL:             # <<<<<<<<<<<<<<
@@ -4678,20 +4678,20 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
       __pyx_t_3 = ((__pyx_v_new_buf == NULL) != 0);
       if (__pyx_t_3) {
 
-        /* "msgpack_rlp/_unpacker.pyx":427
+        /* "msgpack_rlp/_unpacker.pyx":426
  *                     # self.buf still holds old buffer and will be freed during
  *                     # obj destruction
  *                     raise MemoryError("Unable to enlarge internal buffer.")             # <<<<<<<<<<<<<<
  *                 memcpy(new_buf, buf + head, tail - head)
  *                 PyMem_Free(buf)
  */
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 427, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 426, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_Raise(__pyx_t_4, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __PYX_ERR(0, 427, __pyx_L1_error)
+        __PYX_ERR(0, 426, __pyx_L1_error)
 
-        /* "msgpack_rlp/_unpacker.pyx":424
+        /* "msgpack_rlp/_unpacker.pyx":423
  *                 new_size = min(new_size*2, self.max_buffer_size)
  *                 new_buf = <char*>PyMem_Malloc(new_size)
  *                 if new_buf == NULL:             # <<<<<<<<<<<<<<
@@ -4700,7 +4700,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       }
 
-      /* "msgpack_rlp/_unpacker.pyx":428
+      /* "msgpack_rlp/_unpacker.pyx":427
  *                     # obj destruction
  *                     raise MemoryError("Unable to enlarge internal buffer.")
  *                 memcpy(new_buf, buf + head, tail - head)             # <<<<<<<<<<<<<<
@@ -4709,7 +4709,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       memcpy(__pyx_v_new_buf, (__pyx_v_buf + __pyx_v_head), (__pyx_v_tail - __pyx_v_head));
 
-      /* "msgpack_rlp/_unpacker.pyx":429
+      /* "msgpack_rlp/_unpacker.pyx":428
  *                     raise MemoryError("Unable to enlarge internal buffer.")
  *                 memcpy(new_buf, buf + head, tail - head)
  *                 PyMem_Free(buf)             # <<<<<<<<<<<<<<
@@ -4718,7 +4718,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       PyMem_Free(__pyx_v_buf);
 
-      /* "msgpack_rlp/_unpacker.pyx":431
+      /* "msgpack_rlp/_unpacker.pyx":430
  *                 PyMem_Free(buf)
  * 
  *                 buf = new_buf             # <<<<<<<<<<<<<<
@@ -4727,7 +4727,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       __pyx_v_buf = __pyx_v_new_buf;
 
-      /* "msgpack_rlp/_unpacker.pyx":432
+      /* "msgpack_rlp/_unpacker.pyx":431
  * 
  *                 buf = new_buf
  *                 buf_size = new_size             # <<<<<<<<<<<<<<
@@ -4736,7 +4736,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       __pyx_v_buf_size = __pyx_v_new_size;
 
-      /* "msgpack_rlp/_unpacker.pyx":433
+      /* "msgpack_rlp/_unpacker.pyx":432
  *                 buf = new_buf
  *                 buf_size = new_size
  *                 tail -= head             # <<<<<<<<<<<<<<
@@ -4745,7 +4745,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
       __pyx_v_tail = (__pyx_v_tail - __pyx_v_head);
 
-      /* "msgpack_rlp/_unpacker.pyx":434
+      /* "msgpack_rlp/_unpacker.pyx":433
  *                 buf_size = new_size
  *                 tail -= head
  *                 head = 0             # <<<<<<<<<<<<<<
@@ -4756,7 +4756,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
     }
     __pyx_L4:;
 
-    /* "msgpack_rlp/_unpacker.pyx":411
+    /* "msgpack_rlp/_unpacker.pyx":410
  *             Py_ssize_t new_size
  * 
  *         if tail + _buf_len > buf_size:             # <<<<<<<<<<<<<<
@@ -4765,7 +4765,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":436
+  /* "msgpack_rlp/_unpacker.pyx":435
  *                 head = 0
  * 
  *         memcpy(buf + tail, <char*>(_buf), _buf_len)             # <<<<<<<<<<<<<<
@@ -4774,7 +4774,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
   memcpy((__pyx_v_buf + __pyx_v_tail), ((char *)__pyx_v__buf), __pyx_v__buf_len);
 
-  /* "msgpack_rlp/_unpacker.pyx":437
+  /* "msgpack_rlp/_unpacker.pyx":436
  * 
  *         memcpy(buf + tail, <char*>(_buf), _buf_len)
  *         self.buf = buf             # <<<<<<<<<<<<<<
@@ -4783,7 +4783,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
   __pyx_v_self->buf = __pyx_v_buf;
 
-  /* "msgpack_rlp/_unpacker.pyx":438
+  /* "msgpack_rlp/_unpacker.pyx":437
  *         memcpy(buf + tail, <char*>(_buf), _buf_len)
  *         self.buf = buf
  *         self.buf_head = head             # <<<<<<<<<<<<<<
@@ -4792,7 +4792,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
   __pyx_v_self->buf_head = __pyx_v_head;
 
-  /* "msgpack_rlp/_unpacker.pyx":439
+  /* "msgpack_rlp/_unpacker.pyx":438
  *         self.buf = buf
  *         self.buf_head = head
  *         self.buf_size = buf_size             # <<<<<<<<<<<<<<
@@ -4801,7 +4801,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
   __pyx_v_self->buf_size = __pyx_v_buf_size;
 
-  /* "msgpack_rlp/_unpacker.pyx":440
+  /* "msgpack_rlp/_unpacker.pyx":439
  *         self.buf_head = head
  *         self.buf_size = buf_size
  *         self.buf_tail = tail + _buf_len             # <<<<<<<<<<<<<<
@@ -4810,7 +4810,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
  */
   __pyx_v_self->buf_tail = (__pyx_v_tail + __pyx_v__buf_len);
 
-  /* "msgpack_rlp/_unpacker.pyx":402
+  /* "msgpack_rlp/_unpacker.pyx":401
  *                 PyBuffer_Release(&pybuff)
  * 
  *     cdef append_buffer(self, void* _buf, Py_ssize_t _buf_len):             # <<<<<<<<<<<<<<
@@ -4831,7 +4831,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer(struct
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":442
+/* "msgpack_rlp/_unpacker.pyx":441
  *         self.buf_tail = tail + _buf_len
  * 
  *     cdef read_from_file(self):             # <<<<<<<<<<<<<<
@@ -4855,7 +4855,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
   char *__pyx_t_10;
   __Pyx_RefNannySetupContext("read_from_file", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":445
+  /* "msgpack_rlp/_unpacker.pyx":444
  *         next_bytes = self.file_like_read(
  *                 min(self.read_size,
  *                     self.max_buffer_size - (self.buf_tail - self.buf_head)             # <<<<<<<<<<<<<<
@@ -4864,7 +4864,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
  */
   __pyx_t_2 = (__pyx_v_self->max_buffer_size - (__pyx_v_self->buf_tail - __pyx_v_self->buf_head));
 
-  /* "msgpack_rlp/_unpacker.pyx":444
+  /* "msgpack_rlp/_unpacker.pyx":443
  *     cdef read_from_file(self):
  *         next_bytes = self.file_like_read(
  *                 min(self.read_size,             # <<<<<<<<<<<<<<
@@ -4873,7 +4873,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
  */
   __pyx_t_3 = __pyx_v_self->read_size;
 
-  /* "msgpack_rlp/_unpacker.pyx":445
+  /* "msgpack_rlp/_unpacker.pyx":444
  *         next_bytes = self.file_like_read(
  *                 min(self.read_size,
  *                     self.max_buffer_size - (self.buf_tail - self.buf_head)             # <<<<<<<<<<<<<<
@@ -4885,7 +4885,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
   } else {
     __pyx_t_4 = __pyx_t_3;
   }
-  __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 445, __pyx_L1_error)
+  __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 444, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_v_self->file_like_read);
   __pyx_t_6 = __pyx_v_self->file_like_read; __pyx_t_7 = NULL;
@@ -4899,14 +4899,14 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
     }
   }
   if (!__pyx_t_7) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 442, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 442, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4915,20 +4915,20 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 442, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 443, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 442, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7); __pyx_t_7 = NULL;
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 442, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
@@ -4937,30 +4937,30 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
   __pyx_v_next_bytes = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":447
+  /* "msgpack_rlp/_unpacker.pyx":446
  *                     self.max_buffer_size - (self.buf_tail - self.buf_head)
  *                     ))
  *         if next_bytes:             # <<<<<<<<<<<<<<
  *             self.append_buffer(PyBytes_AsString(next_bytes), PyBytes_Size(next_bytes))
  *         else:
  */
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_next_bytes); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 447, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_next_bytes); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 446, __pyx_L1_error)
   if (__pyx_t_9) {
 
-    /* "msgpack_rlp/_unpacker.pyx":448
+    /* "msgpack_rlp/_unpacker.pyx":447
  *                     ))
  *         if next_bytes:
  *             self.append_buffer(PyBytes_AsString(next_bytes), PyBytes_Size(next_bytes))             # <<<<<<<<<<<<<<
  *         else:
  *             self.file_like = None
  */
-    __pyx_t_10 = PyBytes_AsString(__pyx_v_next_bytes); if (unlikely(__pyx_t_10 == ((char *)NULL))) __PYX_ERR(0, 448, __pyx_L1_error)
-    __pyx_t_4 = PyBytes_Size(__pyx_v_next_bytes); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1L))) __PYX_ERR(0, 448, __pyx_L1_error)
-    __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->append_buffer(__pyx_v_self, __pyx_t_10, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 448, __pyx_L1_error)
+    __pyx_t_10 = PyBytes_AsString(__pyx_v_next_bytes); if (unlikely(__pyx_t_10 == ((char *)NULL))) __PYX_ERR(0, 447, __pyx_L1_error)
+    __pyx_t_4 = PyBytes_Size(__pyx_v_next_bytes); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1L))) __PYX_ERR(0, 447, __pyx_L1_error)
+    __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->append_buffer(__pyx_v_self, __pyx_t_10, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 447, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "msgpack_rlp/_unpacker.pyx":447
+    /* "msgpack_rlp/_unpacker.pyx":446
  *                     self.max_buffer_size - (self.buf_tail - self.buf_head)
  *                     ))
  *         if next_bytes:             # <<<<<<<<<<<<<<
@@ -4970,7 +4970,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
     goto __pyx_L3;
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":450
+  /* "msgpack_rlp/_unpacker.pyx":449
  *             self.append_buffer(PyBytes_AsString(next_bytes), PyBytes_Size(next_bytes))
  *         else:
  *             self.file_like = None             # <<<<<<<<<<<<<<
@@ -4986,7 +4986,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
   }
   __pyx_L3:;
 
-  /* "msgpack_rlp/_unpacker.pyx":442
+  /* "msgpack_rlp/_unpacker.pyx":441
  *         self.buf_tail = tail + _buf_len
  * 
  *     cdef read_from_file(self):             # <<<<<<<<<<<<<<
@@ -5012,7 +5012,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file(struc
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":452
+/* "msgpack_rlp/_unpacker.pyx":451
  *             self.file_like = None
  * 
  *     cdef object _unpack(self, execute_fn execute, object write_bytes, bint iter=0):             # <<<<<<<<<<<<<<
@@ -5050,7 +5050,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
     }
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":457
+  /* "msgpack_rlp/_unpacker.pyx":456
  *         cdef Py_ssize_t prev_head
  * 
  *         if write_bytes is not None:             # <<<<<<<<<<<<<<
@@ -5061,16 +5061,16 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "msgpack_rlp/_unpacker.pyx":458
+    /* "msgpack_rlp/_unpacker.pyx":457
  * 
  *         if write_bytes is not None:
  *             PyErr_WarnEx(DeprecationWarning, "`write_bytes` option is deprecated. Use `.tell()` instead.", 1)             # <<<<<<<<<<<<<<
  * 
  *         if self.buf_head >= self.buf_tail and self.file_like is not None:
  */
-    __pyx_t_3 = PyErr_WarnEx(__pyx_builtin_DeprecationWarning, ((char *)"`write_bytes` option is deprecated. Use `.tell()` instead."), 1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 458, __pyx_L1_error)
+    __pyx_t_3 = PyErr_WarnEx(__pyx_builtin_DeprecationWarning, ((char *)"`write_bytes` option is deprecated. Use `.tell()` instead."), 1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 457, __pyx_L1_error)
 
-    /* "msgpack_rlp/_unpacker.pyx":457
+    /* "msgpack_rlp/_unpacker.pyx":456
  *         cdef Py_ssize_t prev_head
  * 
  *         if write_bytes is not None:             # <<<<<<<<<<<<<<
@@ -5079,7 +5079,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":460
+  /* "msgpack_rlp/_unpacker.pyx":459
  *             PyErr_WarnEx(DeprecationWarning, "`write_bytes` option is deprecated. Use `.tell()` instead.", 1)
  * 
  *         if self.buf_head >= self.buf_tail and self.file_like is not None:             # <<<<<<<<<<<<<<
@@ -5098,18 +5098,18 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "msgpack_rlp/_unpacker.pyx":461
+    /* "msgpack_rlp/_unpacker.pyx":460
  * 
  *         if self.buf_head >= self.buf_tail and self.file_like is not None:
  *             self.read_from_file()             # <<<<<<<<<<<<<<
  * 
  *         while 1:
  */
-    __pyx_t_5 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->read_from_file(__pyx_v_self); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 461, __pyx_L1_error)
+    __pyx_t_5 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->read_from_file(__pyx_v_self); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 460, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "msgpack_rlp/_unpacker.pyx":460
+    /* "msgpack_rlp/_unpacker.pyx":459
  *             PyErr_WarnEx(DeprecationWarning, "`write_bytes` option is deprecated. Use `.tell()` instead.", 1)
  * 
  *         if self.buf_head >= self.buf_tail and self.file_like is not None:             # <<<<<<<<<<<<<<
@@ -5118,7 +5118,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":463
+  /* "msgpack_rlp/_unpacker.pyx":462
  *             self.read_from_file()
  * 
  *         while 1:             # <<<<<<<<<<<<<<
@@ -5127,7 +5127,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
   while (1) {
 
-    /* "msgpack_rlp/_unpacker.pyx":464
+    /* "msgpack_rlp/_unpacker.pyx":463
  * 
  *         while 1:
  *             prev_head = self.buf_head             # <<<<<<<<<<<<<<
@@ -5137,7 +5137,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
     __pyx_t_6 = __pyx_v_self->buf_head;
     __pyx_v_prev_head = __pyx_t_6;
 
-    /* "msgpack_rlp/_unpacker.pyx":465
+    /* "msgpack_rlp/_unpacker.pyx":464
  *         while 1:
  *             prev_head = self.buf_head
  *             if prev_head >= self.buf_tail:             # <<<<<<<<<<<<<<
@@ -5147,7 +5147,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
     __pyx_t_2 = ((__pyx_v_prev_head >= __pyx_v_self->buf_tail) != 0);
     if (__pyx_t_2) {
 
-      /* "msgpack_rlp/_unpacker.pyx":466
+      /* "msgpack_rlp/_unpacker.pyx":465
  *             prev_head = self.buf_head
  *             if prev_head >= self.buf_tail:
  *                 if iter:             # <<<<<<<<<<<<<<
@@ -5157,20 +5157,20 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
       __pyx_t_2 = (__pyx_v_iter != 0);
       if (__pyx_t_2) {
 
-        /* "msgpack_rlp/_unpacker.pyx":467
+        /* "msgpack_rlp/_unpacker.pyx":466
  *             if prev_head >= self.buf_tail:
  *                 if iter:
  *                     raise StopIteration("No more data to unpack.")             # <<<<<<<<<<<<<<
  *                 else:
  *                     raise OutOfData("No more data to unpack.")
  */
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_StopIteration, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 467, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_StopIteration, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 466, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_Raise(__pyx_t_5, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __PYX_ERR(0, 467, __pyx_L1_error)
+        __PYX_ERR(0, 466, __pyx_L1_error)
 
-        /* "msgpack_rlp/_unpacker.pyx":466
+        /* "msgpack_rlp/_unpacker.pyx":465
  *             prev_head = self.buf_head
  *             if prev_head >= self.buf_tail:
  *                 if iter:             # <<<<<<<<<<<<<<
@@ -5179,7 +5179,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
       }
 
-      /* "msgpack_rlp/_unpacker.pyx":469
+      /* "msgpack_rlp/_unpacker.pyx":468
  *                     raise StopIteration("No more data to unpack.")
  *                 else:
  *                     raise OutOfData("No more data to unpack.")             # <<<<<<<<<<<<<<
@@ -5187,17 +5187,17 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  *             try:
  */
       /*else*/ {
-        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_OutOfData); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 469, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_OutOfData); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 468, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 469, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 468, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_Raise(__pyx_t_7, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __PYX_ERR(0, 469, __pyx_L1_error)
+        __PYX_ERR(0, 468, __pyx_L1_error)
       }
 
-      /* "msgpack_rlp/_unpacker.pyx":465
+      /* "msgpack_rlp/_unpacker.pyx":464
  *         while 1:
  *             prev_head = self.buf_head
  *             if prev_head >= self.buf_tail:             # <<<<<<<<<<<<<<
@@ -5206,7 +5206,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
     }
 
-    /* "msgpack_rlp/_unpacker.pyx":471
+    /* "msgpack_rlp/_unpacker.pyx":470
  *                     raise OutOfData("No more data to unpack.")
  * 
  *             try:             # <<<<<<<<<<<<<<
@@ -5222,17 +5222,17 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
       __Pyx_XGOTREF(__pyx_t_10);
       /*try:*/ {
 
-        /* "msgpack_rlp/_unpacker.pyx":472
+        /* "msgpack_rlp/_unpacker.pyx":471
  * 
  *             try:
  *                 ret = execute(&self.ctx, self.buf, self.buf_tail, &self.buf_head)             # <<<<<<<<<<<<<<
  *                 self.stream_offset += self.buf_head - prev_head
  *                 if write_bytes is not None:
  */
-        __pyx_t_3 = __pyx_v_execute((&__pyx_v_self->ctx), __pyx_v_self->buf, __pyx_v_self->buf_tail, (&__pyx_v_self->buf_head)); if (unlikely(__pyx_t_3 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 472, __pyx_L11_error)
+        __pyx_t_3 = __pyx_v_execute((&__pyx_v_self->ctx), __pyx_v_self->buf, __pyx_v_self->buf_tail, (&__pyx_v_self->buf_head)); if (unlikely(__pyx_t_3 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 471, __pyx_L11_error)
         __pyx_v_ret = __pyx_t_3;
 
-        /* "msgpack_rlp/_unpacker.pyx":473
+        /* "msgpack_rlp/_unpacker.pyx":472
  *             try:
  *                 ret = execute(&self.ctx, self.buf, self.buf_tail, &self.buf_head)
  *                 self.stream_offset += self.buf_head - prev_head             # <<<<<<<<<<<<<<
@@ -5241,7 +5241,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
         __pyx_v_self->stream_offset = (__pyx_v_self->stream_offset + (__pyx_v_self->buf_head - __pyx_v_prev_head));
 
-        /* "msgpack_rlp/_unpacker.pyx":474
+        /* "msgpack_rlp/_unpacker.pyx":473
  *                 ret = execute(&self.ctx, self.buf, self.buf_tail, &self.buf_head)
  *                 self.stream_offset += self.buf_head - prev_head
  *                 if write_bytes is not None:             # <<<<<<<<<<<<<<
@@ -5252,14 +5252,14 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
         __pyx_t_4 = (__pyx_t_2 != 0);
         if (__pyx_t_4) {
 
-          /* "msgpack_rlp/_unpacker.pyx":475
+          /* "msgpack_rlp/_unpacker.pyx":474
  *                 self.stream_offset += self.buf_head - prev_head
  *                 if write_bytes is not None:
  *                     write_bytes(PyBytes_FromStringAndSize(self.buf + prev_head, self.buf_head - prev_head))             # <<<<<<<<<<<<<<
  * 
  *                 if ret == 1:
  */
-          __pyx_t_5 = PyBytes_FromStringAndSize((__pyx_v_self->buf + __pyx_v_prev_head), (__pyx_v_self->buf_head - __pyx_v_prev_head)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 475, __pyx_L11_error)
+          __pyx_t_5 = PyBytes_FromStringAndSize((__pyx_v_self->buf + __pyx_v_prev_head), (__pyx_v_self->buf_head - __pyx_v_prev_head)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 474, __pyx_L11_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_INCREF(__pyx_v_write_bytes);
           __pyx_t_11 = __pyx_v_write_bytes; __pyx_t_12 = NULL;
@@ -5273,14 +5273,14 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
             }
           }
           if (!__pyx_t_12) {
-            __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 475, __pyx_L11_error)
+            __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 474, __pyx_L11_error)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_GOTREF(__pyx_t_7);
           } else {
             #if CYTHON_FAST_PYCALL
             if (PyFunction_Check(__pyx_t_11)) {
               PyObject *__pyx_temp[2] = {__pyx_t_12, __pyx_t_5};
-              __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 475, __pyx_L11_error)
+              __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 474, __pyx_L11_error)
               __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
               __Pyx_GOTREF(__pyx_t_7);
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -5289,20 +5289,20 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
             #if CYTHON_FAST_PYCCALL
             if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
               PyObject *__pyx_temp[2] = {__pyx_t_12, __pyx_t_5};
-              __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 475, __pyx_L11_error)
+              __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 474, __pyx_L11_error)
               __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
               __Pyx_GOTREF(__pyx_t_7);
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             } else
             #endif
             {
-              __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 475, __pyx_L11_error)
+              __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 474, __pyx_L11_error)
               __Pyx_GOTREF(__pyx_t_13);
               __Pyx_GIVEREF(__pyx_t_12); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_12); __pyx_t_12 = NULL;
               __Pyx_GIVEREF(__pyx_t_5);
               PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_t_5);
               __pyx_t_5 = 0;
-              __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_13, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 475, __pyx_L11_error)
+              __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_13, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 474, __pyx_L11_error)
               __Pyx_GOTREF(__pyx_t_7);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             }
@@ -5310,7 +5310,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-          /* "msgpack_rlp/_unpacker.pyx":474
+          /* "msgpack_rlp/_unpacker.pyx":473
  *                 ret = execute(&self.ctx, self.buf, self.buf_tail, &self.buf_head)
  *                 self.stream_offset += self.buf_head - prev_head
  *                 if write_bytes is not None:             # <<<<<<<<<<<<<<
@@ -5319,7 +5319,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
         }
 
-        /* "msgpack_rlp/_unpacker.pyx":477
+        /* "msgpack_rlp/_unpacker.pyx":476
  *                     write_bytes(PyBytes_FromStringAndSize(self.buf + prev_head, self.buf_head - prev_head))
  * 
  *                 if ret == 1:             # <<<<<<<<<<<<<<
@@ -5329,19 +5329,19 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
         switch (__pyx_v_ret) {
           case 1:
 
-          /* "msgpack_rlp/_unpacker.pyx":478
+          /* "msgpack_rlp/_unpacker.pyx":477
  * 
  *                 if ret == 1:
  *                     obj = unpack_data(&self.ctx)             # <<<<<<<<<<<<<<
  *                     unpack_init(&self.ctx)
  *                     return obj
  */
-          __pyx_t_7 = unpack_data((&__pyx_v_self->ctx)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 478, __pyx_L11_error)
+          __pyx_t_7 = unpack_data((&__pyx_v_self->ctx)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 477, __pyx_L11_error)
           __Pyx_GOTREF(__pyx_t_7);
           __pyx_v_obj = __pyx_t_7;
           __pyx_t_7 = 0;
 
-          /* "msgpack_rlp/_unpacker.pyx":479
+          /* "msgpack_rlp/_unpacker.pyx":478
  *                 if ret == 1:
  *                     obj = unpack_data(&self.ctx)
  *                     unpack_init(&self.ctx)             # <<<<<<<<<<<<<<
@@ -5350,7 +5350,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
           unpack_init((&__pyx_v_self->ctx));
 
-          /* "msgpack_rlp/_unpacker.pyx":480
+          /* "msgpack_rlp/_unpacker.pyx":479
  *                     obj = unpack_data(&self.ctx)
  *                     unpack_init(&self.ctx)
  *                     return obj             # <<<<<<<<<<<<<<
@@ -5362,7 +5362,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
           __pyx_r = __pyx_v_obj;
           goto __pyx_L15_try_return;
 
-          /* "msgpack_rlp/_unpacker.pyx":477
+          /* "msgpack_rlp/_unpacker.pyx":476
  *                     write_bytes(PyBytes_FromStringAndSize(self.buf + prev_head, self.buf_head - prev_head))
  * 
  *                 if ret == 1:             # <<<<<<<<<<<<<<
@@ -5371,7 +5371,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
           break;
 
-          /* "msgpack_rlp/_unpacker.pyx":481
+          /* "msgpack_rlp/_unpacker.pyx":480
  *                     unpack_init(&self.ctx)
  *                     return obj
  *                 elif ret == 0:             # <<<<<<<<<<<<<<
@@ -5380,7 +5380,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
           case 0:
 
-          /* "msgpack_rlp/_unpacker.pyx":482
+          /* "msgpack_rlp/_unpacker.pyx":481
  *                     return obj
  *                 elif ret == 0:
  *                     if self.file_like is not None:             # <<<<<<<<<<<<<<
@@ -5391,18 +5391,18 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
           __pyx_t_2 = (__pyx_t_4 != 0);
           if (__pyx_t_2) {
 
-            /* "msgpack_rlp/_unpacker.pyx":483
+            /* "msgpack_rlp/_unpacker.pyx":482
  *                 elif ret == 0:
  *                     if self.file_like is not None:
  *                         self.read_from_file()             # <<<<<<<<<<<<<<
  *                         continue
  *                     if iter:
  */
-            __pyx_t_7 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->read_from_file(__pyx_v_self); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 483, __pyx_L11_error)
+            __pyx_t_7 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->read_from_file(__pyx_v_self); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 482, __pyx_L11_error)
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-            /* "msgpack_rlp/_unpacker.pyx":484
+            /* "msgpack_rlp/_unpacker.pyx":483
  *                     if self.file_like is not None:
  *                         self.read_from_file()
  *                         continue             # <<<<<<<<<<<<<<
@@ -5411,7 +5411,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
             goto __pyx_L17_try_continue;
 
-            /* "msgpack_rlp/_unpacker.pyx":482
+            /* "msgpack_rlp/_unpacker.pyx":481
  *                     return obj
  *                 elif ret == 0:
  *                     if self.file_like is not None:             # <<<<<<<<<<<<<<
@@ -5420,7 +5420,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
           }
 
-          /* "msgpack_rlp/_unpacker.pyx":485
+          /* "msgpack_rlp/_unpacker.pyx":484
  *                         self.read_from_file()
  *                         continue
  *                     if iter:             # <<<<<<<<<<<<<<
@@ -5430,20 +5430,20 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
           __pyx_t_2 = (__pyx_v_iter != 0);
           if (__pyx_t_2) {
 
-            /* "msgpack_rlp/_unpacker.pyx":486
+            /* "msgpack_rlp/_unpacker.pyx":485
  *                         continue
  *                     if iter:
  *                         raise StopIteration("No more data to unpack.")             # <<<<<<<<<<<<<<
  *                     else:
  *                         raise OutOfData("No more data to unpack.")
  */
-            __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_StopIteration, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 486, __pyx_L11_error)
+            __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_StopIteration, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 485, __pyx_L11_error)
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_Raise(__pyx_t_7, 0, 0, 0);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-            __PYX_ERR(0, 486, __pyx_L11_error)
+            __PYX_ERR(0, 485, __pyx_L11_error)
 
-            /* "msgpack_rlp/_unpacker.pyx":485
+            /* "msgpack_rlp/_unpacker.pyx":484
  *                         self.read_from_file()
  *                         continue
  *                     if iter:             # <<<<<<<<<<<<<<
@@ -5452,7 +5452,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  */
           }
 
-          /* "msgpack_rlp/_unpacker.pyx":488
+          /* "msgpack_rlp/_unpacker.pyx":487
  *                         raise StopIteration("No more data to unpack.")
  *                     else:
  *                         raise OutOfData("No more data to unpack.")             # <<<<<<<<<<<<<<
@@ -5460,17 +5460,17 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
  *                     raise UnpackValueError("Unpack failed: error = %d" % (ret,))
  */
           /*else*/ {
-            __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_OutOfData); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 488, __pyx_L11_error)
+            __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_OutOfData); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 487, __pyx_L11_error)
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 488, __pyx_L11_error)
+            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 487, __pyx_L11_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __Pyx_Raise(__pyx_t_11, 0, 0, 0);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __PYX_ERR(0, 488, __pyx_L11_error)
+            __PYX_ERR(0, 487, __pyx_L11_error)
           }
 
-          /* "msgpack_rlp/_unpacker.pyx":481
+          /* "msgpack_rlp/_unpacker.pyx":480
  *                     unpack_init(&self.ctx)
  *                     return obj
  *                 elif ret == 0:             # <<<<<<<<<<<<<<
@@ -5480,23 +5480,23 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
           break;
           default:
 
-          /* "msgpack_rlp/_unpacker.pyx":490
+          /* "msgpack_rlp/_unpacker.pyx":489
  *                         raise OutOfData("No more data to unpack.")
  *                 else:
  *                     raise UnpackValueError("Unpack failed: error = %d" % (ret,))             # <<<<<<<<<<<<<<
  *             except ValueError as e:
  *                 raise UnpackValueError(e)
  */
-          __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 490, __pyx_L11_error)
+          __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 489, __pyx_L11_error)
           __Pyx_GOTREF(__pyx_t_7);
-          __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 490, __pyx_L11_error)
+          __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 489, __pyx_L11_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 490, __pyx_L11_error)
+          __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 489, __pyx_L11_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_GIVEREF(__pyx_t_13);
           PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_13);
           __pyx_t_13 = 0;
-          __pyx_t_13 = __Pyx_PyString_Format(__pyx_kp_s_Unpack_failed_error_d, __pyx_t_5); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 490, __pyx_L11_error)
+          __pyx_t_13 = __Pyx_PyString_Format(__pyx_kp_s_Unpack_failed_error_d, __pyx_t_5); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 489, __pyx_L11_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = NULL;
@@ -5510,14 +5510,14 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
             }
           }
           if (!__pyx_t_5) {
-            __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_13); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 490, __pyx_L11_error)
+            __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_13); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 489, __pyx_L11_error)
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             __Pyx_GOTREF(__pyx_t_11);
           } else {
             #if CYTHON_FAST_PYCALL
             if (PyFunction_Check(__pyx_t_7)) {
               PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_13};
-              __pyx_t_11 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 490, __pyx_L11_error)
+              __pyx_t_11 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 489, __pyx_L11_error)
               __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
@@ -5526,20 +5526,20 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
             #if CYTHON_FAST_PYCCALL
             if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
               PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_13};
-              __pyx_t_11 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 490, __pyx_L11_error)
+              __pyx_t_11 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 489, __pyx_L11_error)
               __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             } else
             #endif
             {
-              __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 490, __pyx_L11_error)
+              __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 489, __pyx_L11_error)
               __Pyx_GOTREF(__pyx_t_12);
               __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_5); __pyx_t_5 = NULL;
               __Pyx_GIVEREF(__pyx_t_13);
               PyTuple_SET_ITEM(__pyx_t_12, 0+1, __pyx_t_13);
               __pyx_t_13 = 0;
-              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_12, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 490, __pyx_L11_error)
+              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_12, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 489, __pyx_L11_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
             }
@@ -5547,11 +5547,11 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
           __Pyx_Raise(__pyx_t_11, 0, 0, 0);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __PYX_ERR(0, 490, __pyx_L11_error)
+          __PYX_ERR(0, 489, __pyx_L11_error)
           break;
         }
 
-        /* "msgpack_rlp/_unpacker.pyx":471
+        /* "msgpack_rlp/_unpacker.pyx":470
  *                     raise OutOfData("No more data to unpack.")
  * 
  *             try:             # <<<<<<<<<<<<<<
@@ -5566,7 +5566,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "msgpack_rlp/_unpacker.pyx":491
+      /* "msgpack_rlp/_unpacker.pyx":490
  *                 else:
  *                     raise UnpackValueError("Unpack failed: error = %d" % (ret,))
  *             except ValueError as e:             # <<<<<<<<<<<<<<
@@ -5576,21 +5576,21 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
       __pyx_t_3 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ValueError);
       if (__pyx_t_3) {
         __Pyx_AddTraceback("msgpack_rlp._unpacker.Unpacker._unpack", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_11, &__pyx_t_7, &__pyx_t_12) < 0) __PYX_ERR(0, 491, __pyx_L13_except_error)
+        if (__Pyx_GetException(&__pyx_t_11, &__pyx_t_7, &__pyx_t_12) < 0) __PYX_ERR(0, 490, __pyx_L13_except_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_INCREF(__pyx_t_7);
         __pyx_v_e = __pyx_t_7;
 
-        /* "msgpack_rlp/_unpacker.pyx":492
+        /* "msgpack_rlp/_unpacker.pyx":491
  *                     raise UnpackValueError("Unpack failed: error = %d" % (ret,))
  *             except ValueError as e:
  *                 raise UnpackValueError(e)             # <<<<<<<<<<<<<<
  * 
  *     def read_bytes(self, Py_ssize_t nbytes):
  */
-        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 492, __pyx_L13_except_error)
+        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_UnpackValueError); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 491, __pyx_L13_except_error)
         __Pyx_GOTREF(__pyx_t_5);
         __pyx_t_14 = NULL;
         if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -5603,13 +5603,13 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
           }
         }
         if (!__pyx_t_14) {
-          __pyx_t_13 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_e); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 492, __pyx_L13_except_error)
+          __pyx_t_13 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_e); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 491, __pyx_L13_except_error)
           __Pyx_GOTREF(__pyx_t_13);
         } else {
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_5)) {
             PyObject *__pyx_temp[2] = {__pyx_t_14, __pyx_v_e};
-            __pyx_t_13 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 492, __pyx_L13_except_error)
+            __pyx_t_13 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 491, __pyx_L13_except_error)
             __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
             __Pyx_GOTREF(__pyx_t_13);
           } else
@@ -5617,19 +5617,19 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
             PyObject *__pyx_temp[2] = {__pyx_t_14, __pyx_v_e};
-            __pyx_t_13 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 492, __pyx_L13_except_error)
+            __pyx_t_13 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 491, __pyx_L13_except_error)
             __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
             __Pyx_GOTREF(__pyx_t_13);
           } else
           #endif
           {
-            __pyx_t_15 = PyTuple_New(1+1); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 492, __pyx_L13_except_error)
+            __pyx_t_15 = PyTuple_New(1+1); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 491, __pyx_L13_except_error)
             __Pyx_GOTREF(__pyx_t_15);
             __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_t_14); __pyx_t_14 = NULL;
             __Pyx_INCREF(__pyx_v_e);
             __Pyx_GIVEREF(__pyx_v_e);
             PyTuple_SET_ITEM(__pyx_t_15, 0+1, __pyx_v_e);
-            __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_15, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 492, __pyx_L13_except_error)
+            __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_15, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 491, __pyx_L13_except_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
           }
@@ -5637,12 +5637,12 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_Raise(__pyx_t_13, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __PYX_ERR(0, 492, __pyx_L13_except_error)
+        __PYX_ERR(0, 491, __pyx_L13_except_error)
       }
       goto __pyx_L13_except_error;
       __pyx_L13_except_error:;
 
-      /* "msgpack_rlp/_unpacker.pyx":471
+      /* "msgpack_rlp/_unpacker.pyx":470
  *                     raise OutOfData("No more data to unpack.")
  * 
  *             try:             # <<<<<<<<<<<<<<
@@ -5670,7 +5670,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
     __pyx_L7_continue:;
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":452
+  /* "msgpack_rlp/_unpacker.pyx":451
  *             self.file_like = None
  * 
  *     cdef object _unpack(self, execute_fn execute, object write_bytes, bint iter=0):             # <<<<<<<<<<<<<<
@@ -5699,7 +5699,7 @@ static PyObject *__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack(struct __pyx
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":494
+/* "msgpack_rlp/_unpacker.pyx":493
  *                 raise UnpackValueError(e)
  * 
  *     def read_bytes(self, Py_ssize_t nbytes):             # <<<<<<<<<<<<<<
@@ -5716,7 +5716,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_9read_bytes(PyObjec
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("read_bytes (wrapper)", 0);
   assert(__pyx_arg_nbytes); {
-    __pyx_v_nbytes = __Pyx_PyIndex_AsSsize_t(__pyx_arg_nbytes); if (unlikely((__pyx_v_nbytes == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 494, __pyx_L3_error)
+    __pyx_v_nbytes = __Pyx_PyIndex_AsSsize_t(__pyx_arg_nbytes); if (unlikely((__pyx_v_nbytes == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 493, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5749,7 +5749,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
   PyObject *__pyx_t_11 = NULL;
   __Pyx_RefNannySetupContext("read_bytes", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":497
+  /* "msgpack_rlp/_unpacker.pyx":496
  *         """Read a specified number of raw bytes from the stream"""
  *         cdef Py_ssize_t nread
  *         nread = min(self.buf_tail - self.buf_head, nbytes)             # <<<<<<<<<<<<<<
@@ -5765,19 +5765,19 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
   }
   __pyx_v_nread = __pyx_t_3;
 
-  /* "msgpack_rlp/_unpacker.pyx":498
+  /* "msgpack_rlp/_unpacker.pyx":497
  *         cdef Py_ssize_t nread
  *         nread = min(self.buf_tail - self.buf_head, nbytes)
  *         ret = PyBytes_FromStringAndSize(self.buf + self.buf_head, nread)             # <<<<<<<<<<<<<<
  *         self.buf_head += nread
  *         if len(ret) < nbytes and self.file_like is not None:
  */
-  __pyx_t_4 = PyBytes_FromStringAndSize((__pyx_v_self->buf + __pyx_v_self->buf_head), __pyx_v_nread); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 498, __pyx_L1_error)
+  __pyx_t_4 = PyBytes_FromStringAndSize((__pyx_v_self->buf + __pyx_v_self->buf_head), __pyx_v_nread); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_v_ret = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":499
+  /* "msgpack_rlp/_unpacker.pyx":498
  *         nread = min(self.buf_tail - self.buf_head, nbytes)
  *         ret = PyBytes_FromStringAndSize(self.buf + self.buf_head, nread)
  *         self.buf_head += nread             # <<<<<<<<<<<<<<
@@ -5786,14 +5786,14 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
  */
   __pyx_v_self->buf_head = (__pyx_v_self->buf_head + __pyx_v_nread);
 
-  /* "msgpack_rlp/_unpacker.pyx":500
+  /* "msgpack_rlp/_unpacker.pyx":499
  *         ret = PyBytes_FromStringAndSize(self.buf + self.buf_head, nread)
  *         self.buf_head += nread
  *         if len(ret) < nbytes and self.file_like is not None:             # <<<<<<<<<<<<<<
  *             ret += self.file_like.read(nbytes - len(ret))
  *         return ret
  */
-  __pyx_t_3 = PyObject_Length(__pyx_v_ret); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 500, __pyx_L1_error)
+  __pyx_t_3 = PyObject_Length(__pyx_v_ret); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 499, __pyx_L1_error)
   __pyx_t_6 = ((__pyx_t_3 < __pyx_v_nbytes) != 0);
   if (__pyx_t_6) {
   } else {
@@ -5806,17 +5806,17 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "msgpack_rlp/_unpacker.pyx":501
+    /* "msgpack_rlp/_unpacker.pyx":500
  *         self.buf_head += nread
  *         if len(ret) < nbytes and self.file_like is not None:
  *             ret += self.file_like.read(nbytes - len(ret))             # <<<<<<<<<<<<<<
  *         return ret
  * 
  */
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->file_like, __pyx_n_s_read); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 501, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->file_like, __pyx_n_s_read); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 500, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_3 = PyObject_Length(__pyx_v_ret); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 501, __pyx_L1_error)
-    __pyx_t_9 = PyInt_FromSsize_t((__pyx_v_nbytes - __pyx_t_3)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 501, __pyx_L1_error)
+    __pyx_t_3 = PyObject_Length(__pyx_v_ret); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 500, __pyx_L1_error)
+    __pyx_t_9 = PyInt_FromSsize_t((__pyx_v_nbytes - __pyx_t_3)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 500, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_10 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
@@ -5829,14 +5829,14 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
       }
     }
     if (!__pyx_t_10) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 501, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 500, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_GOTREF(__pyx_t_4);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_8)) {
         PyObject *__pyx_temp[2] = {__pyx_t_10, __pyx_t_9};
-        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 501, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 500, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -5845,32 +5845,32 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_8)) {
         PyObject *__pyx_temp[2] = {__pyx_t_10, __pyx_t_9};
-        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 501, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 500, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       } else
       #endif
       {
-        __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 501, __pyx_L1_error)
+        __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 500, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_10); __pyx_t_10 = NULL;
         __Pyx_GIVEREF(__pyx_t_9);
         PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_9);
         __pyx_t_9 = 0;
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_11, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 501, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_11, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 500, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = PyNumber_InPlaceAdd(__pyx_v_ret, __pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 501, __pyx_L1_error)
+    __pyx_t_8 = PyNumber_InPlaceAdd(__pyx_v_ret, __pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 500, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF_SET(__pyx_v_ret, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "msgpack_rlp/_unpacker.pyx":500
+    /* "msgpack_rlp/_unpacker.pyx":499
  *         ret = PyBytes_FromStringAndSize(self.buf + self.buf_head, nread)
  *         self.buf_head += nread
  *         if len(ret) < nbytes and self.file_like is not None:             # <<<<<<<<<<<<<<
@@ -5879,7 +5879,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
  */
   }
 
-  /* "msgpack_rlp/_unpacker.pyx":502
+  /* "msgpack_rlp/_unpacker.pyx":501
  *         if len(ret) < nbytes and self.file_like is not None:
  *             ret += self.file_like.read(nbytes - len(ret))
  *         return ret             # <<<<<<<<<<<<<<
@@ -5891,7 +5891,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":494
+  /* "msgpack_rlp/_unpacker.pyx":493
  *                 raise UnpackValueError(e)
  * 
  *     def read_bytes(self, Py_ssize_t nbytes):             # <<<<<<<<<<<<<<
@@ -5915,7 +5915,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_8read_bytes(struct 
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":504
+/* "msgpack_rlp/_unpacker.pyx":503
  *         return ret
  * 
  *     def unpack(self, object write_bytes=None):             # <<<<<<<<<<<<<<
@@ -5953,7 +5953,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_11unpack(PyObject *
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unpack") < 0)) __PYX_ERR(0, 504, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unpack") < 0)) __PYX_ERR(0, 503, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5967,7 +5967,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_11unpack(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("unpack", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 504, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("unpack", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 503, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("msgpack_rlp._unpacker.Unpacker.unpack", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5986,7 +5986,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_10unpack(struct __p
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("unpack", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":512
+  /* "msgpack_rlp/_unpacker.pyx":511
  *         Raises `OutOfData` when there are no more bytes to unpack.
  *         """
  *         return self._unpack(unpack_construct, write_bytes)             # <<<<<<<<<<<<<<
@@ -5994,13 +5994,13 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_10unpack(struct __p
  *     def skip(self, object write_bytes=None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, unpack_construct, __pyx_v_write_bytes, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 512, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, unpack_construct, __pyx_v_write_bytes, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 511, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":504
+  /* "msgpack_rlp/_unpacker.pyx":503
  *         return ret
  * 
  *     def unpack(self, object write_bytes=None):             # <<<<<<<<<<<<<<
@@ -6019,7 +6019,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_10unpack(struct __p
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":514
+/* "msgpack_rlp/_unpacker.pyx":513
  *         return self._unpack(unpack_construct, write_bytes)
  * 
  *     def skip(self, object write_bytes=None):             # <<<<<<<<<<<<<<
@@ -6057,7 +6057,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_13skip(PyObject *__
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "skip") < 0)) __PYX_ERR(0, 514, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "skip") < 0)) __PYX_ERR(0, 513, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6071,7 +6071,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_13skip(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("skip", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 514, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("skip", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 513, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("msgpack_rlp._unpacker.Unpacker.skip", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6090,7 +6090,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_12skip(struct __pyx
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("skip", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":522
+  /* "msgpack_rlp/_unpacker.pyx":521
  *         Raises `OutOfData` when there are no more bytes to unpack.
  *         """
  *         return self._unpack(unpack_skip, write_bytes)             # <<<<<<<<<<<<<<
@@ -6098,13 +6098,13 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_12skip(struct __pyx
  *     def read_array_header(self, object write_bytes=None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, unpack_skip, __pyx_v_write_bytes, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 522, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, unpack_skip, __pyx_v_write_bytes, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 521, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":514
+  /* "msgpack_rlp/_unpacker.pyx":513
  *         return self._unpack(unpack_construct, write_bytes)
  * 
  *     def skip(self, object write_bytes=None):             # <<<<<<<<<<<<<<
@@ -6123,7 +6123,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_12skip(struct __pyx
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":524
+/* "msgpack_rlp/_unpacker.pyx":523
  *         return self._unpack(unpack_skip, write_bytes)
  * 
  *     def read_array_header(self, object write_bytes=None):             # <<<<<<<<<<<<<<
@@ -6161,7 +6161,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_15read_array_header
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "read_array_header") < 0)) __PYX_ERR(0, 524, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "read_array_header") < 0)) __PYX_ERR(0, 523, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6175,7 +6175,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_15read_array_header
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("read_array_header", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 524, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("read_array_header", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 523, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("msgpack_rlp._unpacker.Unpacker.read_array_header", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6194,7 +6194,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_14read_array_header
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("read_array_header", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":530
+  /* "msgpack_rlp/_unpacker.pyx":529
  *         Raises `OutOfData` when there are no more bytes to unpack.
  *         """
  *         return self._unpack(read_array_header, write_bytes)             # <<<<<<<<<<<<<<
@@ -6202,13 +6202,13 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_14read_array_header
  *     def read_map_header(self, object write_bytes=None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, read_array_header, __pyx_v_write_bytes, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 530, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, read_array_header, __pyx_v_write_bytes, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 529, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":524
+  /* "msgpack_rlp/_unpacker.pyx":523
  *         return self._unpack(unpack_skip, write_bytes)
  * 
  *     def read_array_header(self, object write_bytes=None):             # <<<<<<<<<<<<<<
@@ -6227,7 +6227,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_14read_array_header
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":532
+/* "msgpack_rlp/_unpacker.pyx":531
  *         return self._unpack(read_array_header, write_bytes)
  * 
  *     def read_map_header(self, object write_bytes=None):             # <<<<<<<<<<<<<<
@@ -6265,7 +6265,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_17read_map_header(P
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "read_map_header") < 0)) __PYX_ERR(0, 532, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "read_map_header") < 0)) __PYX_ERR(0, 531, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6279,7 +6279,7 @@ static PyObject *__pyx_pw_11msgpack_rlp_9_unpacker_8Unpacker_17read_map_header(P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("read_map_header", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 532, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("read_map_header", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 531, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("msgpack_rlp._unpacker.Unpacker.read_map_header", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6298,7 +6298,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_16read_map_header(s
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("read_map_header", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":538
+  /* "msgpack_rlp/_unpacker.pyx":537
  *         Raises `OutOfData` when there are no more bytes to unpack.
  *         """
  *         return self._unpack(read_map_header, write_bytes)             # <<<<<<<<<<<<<<
@@ -6306,13 +6306,13 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_16read_map_header(s
  *     def tell(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, read_map_header, __pyx_v_write_bytes, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 538, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, read_map_header, __pyx_v_write_bytes, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 537, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":532
+  /* "msgpack_rlp/_unpacker.pyx":531
  *         return self._unpack(read_array_header, write_bytes)
  * 
  *     def read_map_header(self, object write_bytes=None):             # <<<<<<<<<<<<<<
@@ -6331,7 +6331,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_16read_map_header(s
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":540
+/* "msgpack_rlp/_unpacker.pyx":539
  *         return self._unpack(read_map_header, write_bytes)
  * 
  *     def tell(self):             # <<<<<<<<<<<<<<
@@ -6359,7 +6359,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_18tell(struct __pyx
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("tell", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":541
+  /* "msgpack_rlp/_unpacker.pyx":540
  * 
  *     def tell(self):
  *         return self.stream_offset             # <<<<<<<<<<<<<<
@@ -6367,13 +6367,13 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_18tell(struct __pyx
  *     def __iter__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_PY_LONG_LONG(__pyx_v_self->stream_offset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 541, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_PY_LONG_LONG(__pyx_v_self->stream_offset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 540, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":540
+  /* "msgpack_rlp/_unpacker.pyx":539
  *         return self._unpack(read_map_header, write_bytes)
  * 
  *     def tell(self):             # <<<<<<<<<<<<<<
@@ -6392,7 +6392,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_18tell(struct __pyx
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":543
+/* "msgpack_rlp/_unpacker.pyx":542
  *         return self.stream_offset
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -6418,7 +6418,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_20__iter__(struct _
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__iter__", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":544
+  /* "msgpack_rlp/_unpacker.pyx":543
  * 
  *     def __iter__(self):
  *         return self             # <<<<<<<<<<<<<<
@@ -6430,7 +6430,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_20__iter__(struct _
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":543
+  /* "msgpack_rlp/_unpacker.pyx":542
  *         return self.stream_offset
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -6445,7 +6445,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_20__iter__(struct _
   return __pyx_r;
 }
 
-/* "msgpack_rlp/_unpacker.pyx":546
+/* "msgpack_rlp/_unpacker.pyx":545
  *         return self
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -6473,7 +6473,7 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_22__next__(struct _
   struct __pyx_opt_args_11msgpack_rlp_9_unpacker_8Unpacker__unpack __pyx_t_2;
   __Pyx_RefNannySetupContext("__next__", 0);
 
-  /* "msgpack_rlp/_unpacker.pyx":547
+  /* "msgpack_rlp/_unpacker.pyx":546
  * 
  *     def __next__(self):
  *         return self._unpack(unpack_construct, None, 1)             # <<<<<<<<<<<<<<
@@ -6483,13 +6483,13 @@ static PyObject *__pyx_pf_11msgpack_rlp_9_unpacker_8Unpacker_22__next__(struct _
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.iter = 1;
-  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, unpack_construct, Py_None, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 547, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_11msgpack_rlp_9_unpacker_Unpacker *)__pyx_v_self->__pyx_vtab)->_unpack(__pyx_v_self, unpack_construct, Py_None, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "msgpack_rlp/_unpacker.pyx":546
+  /* "msgpack_rlp/_unpacker.pyx":545
  *         return self
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -6932,14 +6932,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 99, __pyx_L1_error)
   __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) __PYX_ERR(0, 128, __pyx_L1_error)
-  __pyx_builtin_BufferError = __Pyx_GetBuiltinName(__pyx_n_s_BufferError); if (!__pyx_builtin_BufferError) __PYX_ERR(0, 143, __pyx_L1_error)
-  __pyx_builtin_RuntimeWarning = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeWarning); if (!__pyx_builtin_RuntimeWarning) __PYX_ERR(0, 159, __pyx_L1_error)
-  __pyx_builtin_PendingDeprecationWarning = __Pyx_GetBuiltinName(__pyx_n_s_PendingDeprecationWarning); if (!__pyx_builtin_PendingDeprecationWarning) __PYX_ERR(0, 195, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 357, __pyx_L1_error)
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 364, __pyx_L1_error)
-  __pyx_builtin_AssertionError = __Pyx_GetBuiltinName(__pyx_n_s_AssertionError); if (!__pyx_builtin_AssertionError) __PYX_ERR(0, 392, __pyx_L1_error)
-  __pyx_builtin_DeprecationWarning = __Pyx_GetBuiltinName(__pyx_n_s_DeprecationWarning); if (!__pyx_builtin_DeprecationWarning) __PYX_ERR(0, 458, __pyx_L1_error)
-  __pyx_builtin_StopIteration = __Pyx_GetBuiltinName(__pyx_n_s_StopIteration); if (!__pyx_builtin_StopIteration) __PYX_ERR(0, 467, __pyx_L1_error)
+  __pyx_builtin_BufferError = __Pyx_GetBuiltinName(__pyx_n_s_BufferError); if (!__pyx_builtin_BufferError) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_builtin_RuntimeWarning = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeWarning); if (!__pyx_builtin_RuntimeWarning) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_builtin_PendingDeprecationWarning = __Pyx_GetBuiltinName(__pyx_n_s_PendingDeprecationWarning); if (!__pyx_builtin_PendingDeprecationWarning) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 356, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 363, __pyx_L1_error)
+  __pyx_builtin_AssertionError = __Pyx_GetBuiltinName(__pyx_n_s_AssertionError); if (!__pyx_builtin_AssertionError) __PYX_ERR(0, 391, __pyx_L1_error)
+  __pyx_builtin_DeprecationWarning = __Pyx_GetBuiltinName(__pyx_n_s_DeprecationWarning); if (!__pyx_builtin_DeprecationWarning) __PYX_ERR(0, 457, __pyx_L1_error)
+  __pyx_builtin_StopIteration = __Pyx_GetBuiltinName(__pyx_n_s_StopIteration); if (!__pyx_builtin_StopIteration) __PYX_ERR(0, 466, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -7004,146 +7004,146 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "msgpack_rlp/_unpacker.pyx":143
+  /* "msgpack_rlp/_unpacker.pyx":142
  *         if view.itemsize != 1:
  *             PyBuffer_Release(view)
  *             raise BufferError("cannot unpack from multi-byte object")             # <<<<<<<<<<<<<<
  *         if PyBuffer_IsContiguous(view, 'A') == 0:
  *             PyBuffer_Release(view)
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_cannot_unpack_from_multi_byte_ob); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_cannot_unpack_from_multi_byte_ob); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "msgpack_rlp/_unpacker.pyx":158
+  /* "msgpack_rlp/_unpacker.pyx":157
  *         new_protocol[0] = 0
  *         if PyObject_AsReadBuffer(obj, <const void**> buf, buffer_len) == -1:
  *             raise BufferError("could not get memoryview")             # <<<<<<<<<<<<<<
  *         PyErr_WarnEx(RuntimeWarning,
  *                      "using old buffer interface to unpack %s; "
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_could_not_get_memoryview); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_could_not_get_memoryview); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "msgpack_rlp/_unpacker.pyx":218
+  /* "msgpack_rlp/_unpacker.pyx":217
  *     unpack_clear(&ctx)
  *     if ret == 11:
  *         raise UnpackValueError("Attempted to apply an int sede to an encoded value, but it was larger than the maximum allowed size for int")             # <<<<<<<<<<<<<<
  *     elif ret == 12:
  *         raise UnpackValueError("Unknown sede type")
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_Attempted_to_apply_an_int_sede_t); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_Attempted_to_apply_an_int_sede_t); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "msgpack_rlp/_unpacker.pyx":220
+  /* "msgpack_rlp/_unpacker.pyx":219
  *         raise UnpackValueError("Attempted to apply an int sede to an encoded value, but it was larger than the maximum allowed size for int")
  *     elif ret == 12:
  *         raise UnpackValueError("Unknown sede type")             # <<<<<<<<<<<<<<
  *     else:
  *         raise UnpackValueError("Unpack failed: error = %d" % (ret,))
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_Unknown_sede_type); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_Unknown_sede_type); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "msgpack_rlp/_unpacker.pyx":353
+  /* "msgpack_rlp/_unpacker.pyx":352
  *             self.file_like_read = file_like.read
  *             if not PyCallable_Check(self.file_like_read):
  *                 raise TypeError("`file_like.read` must be a callable.")             # <<<<<<<<<<<<<<
  *         if not max_buffer_size:
  *             max_buffer_size = INT_MAX
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_file_like_read_must_be_a_callab); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 353, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_file_like_read_must_be_a_callab); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
-  /* "msgpack_rlp/_unpacker.pyx":357
+  /* "msgpack_rlp/_unpacker.pyx":356
  *             max_buffer_size = INT_MAX
  *         if read_size > max_buffer_size:
  *             raise ValueError("read_size should be less or equal to max_buffer_size")             # <<<<<<<<<<<<<<
  *         if not read_size:
  *             read_size = min(max_buffer_size, 1024**2)
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_read_size_should_be_less_or_equa); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_read_size_should_be_less_or_equa); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 356, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "msgpack_rlp/_unpacker.pyx":364
+  /* "msgpack_rlp/_unpacker.pyx":363
  *         self.buf = <char*>PyMem_Malloc(read_size)
  *         if self.buf == NULL:
  *             raise MemoryError("Unable to allocate internal buffer.")             # <<<<<<<<<<<<<<
  *         self.buf_size = read_size
  *         self.buf_head = 0
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_allocate_internal_buff); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 364, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_allocate_internal_buff); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
-  /* "msgpack_rlp/_unpacker.pyx":392
+  /* "msgpack_rlp/_unpacker.pyx":391
  * 
  *         if self.file_like is not None:
  *             raise AssertionError(             # <<<<<<<<<<<<<<
  *                     "unpacker.feed() is not be able to use with `file_like`.")
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_unpacker_feed_is_not_be_able_to); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 392, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_unpacker_feed_is_not_be_able_to); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 391, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
 
-  /* "msgpack_rlp/_unpacker.pyx":427
+  /* "msgpack_rlp/_unpacker.pyx":426
  *                     # self.buf still holds old buffer and will be freed during
  *                     # obj destruction
  *                     raise MemoryError("Unable to enlarge internal buffer.")             # <<<<<<<<<<<<<<
  *                 memcpy(new_buf, buf + head, tail - head)
  *                 PyMem_Free(buf)
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_enlarge_internal_buffe); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 427, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_enlarge_internal_buffe); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
 
-  /* "msgpack_rlp/_unpacker.pyx":467
+  /* "msgpack_rlp/_unpacker.pyx":466
  *             if prev_head >= self.buf_tail:
  *                 if iter:
  *                     raise StopIteration("No more data to unpack.")             # <<<<<<<<<<<<<<
  *                 else:
  *                     raise OutOfData("No more data to unpack.")
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_No_more_data_to_unpack); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 467, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_No_more_data_to_unpack); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
 
-  /* "msgpack_rlp/_unpacker.pyx":469
+  /* "msgpack_rlp/_unpacker.pyx":468
  *                     raise StopIteration("No more data to unpack.")
  *                 else:
  *                     raise OutOfData("No more data to unpack.")             # <<<<<<<<<<<<<<
  * 
  *             try:
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_No_more_data_to_unpack); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 469, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_No_more_data_to_unpack); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 468, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
 
-  /* "msgpack_rlp/_unpacker.pyx":486
+  /* "msgpack_rlp/_unpacker.pyx":485
  *                         continue
  *                     if iter:
  *                         raise StopIteration("No more data to unpack.")             # <<<<<<<<<<<<<<
  *                     else:
  *                         raise OutOfData("No more data to unpack.")
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_No_more_data_to_unpack); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_No_more_data_to_unpack); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
 
-  /* "msgpack_rlp/_unpacker.pyx":488
+  /* "msgpack_rlp/_unpacker.pyx":487
  *                         raise StopIteration("No more data to unpack.")
  *                     else:
  *                         raise OutOfData("No more data to unpack.")             # <<<<<<<<<<<<<<
  *                 else:
  *                     raise UnpackValueError("Unpack failed: error = %d" % (ret,))
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_No_more_data_to_unpack); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 488, __pyx_L1_error)
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_No_more_data_to_unpack); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 487, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
 
@@ -7178,29 +7178,29 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__23);
   __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_msgpack_rlp__unpacker_pyx, __pyx_n_s_default_read_extended_type, 127, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 127, __pyx_L1_error)
 
-  /* "msgpack_rlp/_unpacker.pyx":166
+  /* "msgpack_rlp/_unpacker.pyx":165
  *         return 1
  * 
  * def unpackb(object packed, object object_hook=None, object list_hook=None,             # <<<<<<<<<<<<<<
  *             bint use_list=False, bint raw=True,
  *             encoding=None, unicode_errors=None,
  */
-  __pyx_tuple__25 = PyTuple_Pack(25, __pyx_n_s_packed, __pyx_n_s_object_hook, __pyx_n_s_list_hook, __pyx_n_s_use_list, __pyx_n_s_raw, __pyx_n_s_encoding, __pyx_n_s_unicode_errors, __pyx_n_s_object_pairs_hook, __pyx_n_s_ext_hook, __pyx_n_s_sedes, __pyx_n_s_max_str_len, __pyx_n_s_max_bin_len, __pyx_n_s_max_array_len, __pyx_n_s_max_map_len, __pyx_n_s_max_ext_len, __pyx_n_s_ctx, __pyx_n_s_off, __pyx_n_s_ret, __pyx_n_s_view, __pyx_n_s_buf, __pyx_n_s_buf_len, __pyx_n_s_cenc, __pyx_n_s_cerr, __pyx_n_s_new_protocol, __pyx_n_s_obj); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(25, __pyx_n_s_packed, __pyx_n_s_object_hook, __pyx_n_s_list_hook, __pyx_n_s_use_list, __pyx_n_s_raw, __pyx_n_s_encoding, __pyx_n_s_unicode_errors, __pyx_n_s_object_pairs_hook, __pyx_n_s_ext_hook, __pyx_n_s_sedes, __pyx_n_s_max_str_len, __pyx_n_s_max_bin_len, __pyx_n_s_max_array_len, __pyx_n_s_max_map_len, __pyx_n_s_max_ext_len, __pyx_n_s_ctx, __pyx_n_s_off, __pyx_n_s_ret, __pyx_n_s_view, __pyx_n_s_buf, __pyx_n_s_buf_len, __pyx_n_s_cenc, __pyx_n_s_cerr, __pyx_n_s_new_protocol, __pyx_n_s_obj); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(15, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_msgpack_rlp__unpacker_pyx, __pyx_n_s_unpackb, 166, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(15, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_msgpack_rlp__unpacker_pyx, __pyx_n_s_unpackb, 165, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 165, __pyx_L1_error)
 
-  /* "msgpack_rlp/_unpacker.pyx":225
+  /* "msgpack_rlp/_unpacker.pyx":224
  * 
  * 
  * def unpack(object stream, **kwargs):             # <<<<<<<<<<<<<<
  *     PyErr_WarnEx(
  *         PendingDeprecationWarning,
  */
-  __pyx_tuple__27 = PyTuple_Pack(3, __pyx_n_s_stream, __pyx_n_s_kwargs, __pyx_n_s_data); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(3, __pyx_n_s_stream, __pyx_n_s_kwargs, __pyx_n_s_data); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_msgpack_rlp__unpacker_pyx, __pyx_n_s_unpack, 225, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_msgpack_rlp__unpacker_pyx, __pyx_n_s_unpack, 224, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -7357,11 +7357,11 @@ static int __pyx_pymod_exec__unpacker(PyObject *__pyx_pyinit_module)
   __pyx_vtable_11msgpack_rlp_9_unpacker_Unpacker.append_buffer = (PyObject *(*)(struct __pyx_obj_11msgpack_rlp_9_unpacker_Unpacker *, void *, Py_ssize_t))__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_append_buffer;
   __pyx_vtable_11msgpack_rlp_9_unpacker_Unpacker.read_from_file = (PyObject *(*)(struct __pyx_obj_11msgpack_rlp_9_unpacker_Unpacker *))__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker_read_from_file;
   __pyx_vtable_11msgpack_rlp_9_unpacker_Unpacker._unpack = (PyObject *(*)(struct __pyx_obj_11msgpack_rlp_9_unpacker_Unpacker *, execute_fn, PyObject *, struct __pyx_opt_args_11msgpack_rlp_9_unpacker_8Unpacker__unpack *__pyx_optional_args))__pyx_f_11msgpack_rlp_9_unpacker_8Unpacker__unpack;
-  if (PyType_Ready(&__pyx_type_11msgpack_rlp_9_unpacker_Unpacker) < 0) __PYX_ERR(0, 233, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_11msgpack_rlp_9_unpacker_Unpacker) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
   __pyx_type_11msgpack_rlp_9_unpacker_Unpacker.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_11msgpack_rlp_9_unpacker_Unpacker.tp_dict, __pyx_vtabptr_11msgpack_rlp_9_unpacker_Unpacker) < 0) __PYX_ERR(0, 233, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "Unpacker", (PyObject *)&__pyx_type_11msgpack_rlp_9_unpacker_Unpacker) < 0) __PYX_ERR(0, 233, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11msgpack_rlp_9_unpacker_Unpacker) < 0) __PYX_ERR(0, 233, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_11msgpack_rlp_9_unpacker_Unpacker.tp_dict, __pyx_vtabptr_11msgpack_rlp_9_unpacker_Unpacker) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "Unpacker", (PyObject *)&__pyx_type_11msgpack_rlp_9_unpacker_Unpacker) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11msgpack_rlp_9_unpacker_Unpacker) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
   __pyx_ptype_11msgpack_rlp_9_unpacker_Unpacker = &__pyx_type_11msgpack_rlp_9_unpacker_Unpacker;
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -7461,51 +7461,51 @@ static int __pyx_pymod_exec__unpacker(PyObject *__pyx_pyinit_module)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_default_read_extended_type, __pyx_t_1) < 0) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":169
+  /* "msgpack_rlp/_unpacker.pyx":168
  *             bint use_list=False, bint raw=True,
  *             encoding=None, unicode_errors=None,
  *             object_pairs_hook=None, ext_hook=ExtType,             # <<<<<<<<<<<<<<
  *             sedes = None,
  *             Py_ssize_t max_str_len=2147483647, # 2**32-1
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ExtType); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ExtType); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_k__8 = __pyx_t_1;
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":166
+  /* "msgpack_rlp/_unpacker.pyx":165
  *         return 1
  * 
  * def unpackb(object packed, object object_hook=None, object list_hook=None,             # <<<<<<<<<<<<<<
  *             bint use_list=False, bint raw=True,
  *             encoding=None, unicode_errors=None,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11msgpack_rlp_9_unpacker_3unpackb, NULL, __pyx_n_s_msgpack_rlp__unpacker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11msgpack_rlp_9_unpacker_3unpackb, NULL, __pyx_n_s_msgpack_rlp__unpacker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_unpackb, __pyx_t_1) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_unpackb, __pyx_t_1) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":225
+  /* "msgpack_rlp/_unpacker.pyx":224
  * 
  * 
  * def unpack(object stream, **kwargs):             # <<<<<<<<<<<<<<
  *     PyErr_WarnEx(
  *         PendingDeprecationWarning,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11msgpack_rlp_9_unpacker_5unpack, NULL, __pyx_n_s_msgpack_rlp__unpacker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11msgpack_rlp_9_unpacker_5unpack, NULL, __pyx_n_s_msgpack_rlp__unpacker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_unpack, __pyx_t_1) < 0) __PYX_ERR(0, 225, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_unpack, __pyx_t_1) < 0) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "msgpack_rlp/_unpacker.pyx":335
+  /* "msgpack_rlp/_unpacker.pyx":334
  *                  object object_hook=None, object object_pairs_hook=None, object list_hook=None,
  *                  encoding=None, unicode_errors=None, int max_buffer_size=0,
  *                  object ext_hook=ExtType,             # <<<<<<<<<<<<<<
  *                  Py_ssize_t max_str_len=2147483647, # 2**32-1
  *                  Py_ssize_t max_bin_len=2147483647,
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ExtType); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ExtType); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_k__11 = __pyx_t_1;
   __Pyx_GIVEREF(__pyx_t_1);
